@@ -47,12 +47,28 @@ function startAudios(){
     audioContainer10.play();
 
     // testMusic has to constantly be executed to work. It handles all the logic of the zones.
-    setInterval(testMusic, 5000);
+    //setInterval(testMusic, 5000);
+    //setInterval(testSlider, 5000);
+}
+//linked to a pause button, simply pauses the audio(not finished)
+function pauseAudios(){
+    audioContainer1.pause();
+    audioContainer2.pause();
+    audioContainer3.pause();
+    audioContainer4.pause();
+    audioContainer5.pause();
+    audioContainer6.pause();
+    audioContainer7.pause();
+    audioContainer8.pause();
+    audioContainer9.pause();
+    audioContainer10.pause();
+
 }
 
 // function sets an interval that decreases the volume of the music.
-function fadeMusic(){
-    var timer = setInterval(fadeAudio, 500);
+//sValue -> slider value
+function fadeMusic(sValue){
+    var timer = setInterval(fadeAudio, sValue); 
     function fadeAudio(){
         if (audioContainer1.volume > 0) {
             audioContainer1.volume -= 0.1;
@@ -65,17 +81,23 @@ function fadeMusic(){
 }
 
 // function sets an interval that increases the volume of the music.
-function increaseMusic(){
-    var timer = setInterval(raiseAudio, 500);
+function increaseMusic(sValue){
+    var timer = setInterval(raiseAudio, sValue);
+    
     function raiseAudio(){
         if (audioContainer1.volume < 1) {
             audioContainer1.volume += 0.1;
             audioContainer1.volume = audioContainer1.volume.toFixed(1);
+            console.log("current Vol level: ", audioContainer1.volume);
         } 
         else if (audioContainer1.volume >= 1){
             clearInterval(timer);
         }
     }
+}
+
+function volumeControl (){
+    
 }
 
 // function determines if coordinates are inside a polygon.
@@ -99,7 +121,7 @@ function inside(point, vs) {
 };
 
 // function handles the logic of the zones in the map.
-function testMusic(){
+/*function testMusic(){
     const zone_one = new zoneOne();;
     var vertices = [[zone_one.get_first_lat, zone_one.get_first_lng],
                     [zone_one.get_second_lat, zone_one.get_second_lng],
@@ -115,4 +137,8 @@ function testMusic(){
         console.log("Not in location");
         fadeMusic();
     }
-}
+}*/
+
+/*function testSlider(){
+    increaseMusic()
+}*/

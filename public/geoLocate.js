@@ -12,7 +12,7 @@ function showLocation(position) {
         body: JSON.stringify(data)
     };
     console.log(data)
-    const response = fetch('/', options);
+    const response = fetch('/', options); // what is this for ?
 }
 
 function errorHandler(err) {
