@@ -13,6 +13,7 @@ $("#uislider2").slider({
     slide: function (event, ui) {
         console.log("slider #2" , ui.value);
         $("#orange-bg").css("opacity", ui.value+"%");
-        increaseMusic(ui.value);
+        setVolume(ui.value);
+
     }
 });

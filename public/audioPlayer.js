@@ -96,8 +96,8 @@ function increaseMusic(sValue){
     }
 }
 
-function volumeControl (){
-    
+function setVolume (uiVolume){
+    audioContainer1.volume = uiVolume/100;
 }
 
 // function determines if coordinates are inside a polygon.
@@ -137,8 +137,4 @@ function inside(point, vs) {
         console.log("Not in location");
         fadeMusic();
     }
-}*/
-
-/*function testSlider(){
-    increaseMusic()
 }*/

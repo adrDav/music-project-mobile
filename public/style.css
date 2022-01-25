@@ -19,6 +19,14 @@ h2 {
     font-weight: normal;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 1);
 }
+/*header for "volume slider"*/
+h3{
+    font-size: 20px;
+    margin-bottom: -20px;
+    color: #ffffff;
+    text-align: left;
+    font-weight: normal;
+}
 
 #holderion {
     display: inline-block;
@@ -158,6 +166,7 @@ input:checked + .slider:before {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2de254', endColorstr='#ff1414', GradientType=1);
     /* IE6-8 */
 }
+
 
 #uislider2 {
     width: 98%;
