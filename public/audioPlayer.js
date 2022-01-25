@@ -22,6 +22,23 @@ audioContainer8.volume = 0;
 audioContainer9.volume = 0;
 audioContainer10.volume = 0;
 
+//function from the API
+var context = new(window.AudioContext || window.webkitAudioContext);
+//track 1 needs to be changed 
+var mediaElement = audioContainer1; 
+
+var source = context.createMediaElement(mediaElement);
+var dist = context.createWaveShaper(); 
+var gain = context.createGain();
+
+source.connect(gain);
+gain.connect(dist);
+dist.connect(context.destination);
+
+gain.gain.value =1;
+dist.curve = makeDistortionCurve(0);
+
+
 // function loops and plays the music.
 function startAudios(){
     audioContainer1.loop = true;
