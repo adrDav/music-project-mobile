@@ -27,7 +27,7 @@ var context = new(window.AudioContext || window.webkitAudioContext);
 //track 1 needs to be changed 
 var mediaElement = audioContainer1; 
 
-var source = context.createMediaElement(mediaElement);
+var source = context.createMediaElementSource(mediaElement);
 var dist = context.createWaveShaper(); 
 var gain = context.createGain();
 
@@ -38,6 +38,20 @@ dist.connect(context.destination);
 gain.gain.value =1;
 dist.curve = makeDistortionCurve(0);
 
+// http://stackoverflow.com/a/22313408/1090298
+function makeDistortionCurve( amount ) {
+  var k = typeof amount === 'number' ? amount : 0,
+    n_samples = 44100,
+    curve = new Float32Array(n_samples),
+    deg = Math.PI / 180,
+    i = 0,
+    x;
+  for ( ; i < n_samples; ++i ) {
+    x = i * 2 / n_samples - 1;
+    curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+  }
+  return curve;
+};
 
 // function loops and plays the music.
 function startAudios(){
