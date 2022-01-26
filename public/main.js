@@ -2,7 +2,7 @@ $("#uislider").slider({
     range: "max",
     slide: function (event, ui) {
         console.log("slider #1" , ui.value);
-        dist.curve = makeDistortionCurve(-100);
+        dist.curve = makeDistortionCurve(ui.value);
         //take ui.value 0-100 make it the opacity of the yellow element
         $("#yellow-bg").css("opacity", ui.value+'%');      
     }
