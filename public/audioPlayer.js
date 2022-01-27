@@ -1,3 +1,24 @@
+
+/*           Filter types
+There are many kinds of filters that can be used to achieve certain kinds of effects:
+
+Low-pass filter Makes sounds more muffled
+
+High-pass filter Makes sounds more tinny
+
+Band-pass filter Cuts off lows and highs (e.g., telephone filter)
+
+Low-shelf filter Affects the amount of bass in a sound (like the bass knob on a stereo)
+
+High-shelf filter Affects the amount of treble in a sound (like the treble knob on a stereo)
+
+Peaking filter Affects the amount of midrange in a sound (like the mid knob on a stereo)
+
+Notch filter Removes unwanted sounds in a narrow frequency range
+
+All-pass filter Creates phaser effects
+*/
+
 // allocating variables for each container with music.
 const audioContainer1 = document.getElementById("audioContainer1");
 const audioContainer2 = document.getElementById("audioContainer2");
@@ -31,6 +52,20 @@ var source = context.createMediaElementSource(mediaElement);
 var dist = context.createWaveShaper(); 
 var gain = context.createGain();
 
+bassFilter = context.createBiquadFilter();
+bassFilter.type = "lowshelf";
+bassFilter.frequency.value = 200; 
+
+
+trebleFilter = context.createBiquadFilter();
+trebleFilter.type = "highshelf"; 
+trebleFilter.frequency.value = 2000;
+
+source.connect(bassFilter);
+bassFilter.connect(trebleFilter); 
+trebleFilter.connect(context.destination);
+
+/*
 source.connect(gain);
 gain.connect(dist);
 dist.connect(context.destination);
@@ -38,7 +73,6 @@ dist.connect(context.destination);
 gain.gain.value =1;
 dist.curve = makeDistortionCurve(0);
 
-// http://stackoverflow.com/a/22313408/1090298
 function makeDistortionCurve( amount ) {
   var k = typeof amount === 'number' ? amount : 0,
     n_samples = 44100,
@@ -51,7 +85,7 @@ function makeDistortionCurve( amount ) {
     curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
   }
   return curve;
-};
+};*/
 
 // function loops and plays the music.
 function startAudios(){
@@ -127,6 +161,7 @@ function increaseMusic(sValue){
     }
 }
 
+//volume controls 
 function setVolume (uiVolume){
     audioContainer1.volume = uiVolume/100;
 }
