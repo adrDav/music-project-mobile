@@ -43,51 +43,31 @@ audioContainer8.volume = 0;
 audioContainer9.volume = 0;
 audioContainer10.volume = 0;
 
-//function from the API
+//Web Audio API
 var context = new(window.AudioContext || window.webkitAudioContext);
 //track 1 needs to be changed 
 var mediaElement = audioContainer1; 
-
+//here we create/open the node 
 var source = context.createMediaElementSource(mediaElement);
 var dist = context.createWaveShaper(); 
 var gain = context.createGain();
 
+//here we add bass filter/fx to the node
 bassFilter = context.createBiquadFilter();
 bassFilter.type = "lowshelf";
 bassFilter.frequency.value = 200; 
 
-
+// here we add treble filter/fx to the node.
 trebleFilter = context.createBiquadFilter();
 trebleFilter.type = "highshelf"; 
 trebleFilter.frequency.value = 2000;
 
+//connecting the filter nodes to the audio source and send it to the destination (window)
 source.connect(bassFilter);
 bassFilter.connect(trebleFilter); 
 trebleFilter.connect(context.destination);
 
-/*
-source.connect(gain);
-gain.connect(dist);
-dist.connect(context.destination);
-
-gain.gain.value =1;
-dist.curve = makeDistortionCurve(0);
-
-function makeDistortionCurve( amount ) {
-  var k = typeof amount === 'number' ? amount : 0,
-    n_samples = 44100,
-    curve = new Float32Array(n_samples),
-    deg = Math.PI / 180,
-    i = 0,
-    x;
-  for ( ; i < n_samples; ++i ) {
-    x = i * 2 / n_samples - 1;
-    curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
-  }
-  return curve;
-};*/
-
-// function loops and plays the music.
+// function loops and plays the music just the first track for now.
 function startAudios(){
     audioContainer1.loop = true;
     audioContainer2.loop = true;
