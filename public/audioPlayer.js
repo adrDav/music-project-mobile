@@ -19,33 +19,21 @@ Notch filter Removes unwanted sounds in a narrow frequency range
 All-pass filter Creates phaser effects
 */
 
+//before seeting which track should be palying at the moment, we need to find the zone location of the user
+
+audioContainer = "audioContainer1";
+
 // allocating variables for each container with music.
-const audioContainer1 = document.getElementById("audioContainer1");
-const audioContainer2 = document.getElementById("audioContainer2");
-const audioContainer3 = document.getElementById("audioContainer3");
-const audioContainer4 = document.getElementById("audioContainer4");
-const audioContainer5 = document.getElementById("audioContainer5");
-const audioContainer6 = document.getElementById("audioContainer6");
-const audioContainer7 = document.getElementById("audioContainer7");
-const audioContainer8 = document.getElementById("audioContainer8");
-const audioContainer9 = document.getElementById("audioContainer9");
-const audioContainer10 = document.getElementById("audioContainer10");
+const audioContainer1 = document.getElementById(audioContainer);
+
+
 
 // muted containers from start. Volume goes from 0 to 1 (decimal numbers).
 audioContainer1.volume = 0;
-audioContainer2.volume = 0;
-audioContainer3.volume = 0;
-audioContainer4.volume = 0;
-audioContainer5.volume = 0;
-audioContainer6.volume = 0;
-audioContainer7.volume = 0;
-audioContainer8.volume = 0;
-audioContainer9.volume = 0;
-audioContainer10.volume = 0;
 
-//Web Audio API
+//Web Audio API 
 var context = new(window.AudioContext || window.webkitAudioContext);
-//track 1 needs to be changed 
+//holds current track being played 
 var mediaElement = audioContainer1; 
 //here we create/open the node 
 var source = context.createMediaElementSource(mediaElement);
@@ -70,75 +58,24 @@ trebleFilter.connect(context.destination);
 // function loops and plays the music just the first track for now.
 function startAudios(){
     audioContainer1.loop = true;
-    audioContainer2.loop = true;
-    audioContainer3.loop = true;
-    audioContainer4.loop = true;
-    audioContainer5.loop = true;
-    audioContainer6.loop = true;
-    audioContainer7.loop = true;
-    audioContainer8.loop = true;
-    audioContainer9.loop = true;
-    audioContainer10.loop = true;
 
     audioContainer1.play(); 
-    audioContainer2.play(); 
-    audioContainer3.play(); 
-    audioContainer4.play(); 
-    audioContainer5.play(); 
-    audioContainer6.play();
-    audioContainer7.play(); 
-    audioContainer8.play(); 
-    audioContainer9.play(); 
-    audioContainer10.play();
+    
 
     // testMusic has to constantly be executed to work. It handles all the logic of the zones.
     //setInterval(testMusic, 5000);
     //setInterval(testSlider, 5000);
 }
-//linked to a pause button, simply pauses the audio(not finished)
+//linked to a pause button, simply pauses the audio
 function pauseAudios(){
     audioContainer1.pause();
-    audioContainer2.pause();
-    audioContainer3.pause();
-    audioContainer4.pause();
-    audioContainer5.pause();
-    audioContainer6.pause();
-    audioContainer7.pause();
-    audioContainer8.pause();
-    audioContainer9.pause();
-    audioContainer10.pause();
-
 }
 
-// function sets an interval that decreases the volume of the music.
-//sValue -> slider value
-function fadeMusic(sValue){
-    var timer = setInterval(fadeAudio, sValue); 
-    function fadeAudio(){
-        if (audioContainer1.volume > 0) {
-            audioContainer1.volume -= 0.1;
-            audioContainer1.volume = audioContainer1.volume.toFixed(1);
-        } 
-        else if (audioContainer1.volume <= 0){
-            clearInterval(timer);
-        }
-    }
-}
 
-// function sets an interval that increases the volume of the music.
-function increaseMusic(sValue){
-    var timer = setInterval(raiseAudio, sValue);
+
+//function handles the fade in and out of the tracks. 
+function musicFade(sValue){
     
-    function raiseAudio(){
-        if (audioContainer1.volume < 1) {
-            audioContainer1.volume += 0.1;
-            audioContainer1.volume = audioContainer1.volume.toFixed(1);
-            console.log("current Vol level: ", audioContainer1.volume);
-        } 
-        else if (audioContainer1.volume >= 1){
-            clearInterval(timer);
-        }
-    }
 }
 
 //volume controls 

@@ -10,7 +10,10 @@
 
     <button onclick="startAudios()" type="button">START PLAYING</button>
     <button onClick="getLocation()" type="button">CONNECT</button>
-    <div><button onClick="pauseAudios()" type="button">PAUSE T1</button></div><!-- pauses all current tracks -->
+    <div>
+    <button onClick="pauseAudios()" type="button">PAUSE AUDIO</button>
+    <button onClick="nextTrack()" type="button">NEXT TRACK</button>
+    </div><!-- pauses all current tracks -->
 
     <audio id="audioContainer1">
         <source src="audios/Mendelssohn__Octet Excerpt Violin 1.mp3" type="audio/mpeg">
@@ -60,24 +63,12 @@
                 
     </div>
 </div>
- 
-    <div>
-    <div id="greybox"></div>
-
-    <div id="holderion">
-            <div id="uislider"></div>
-            <div class="color" style="padding:0px; background-color: gray;">
-                <div id="yellow-bg" style="background-color: yellow; height:10px;min-width:100%; opacity:0%"></div>
-            </div>
-            <input type="text" id="idnumber" display: none;">
-        </div>
-        <div id="yellowbox"></div>
-        </div>
-    <div>
+<div>
+    <!-- Volume Slider  -->
     <h3 style="color:white">Volume slider: </h3>
     <div id="bluebox"></div>
 
-    <div id="holderion2">
+    <div id="holderion">
         <div id="uislider2"></div>
         <div class="color2" style="padding: 0px; background-color: blue;">
             <div id="orange-bg" style="background-color: #FF4500; height:10px;min-width:100%; opacity:0%"></div>
@@ -85,6 +76,35 @@
         <input type="text2" id="idnumber2" display: none;">
     </div>
     <div id="orangebox"></div>
+    <div>
+
+    <!-- Bass Slider  -->
+    <h3 style="color:white">Bass slider: </h3>
+    <div id="greybox"></div>
+    <div id="holderion2">
+            <div id="uislider"></div>
+            <div class="color" style="padding:0px; background-color: gray;">
+                <div id="yellow-bg" style="background-color: yellow; height:10px;min-width:100%; opacity:0%"></div>
+            </div>
+            <input type="text" id="idnumber" display: none;">
+        </div>
+        <div id="yellowbox"></div>
+    
+    </div>
+    <!-- treble Slider  -->
+    <h3 style="color:white">Treble slider: </h3>
+    <div id="greybox"></div>
+    <div id="holderion3">
+            <div id="uislider3"></div>
+            <div class="color" style="padding:0px; background-color: red;">
+                <div id="green-bg" style="background-color: rgb(0, 255, 0); height:10px;min-width:100%; opacity:0%"></div>
+            </div>
+            <input type="text" id="idnumber3" display: none;">
+        </div>
+        <div id="yellowbox"></div>
+    
+    </div>
+    
 </div>
 
 
