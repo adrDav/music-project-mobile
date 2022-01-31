@@ -1,77 +1,88 @@
 
 /*           Filter types
-There are many kinds of filters that can be used to achieve certain kinds of effects:
-
-Low-pass filter Makes sounds more muffled
-
-High-pass filter Makes sounds more tinny
-
-Band-pass filter Cuts off lows and highs (e.g., telephone filter)
-
-Low-shelf filter Affects the amount of bass in a sound (like the bass knob on a stereo)
-
-High-shelf filter Affects the amount of treble in a sound (like the treble knob on a stereo)
-
-Peaking filter Affects the amount of midrange in a sound (like the mid knob on a stereo)
-
-Notch filter Removes unwanted sounds in a narrow frequency range
-
-All-pass filter Creates phaser effects
+- There are many kinds of filters that can be used to achieve certain kinds of effects:
+- Low-pass filter Makes sounds more muffled
+- High-pass filter Makes sounds more tinny
+- Band-pass filter Cuts off lows and highs (e.g., telephone filter)
+- Low-shelf filter Affects the amount of bass in a sound (like the bass knob on a stereo)
+- High-shelf filter Affects the amount of treble in a sound (like the treble knob on a stereo)
+- Peaking filter Affects the amount of midrange in a sound (like the mid knob on a stereo)
+- Notch filter Removes unwanted sounds in a narrow frequency range
+- All-pass filter Creates phaser effects (dont know what it means)
 */
 
-//before seeting which track should be palying at the moment, we need to find the zone location of the user
+let context,source;
 
-audioContainer = "audioContainer1";
+Container = "audioContainer1";
 
 // allocating variables for each container with music.
-const audioContainer1 = document.getElementById(audioContainer);
-
-
+const audioContainer1 = document.getElementById(Container);
 
 // muted containers from start. Volume goes from 0 to 1 (decimal numbers).
 audioContainer1.volume = 0;
 
 //Web Audio API 
-var context = new(window.AudioContext || window.webkitAudioContext);
-//holds current track being played 
-var mediaElement = audioContainer1; 
-//here we create/open the node 
-var source = context.createMediaElementSource(mediaElement);
-var dist = context.createWaveShaper(); 
-var gain = context.createGain();
+AudioContext = window.AudioContext || window.webkitAudioContext;
 
-//here we add bass filter/fx to the node
-bassFilter = context.createBiquadFilter();
-bassFilter.type = "lowshelf";
-bassFilter.frequency.value = 200; 
-
-// here we add treble filter/fx to the node.
-trebleFilter = context.createBiquadFilter();
-trebleFilter.type = "highshelf"; 
-trebleFilter.frequency.value = 2000;
-
-//connecting the filter nodes to the audio source and send it to the destination (window)
-source.connect(bassFilter);
-bassFilter.connect(trebleFilter); 
-trebleFilter.connect(context.destination);
+/* Reminder VVV
+* bug fix: need to have AudioContext inside of a function for some reason, 
+* because chrome (specifically) doesnt like it when it is not properly shut down/started?.
+* have to test it with iOS safari and other browesers, because from what i read,
+* some browsers wont work if AudioContext is not initilized at the start.  
+*/
 
 // function loops and plays the music just the first track for now.
 function startAudios(){
+
+    context = new AudioContext();
+    //holds current track being played 
+    var mediaElement = audioContainer1; 
+    console.log(mediaElement);
+    //here we create/open the node 
+    var source = context.createMediaElementSource(mediaElement);
+    var dist = context.createWaveShaper(); 
+    var gain = context.createGain();
+
+    //here we add bass filter/fx to the node
+    bassFilter = context.createBiquadFilter();
+    bassFilter.type = "lowshelf";
+    bassFilter.frequency.value = 200; 
+
+    // here we add treble filter/fx to the node.
+    trebleFilter = context.createBiquadFilter();
+    trebleFilter.type = "highshelf"; 
+    trebleFilter.frequency.value = 2000;
+
+    //connecting the filter nodes to the audio source and send it to the destination (window)
+    source.connect(bassFilter);
+    bassFilter.connect(trebleFilter); 
+    trebleFilter.connect(context.destination);
+
     audioContainer1.loop = true;
 
     audioContainer1.play(); 
     
-
     // testMusic has to constantly be executed to work. It handles all the logic of the zones.
     //setInterval(testMusic, 5000);
     //setInterval(testSlider, 5000);
 }
+// nextTrack feature is only intended for testing the fade in and out; (Remove later)
+function nextTrack(){
+    if (Container == "audioContainer1"){
+        Container = "audioContainer2";
+        context.close();
+        source.close();
+    }
+    else{
+        Container = "audioContainer1";
+        startAudios();
+    }
+}
+
 //linked to a pause button, simply pauses the audio
 function pauseAudios(){
     audioContainer1.pause();
 }
-
-
 
 //function handles the fade in and out of the tracks. 
 function musicFade(sValue){
