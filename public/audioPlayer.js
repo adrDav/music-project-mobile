@@ -10,19 +10,22 @@
 - Notch filter Removes unwanted sounds in a narrow frequency range
 - All-pass filter Creates phaser effects (dont know what it means)
 */
-
-let context,source;
-
+let context;
 Container = "audioContainer1";
 
 // allocating variables for each container with music.
-const audioContainer1 = document.getElementById(Container);
+audioContainer1 = document.getElementById(Container);
 
 // muted containers from start. Volume goes from 0 to 1 (decimal numbers).
 audioContainer1.volume = 0;
 
+var track = 0;
+
 //Web Audio API 
-AudioContext = window.AudioContext || window.webkitAudioContext;
+
+/*
+    loop all audio. can we have multiple nodes ?
+*/
 
 /* Reminder VVV
 * bug fix: need to have AudioContext inside of a function for some reason, 
@@ -33,13 +36,14 @@ AudioContext = window.AudioContext || window.webkitAudioContext;
 
 // function loops and plays the music just the first track for now.
 function startAudios(){
+    AudioContext = window.AudioContext || window.webkitAudioContext;
 
     context = new AudioContext();
     //holds current track being played 
     var mediaElement = audioContainer1; 
     console.log(mediaElement);
     //here we create/open the node 
-    var source = context.createMediaElementSource(mediaElement);
+    var source = context.createMediaElementSource(audioContainer1);
     var dist = context.createWaveShaper(); 
     var gain = context.createGain();
 
@@ -68,15 +72,13 @@ function startAudios(){
 }
 // nextTrack feature is only intended for testing the fade in and out; (Remove later)
 function nextTrack(){
-    if (Container == "audioContainer1"){
-        Container = "audioContainer2";
-        context.close();
-        source.close();
-    }
-    else{
-        Container = "audioContainer1";
-        startAudios();
-    }
+    
+    audioContainer1.loop = false;
+    pauseAudios();
+    audioContainer1 = document.getElementById("audioContainer5");
+    context.close();
+    startAudios();
+    
 }
 
 //linked to a pause button, simply pauses the audio
