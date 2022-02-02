@@ -23,7 +23,7 @@ audioContainer9.volume = 0;
 audioContainer10.volume = 0;
 
 // function loops and plays the music.
-function startAudios(){
+async function startAudios(){
     audioContainer1.loop = true;
     audioContainer2.loop = true;
     audioContainer3.loop = true;
@@ -105,8 +105,13 @@ function testMusic(){
                     [zone_one.get_second_lat, zone_one.get_second_lng],
                     [zone_one.get_third_lat, zone_one.get_third_lng],
                     [zone_one.get_fourth_lat, zone_one.get_fourth_lng]];
-    lat = loc.lat;
-    lng = loc.lng;
+    updated = getLocation();
+
+    lat = updated.latitude;
+    lng = updated.longitude;
+
+    console.log(lat);
+    console.log(lng);
 
     if(inside([lat, lng],vertices)){
         console.log("In location");
