@@ -17,7 +17,7 @@ Container = "audioContainer1";
 audioContainer1 = document.getElementById(Container);
 
 // muted containers from start. Volume goes from 0 to 1 (decimal numbers).
-audioContainer1.volume = 0;
+audioContainer1.volume = 1;
 
 var track = 0;
 
@@ -61,6 +61,8 @@ function startAudios(){
     source.connect(bassFilter);
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(context.destination);
+    setInterval(testMusic, 10000);
+}
   
 function nextTrack(){
     
@@ -105,10 +107,10 @@ function inside(point, vs) {
     }
     
     return inside;
-};
+}
 
 // function handles the logic of the zones in the map.
-/*function testMusic(){
+function testMusic(){
     const zone_one = new zoneOne();;
     var vertices = [[zone_one.get_first_lat, zone_one.get_first_lng],
                     [zone_one.get_second_lat, zone_one.get_second_lng],
@@ -124,9 +126,8 @@ function inside(point, vs) {
 
     if(inside([lat, lng],vertices)){
         console.log("In location");
-        increaseMusic();
+        //setVolume(1);
     } else{
         console.log("Not in location");
-        fadeMusic();
     }
-}*/
+}
