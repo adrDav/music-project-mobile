@@ -1,18 +1,24 @@
-function showLocation(position) {
+// coordinates stores the ever-changing coordinates.
+var coordinates = {};
+
+async function showLocation(position) {
+    // obtain coordinates from the API.
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
-    const data = { lat, lng};
+    // coordinates stores new coordinates.
+    coordinates = {latitude: lat, longitude: lng};
+    // print into the HTML file.
     document.getElementById('latitude').textContent = lat;
     document.getElementById('longitude').textContent = lng;
+    // POST request to server.
     const options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(coordinates)
     };
-    console.log(data)
-    const response = fetch('/', options); // what is this for ?
+    const response = await fetch('/', options);
 }
 
 function errorHandler(err) {
@@ -28,7 +34,9 @@ function getLocation() {
        // timeout at 60000 milliseconds (60 seconds)
        var options = {timeout:60000};
        navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+       // return the updated variables.
+       return coordinates;
     } else {
        alert("Sorry, browser does not support geolocation!");
     }
- }
+}
