@@ -1,81 +1,90 @@
+
+/*           Filter types
+- There are many kinds of filters that can be used to achieve certain kinds of effects:
+- Low-pass filter Makes sounds more muffled
+- High-pass filter Makes sounds more tinny
+- Band-pass filter Cuts off lows and highs (e.g., telephone filter)
+- Low-shelf filter Affects the amount of bass in a sound (like the bass knob on a stereo)
+- High-shelf filter Affects the amount of treble in a sound (like the treble knob on a stereo)
+- Peaking filter Affects the amount of midrange in a sound (like the mid knob on a stereo)
+- Notch filter Removes unwanted sounds in a narrow frequency range
+- All-pass filter Creates phaser effects (dont know what it means)
+*/
+let context;
+Container = "audioContainer1";
+
 // allocating variables for each container with music.
-const audioContainer1 = document.getElementById("audioContainer1");
-const audioContainer2 = document.getElementById("audioContainer2");
-const audioContainer3 = document.getElementById("audioContainer3");
-const audioContainer4 = document.getElementById("audioContainer4");
-const audioContainer5 = document.getElementById("audioContainer5");
-const audioContainer6 = document.getElementById("audioContainer6");
-const audioContainer7 = document.getElementById("audioContainer7");
-const audioContainer8 = document.getElementById("audioContainer8");
-const audioContainer9 = document.getElementById("audioContainer9");
-const audioContainer10 = document.getElementById("audioContainer10");
+audioContainer1 = document.getElementById(Container);
 
 // muted containers from start. Volume goes from 0 to 1 (decimal numbers).
 audioContainer1.volume = 0;
-audioContainer2.volume = 0;
-audioContainer3.volume = 0;
-audioContainer4.volume = 0;
-audioContainer5.volume = 0;
-audioContainer6.volume = 0;
-audioContainer7.volume = 0;
-audioContainer8.volume = 0;
-audioContainer9.volume = 0;
-audioContainer10.volume = 0;
 
-// function loops and plays the music.
-async function startAudios(){
-    audioContainer1.loop = true;
-    audioContainer2.loop = true;
-    audioContainer3.loop = true;
-    audioContainer4.loop = true;
-    audioContainer5.loop = true;
-    audioContainer6.loop = true;
-    audioContainer7.loop = true;
-    audioContainer8.loop = true;
-    audioContainer9.loop = true;
-    audioContainer10.loop = true;
+var track = 0;
 
-    audioContainer1.play(); 
-    audioContainer2.play(); 
-    audioContainer3.play(); 
-    audioContainer4.play(); 
-    audioContainer5.play(); 
-    audioContainer6.play();
-    audioContainer7.play(); 
-    audioContainer8.play(); 
-    audioContainer9.play(); 
-    audioContainer10.play();
+//Web Audio API 
 
-    // testMusic has to constantly be executed to work. It handles all the logic of the zones.
-    setInterval(testMusic, 5000);
+/*
+    loop all audio. can we have multiple nodes ?
+*/
+
+/* Reminder VVV
+* bug fix: need to have AudioContext inside of a function for some reason, 
+* because chrome (specifically) doesnt like it when it is not properly shut down/started?.
+* have to test it with iOS safari and other browesers, because from what i read,
+* some browsers wont work if AudioContext is not initilized at the start.  
+*/
+
+// function loops and plays the music just the first track for now.
+function startAudios(){
+    AudioContext = window.AudioContext || window.webkitAudioContext;
+
+    context = new AudioContext();
+    //holds current track being played 
+    var mediaElement = audioContainer1; 
+    console.log(mediaElement);
+    //here we create/open the node 
+    var source = context.createMediaElementSource(audioContainer1);
+    var dist = context.createWaveShaper(); 
+    var gain = context.createGain();
+
+    //here we add bass filter/fx to the node
+    bassFilter = context.createBiquadFilter();
+    bassFilter.type = "lowshelf";
+    bassFilter.frequency.value = 200; 
+
+    // here we add treble filter/fx to the node.
+    trebleFilter = context.createBiquadFilter();
+    trebleFilter.type = "highshelf"; 
+    trebleFilter.frequency.value = 2000;
+
+    //connecting the filter nodes to the audio source and send it to the destination (window)
+    source.connect(bassFilter);
+    bassFilter.connect(trebleFilter); 
+    trebleFilter.connect(context.destination);
+  
+function nextTrack(){
+    
+    audioContainer1.loop = false;
+    pauseAudios();
+    audioContainer1 = document.getElementById("audioContainer5");
+    context.close();
+    startAudios();
+    
 }
 
-// function sets an interval that decreases the volume of the music.
-function fadeMusic(){
-    var timer = setInterval(fadeAudio, 500);
-    function fadeAudio(){
-        if (audioContainer1.volume > 0) {
-            audioContainer1.volume -= 0.1;
-            audioContainer1.volume = audioContainer1.volume.toFixed(1);
-        } 
-        else if (audioContainer1.volume <= 0){
-            clearInterval(timer);
-        }
-    }
+//linked to a pause button, simply pauses the audio
+function pauseAudios(){
+    audioContainer1.pause();
 }
 
-// function sets an interval that increases the volume of the music.
-function increaseMusic(){
-    var timer = setInterval(raiseAudio, 500);
-    function raiseAudio(){
-        if (audioContainer1.volume < 1) {
-            audioContainer1.volume += 0.1;
-            audioContainer1.volume = audioContainer1.volume.toFixed(1);
-        } 
-        else if (audioContainer1.volume >= 1){
-            clearInterval(timer);
-        }
-    }
+//function handles the fade in and out of the tracks. 
+function musicFade(sValue){
+    
+}
+
+//volume controls 
+function setVolume (uiVolume){
+    audioContainer1.volume = uiVolume/100;
 }
 
 // function determines if coordinates are inside a polygon.
@@ -99,7 +108,7 @@ function inside(point, vs) {
 };
 
 // function handles the logic of the zones in the map.
-function testMusic(){
+/*function testMusic(){
     const zone_one = new zoneOne();;
     var vertices = [[zone_one.get_first_lat, zone_one.get_first_lng],
                     [zone_one.get_second_lat, zone_one.get_second_lng],
@@ -120,4 +129,4 @@ function testMusic(){
         console.log("Not in location");
         fadeMusic();
     }
-}
+}*/
