@@ -61,6 +61,7 @@ function startAudios(){
     source.connect(bassFilter);
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(context.destination);
+}
   
 function nextTrack(){
     
@@ -105,7 +106,7 @@ function inside(point, vs) {
     }
     
     return inside;
-};
+}
 
 // function handles the logic of the zones in the map.
 /*function testMusic(){
