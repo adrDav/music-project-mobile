@@ -15,6 +15,7 @@ Container = "audioContainer1";
 
 // allocating variables for each container with music.
 audioContainer1 = document.getElementById(Container);
+audioContainer1.crossOrigin = "anonymous";
 
 // muted containers from start. Volume goes from 0 to 1 (decimal numbers).
 audioContainer1.volume = 0;
@@ -42,6 +43,7 @@ function startAudios(){
     //holds current track being played 
     var mediaElement = audioContainer1; 
     console.log(mediaElement);
+    
     //here we create/open the node 
     var source = context.createMediaElementSource(audioContainer1);
     var dist = context.createWaveShaper(); 
@@ -65,6 +67,8 @@ function startAudios(){
     audioContainer1.loop = true;
 
     audioContainer1.play();
+
+    //setInterval()
 }
   
 function nextTrack(){
