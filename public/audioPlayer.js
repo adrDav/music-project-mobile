@@ -61,6 +61,10 @@ function startAudios(){
     source.connect(bassFilter);
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(context.destination);
+
+    audioContainer1.loop = true;
+
+    audioContainer1.play();
 }
   
 function nextTrack(){
