@@ -61,16 +61,8 @@ function startAudios(){
     source.connect(bassFilter);
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(context.destination);
-
-    audioContainer1.loop = true;
-
-    audioContainer1.play(); 
-    
-    // testMusic has to constantly be executed to work. It handles all the logic of the zones.
-    //setInterval(testMusic, 5000);
-    //setInterval(testSlider, 5000);
 }
-// nextTrack feature is only intended for testing the fade in and out; (Remove later)
+  
 function nextTrack(){
     
     audioContainer1.loop = false;
@@ -114,7 +106,7 @@ function inside(point, vs) {
     }
     
     return inside;
-};
+}
 
 // function handles the logic of the zones in the map.
 /*function testMusic(){
@@ -123,8 +115,13 @@ function inside(point, vs) {
                     [zone_one.get_second_lat, zone_one.get_second_lng],
                     [zone_one.get_third_lat, zone_one.get_third_lng],
                     [zone_one.get_fourth_lat, zone_one.get_fourth_lng]];
-    lat = loc.lat;
-    lng = loc.lng;
+    updated = getLocation();
+
+    lat = updated.latitude;
+    lng = updated.longitude;
+
+    console.log(lat);
+    console.log(lng);
 
     if(inside([lat, lng],vertices)){
         console.log("In location");
