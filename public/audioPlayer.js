@@ -61,16 +61,50 @@ function startAudios(){
     source.connect(bassFilter);
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(context.destination);
+    audioContainer1.play();
+    audioContainer1.loop = true;
 }
+
+let x=0;
   
 function nextTrack(){
-    
-    audioContainer1.loop = false;
-    pauseAudios();
-    audioContainer1 = document.getElementById("audioContainer5");
-    context.close();
-    startAudios();
-    
+
+    switch(x){
+        case 0:
+            console.log("Audio2");
+            
+            audioContainer1.loop = false;
+            pauseAudios();
+            audioContainer1 = document.getElementById("audioContainer2");
+            if(context.state === 'suspended'){
+                context.resume();
+            }
+            context.close();
+            startAudios();
+            x=1;
+            break;
+        case 1:
+            console.log("Audio3");
+            audioContainer1.loop = false;
+            pauseAudios();
+            audioContainer1 = document.getElementById("audioContainer3");
+            context.close();
+            startAudios();
+            x=2;
+            break;
+        case 2:
+            console.log("Audio5");
+            audioContainer1.loop = false;
+            pauseAudios();
+            audioContainer1 = document.getElementById("audioContainer5");
+            context.close();
+            startAudios();
+            x=0;
+            break;
+        default:
+            console.log("player broke");
+
+    }    
 }
 
 //linked to a pause button, simply pauses the audio
