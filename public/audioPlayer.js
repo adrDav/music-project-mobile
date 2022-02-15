@@ -76,11 +76,8 @@ function startAudios(){
     audioContainer.play();
 
     //setInterval()
-
 }
 
-
-  
 function nextTrack(){
 
     switch(x){

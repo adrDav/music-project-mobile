@@ -69,47 +69,6 @@
                 
     </div>
 </div>
-<!--script below is for testing safari iphone browser.-->
-<script>
-    function safariAudioTest(){
-       
-        // allocating variables for each container with music.
-        audioContainer = document.getElementById("audioContainer1");
-        
-        context =  window.AudioContext ? new AudioContext() : webkitAudioContext();
-    
-        //= new AudioContext();
-        //console display the current audion playing  
-        console.log(audioContainer);
-        
-        //create/open the node 
-        var source = context.createMediaElementSource(audioContainer);
-        var dist = context.createWaveShaper(); 
-        var gain = context.createGain();
-    
-        //add bass filter/fx to the node
-        bassFilter = context.createBiquadFilter();
-        bassFilter.type = "lowshelf";
-        bassFilter.frequency.value = 200; 
-    
-        // add treble filter/fx to the node.
-        trebleFilter = context.createBiquadFilter();
-        trebleFilter.type = "highshelf"; 
-        trebleFilter.frequency.value = 2000;
-    
-        //connecting the filter nodes to the audio source and send it to the destination (window)
-        source.connect(bassFilter);
-        bassFilter.connect(trebleFilter); 
-        trebleFilter.connect(context.destination);
-        
-        //looping & playing audio 
-        audioContainer.loop = true;
-        audioContainer.play();
-        audioContainer.volume =0.3;
-        //setInterval()
-    
-    }
-</script>
 
 <div>
     <!-- Volume Slider  -->
@@ -154,16 +113,54 @@
     </div>
     
 </div>
-
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script src="./audioPlayer.js"></script>
     <script src="./geoLocate.js"></script>
     <script src="./main.js"></script>
     <script src="./zoneOne.js"></script>
-</body>
 
+    <!--script below is for testing safari iphone browser.-->
+<script>
+    function safariAudioTest(){
+       
+        // allocating variables for each container with music.
+        audioContainer = document.getElementById("audioContainer1");
+        
+        context =  window.AudioContext ? new AudioContext() : webkitAudioContext();
+    
+        //= new AudioContext();
+        //console display the current audion playing  
+        console.log(audioContainer);
+        
+        //create/open the node 
+        var source = context.createMediaElementSource(audioContainer);
+        var dist = context.createWaveShaper(); 
+        var gain = context.createGain();
+    
+        //add bass filter/fx to the node
+        bassFilter = context.createBiquadFilter();
+        bassFilter.type = "lowshelf";
+        bassFilter.frequency.value = 200; 
+    
+        // add treble filter/fx to the node.
+        trebleFilter = context.createBiquadFilter();
+        trebleFilter.type = "highshelf"; 
+        trebleFilter.frequency.value = 2000;
+    
+        //connecting the filter nodes to the audio source and send it to the destination (window)
+        source.connect(bassFilter);
+        bassFilter.connect(trebleFilter); 
+        trebleFilter.connect(context.destination);
+        
+        //looping & playing audio 
+        audioContainer.loop = true;
+        audioContainer.play();
+        audioContainer.volume =0.3;
+        //setInterval()
+    
+    }
+</script>
+
+</body>
 </html>
