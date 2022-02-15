@@ -2,19 +2,17 @@
 <html>
 <head>
 <link rel="stylesheet" href="style.css">
- 
+<!--viewport allows for porper resizing on mobile devices ,K.-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 </head>
 <body>
     
     <h1 style="color:white">INTERACTIVE MUSIC! </h1>
 
-    <button onclick="startAudios()" type="button">START PLAYING</button>
-    <button onClick="getLocation()" type="button">CONNECT</button>
-    <div>
-    <button onClick="pauseAudios()" type="button">PAUSE AUDIO</button>
-    <button onClick="nextTrack()" type="button">NEXT TRACK</button>
-    </div><!-- pauses all current tracks -->
-
+    <!-- pauses all current tracks -->
+    
     <audio id="audioContainer1">
         <source src="audios/Mendelssohn__Octet Excerpt Violin 1.mp3" type="audio/mpeg">
     </audio>
@@ -45,6 +43,14 @@
     <audio id="audioContainer10">
         <source src="audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
     </audio>
+    
+    <button type="button" onclick="startAudios()"> START PLAYING</button>
+    <button type="button" onClick="getLocation()" >CONNECT</button>
+    <div>
+    <button type="button" onClick="pauseAudios()" >PAUSE AUDIO</button>
+    <button type="button" onClick="nextTrack()"  >NEXT TRACK</button>
+    </div>
+    <button  type="button"  onclick = audioContainer8.play() > SAFARI START PLAYING</button>
 
     <link rel="stylesheet"
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
@@ -63,6 +69,49 @@
                 
     </div>
 </div>
+<!--script below is for testing safari iphone browser.-->
+<script>
+    function startAudios(){
+        Container = "audioContainer1";
+
+        // allocating variables for each container with music.
+        audioContainer1 = document.getElementById(Container);
+        AudioContext = window.AudioContext || window.webkitAudioContext;
+    
+        context = new AudioContext();
+        //holds current track being played 
+        var mediaElement = audioContainer1; 
+        console.log(mediaElement);
+        
+        //here we create/open the node 
+        var source = context.createMediaElementSource(audioContainer1);
+        var dist = context.createWaveShaper(); 
+        var gain = context.createGain();
+    
+        //here we add bass filter/fx to the node
+        bassFilter = context.createBiquadFilter();
+        bassFilter.type = "lowshelf";
+        bassFilter.frequency.value = 200; 
+    
+        // here we add treble filter/fx to the node.
+        trebleFilter = context.createBiquadFilter();
+        trebleFilter.type = "highshelf"; 
+        trebleFilter.frequency.value = 2000;
+    
+        //connecting the filter nodes to the audio source and send it to the destination (window)
+        source.connect(bassFilter);
+        bassFilter.connect(trebleFilter); 
+        trebleFilter.connect(context.destination);
+    
+        audioContainer1.loop = true;
+    
+        audioContainer1.play();
+        audioContainer1.volume =1;
+        //setInterval()
+    
+    }
+</script>
+
 <div>
     <!-- Volume Slider  -->
     <h3 style="color:white">Volume slider: </h3>

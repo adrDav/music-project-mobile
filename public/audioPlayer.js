@@ -23,17 +23,14 @@ audioContainer1.volume = 0;
 var track = 0;
 
 //Web Audio API 
-
-/*
-    loop all audio. can we have multiple nodes ?
-*/
-
 /* Reminder VVV
 * bug fix: need to have AudioContext inside of a function for some reason, 
 * because chrome (specifically) doesnt like it when it is not properly shut down/started?.
 * have to test it with iOS safari and other browesers, because from what i read,
 * some browsers wont work if AudioContext is not initilized at the start.  
 */
+
+
 
 // function loops and plays the music just the first track for now.
 function startAudios(){
@@ -79,7 +76,6 @@ function nextTrack(){
     switch(x){
         case 0:
             console.log("Audio2");
-            
             audioContainer1.loop = false;
             pauseAudios();
             audioContainer1 = document.getElementById("audioContainer2");

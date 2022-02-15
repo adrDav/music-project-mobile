@@ -159,6 +159,11 @@ input:checked + .slider:before {
     opacity: 0.5;
 }
 
+#uislider3 .ui-widget-header {
+    background: #696969 !important;
+    opacity: 0.5;
+}
+
 #uislider {
     width: 98%;
     margin: 7px auto;
