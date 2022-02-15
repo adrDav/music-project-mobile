@@ -10,17 +10,6 @@
 - Notch filter Removes unwanted sounds in a narrow frequency range
 - All-pass filter Creates phaser effects (dont know what it means)
 */
-let context;
-Container = "audioContainer1";
-
-// allocating variables for each container with music.
-audioContainer1 = document.getElementById(Container);
-audioContainer1.crossOrigin = "anonymous";
-
-// muted containers from start. Volume goes from 0 to 1 (decimal numbers).
-audioContainer1.volume = 0;
-
-var track = 0;
 
 //Web Audio API 
 /* Reminder VVV
@@ -30,7 +19,29 @@ var track = 0;
 * some browsers wont work if AudioContext is not initilized at the start.  
 */
 
+/*
+How to make multiple audio streams(?):
+https://stackoverflow.com/questions/46292957/web-audio-with-multiple-streams
+Examples of Web audio API:
+https://css-tricks.com/form-validation-web-audio/
+Advance tutorial for WEb Audio API: 
+https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Advanced_techniques#demo
+Repository of Web Audio Advance Example:
+https://github.com/mdn/webaudio-examples/blob/master/step-sequencer/index.html
+*/
 
+let context;
+//audioContainer = "audioContainer1";
+
+// allocating variables for each container with music.
+audioContainer = document.getElementById("audioContainer1");
+
+let x=0;
+//DONT DELETE BELOW 2 LINES
+//apperently this should have worked for Iphones but did not
+//audioContainer.crossOrigin = "anonymous";
+// muted containers from start. Volume goes from 0 to 1 (decimal numbers).
+audioContainer.volume = 0;
 
 // function loops and plays the music just the first track for now.
 function startAudios(){
@@ -38,11 +49,10 @@ function startAudios(){
 
     context = new AudioContext();
     //holds current track being played 
-    var mediaElement = audioContainer1; 
-    console.log(mediaElement);
+    console.log(audioContainer);
     
     //here we create/open the node 
-    var source = context.createMediaElementSource(audioContainer1);
+    var source = context.createMediaElementSource(audioContainer);
     var dist = context.createWaveShaper(); 
     var gain = context.createGain();
 
@@ -61,45 +71,43 @@ function startAudios(){
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(context.destination);
 
-    audioContainer1.loop = true;
+    audioContainer.loop = true;
 
-    audioContainer1.play();
+    audioContainer.play();
 
     //setInterval()
 
 }
 
-let x=0;
+
   
 function nextTrack(){
 
     switch(x){
         case 0:
             console.log("Audio2");
-            audioContainer1.loop = false;
+            audioContainer.loop = false;
             pauseAudios();
-            audioContainer1 = document.getElementById("audioContainer2");
-            if(context.state === 'suspended'){
-                context.resume();
-            }
+            audioContainer = document.getElementById("audioContainer2");
             context.close();
             startAudios();
+            //console.log(context.State = 'suspended');
             x=1;
             break;
         case 1:
             console.log("Audio3");
-            audioContainer1.loop = false;
+            audioContainer.loop = false;
             pauseAudios();
-            audioContainer1 = document.getElementById("audioContainer3");
+            audioContainer = document.getElementById("audioContainer3");
             context.close();
             startAudios();
             x=2;
             break;
         case 2:
             console.log("Audio5");
-            audioContainer1.loop = false;
+            audioContainer.loop = false;
             pauseAudios();
-            audioContainer1 = document.getElementById("audioContainer5");
+            audioContainer = document.getElementById("audioContainer5");
             context.close();
             startAudios();
             x=0;
@@ -112,7 +120,7 @@ function nextTrack(){
 
 //linked to a pause button, simply pauses the audio
 function pauseAudios(){
-    audioContainer1.pause();
+    audioContainer.pause();
 }
 
 //function handles the fade in and out of the tracks. 
@@ -122,7 +130,7 @@ function musicFade(sValue){
 
 //volume controls 
 function setVolume (uiVolume){
-    audioContainer1.volume = uiVolume/100;
+    audioContainer.volume = uiVolume/100;
 }
 
 // function determines if coordinates are inside a polygon.

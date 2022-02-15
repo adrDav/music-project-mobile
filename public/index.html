@@ -1,4 +1,4 @@
-<!DOCTYPE html> <!-- document declaration  -->
+<!doctype html> <!-- document declaration  -->
 <html>
 <head>
 <link rel="stylesheet" href="style.css">
@@ -50,7 +50,7 @@
     <button type="button" onClick="pauseAudios()" >PAUSE AUDIO</button>
     <button type="button" onClick="nextTrack()"  >NEXT TRACK</button>
     </div>
-    <button  type="button"  onclick = audioContainer8.play() > SAFARI START PLAYING</button>
+    <button  type="button"  onclick = safariAudioTest() > SAFARI START PLAYING</button>
 
     <link rel="stylesheet"
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
@@ -71,29 +71,28 @@
 </div>
 <!--script below is for testing safari iphone browser.-->
 <script>
-    function startAudios(){
-        Container = "audioContainer1";
-
+    function safariAudioTest(){
+       
         // allocating variables for each container with music.
-        audioContainer1 = document.getElementById(Container);
-        AudioContext = window.AudioContext || window.webkitAudioContext;
-    
-        context = new AudioContext();
-        //holds current track being played 
-        var mediaElement = audioContainer1; 
-        console.log(mediaElement);
+        audioContainer = document.getElementById("audioContainer1");
         
-        //here we create/open the node 
-        var source = context.createMediaElementSource(audioContainer1);
+        context =  window.AudioContext ? new AudioContext() : webkitAudioContext();
+    
+        //= new AudioContext();
+        //console display the current audion playing  
+        console.log(audioContainer);
+        
+        //create/open the node 
+        var source = context.createMediaElementSource(audioContainer);
         var dist = context.createWaveShaper(); 
         var gain = context.createGain();
     
-        //here we add bass filter/fx to the node
+        //add bass filter/fx to the node
         bassFilter = context.createBiquadFilter();
         bassFilter.type = "lowshelf";
         bassFilter.frequency.value = 200; 
     
-        // here we add treble filter/fx to the node.
+        // add treble filter/fx to the node.
         trebleFilter = context.createBiquadFilter();
         trebleFilter.type = "highshelf"; 
         trebleFilter.frequency.value = 2000;
@@ -102,11 +101,11 @@
         source.connect(bassFilter);
         bassFilter.connect(trebleFilter); 
         trebleFilter.connect(context.destination);
-    
-        audioContainer1.loop = true;
-    
-        audioContainer1.play();
-        audioContainer1.volume =1;
+        
+        //looping & playing audio 
+        audioContainer.loop = true;
+        audioContainer.play();
+        audioContainer.volume =0.3;
         //setInterval()
     
     }

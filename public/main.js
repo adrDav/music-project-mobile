@@ -1,8 +1,8 @@
-//audio filter slider 
+//bass slider 
 $("#uislider").slider({
     range: "max",
     slide: function (event, ui) {
-        console.log("slider #1" , ui.value);
+        console.log("Bass slider: " , ui.value);
         bassFilter.gain.value = ui.value; 
 
         //take ui.value 0-100 make it the opacity of the yellow element
@@ -14,7 +14,7 @@ $("#uislider").slider({
 $("#uislider2").slider({
     range: "max",
     slide: function (event, ui) {
-        console.log("slider #2" , ui.value);
+        console.log("Volume slider: " , ui.value);
 
         setVolume(ui.value);
 
@@ -22,11 +22,11 @@ $("#uislider2").slider({
     }
 });
 
-//still need to set this one up
+//treble slider 
 $("#uislider3").slider({
     range: "max",
     slide: function (event, ui) {
-        console.log("slider #3" , ui.value);
+        console.log("Treble slider:" , ui.value);
 
         trebleFilter.gain.value = ui.value;
 
