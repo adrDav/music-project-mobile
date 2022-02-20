@@ -45,7 +45,7 @@ audioContainer.volume = 0;
 
 // function loops and plays the music just the first track for now.
 function startAudios(){
-    AudioContext = window.AudioContext || window.webkitAudioContext;
+    context =  window.AudioContext ? new AudioContext() : webkitAudioContext();
 
     context = new AudioContext();
     //holds current track being played 
@@ -88,7 +88,6 @@ function nextTrack(){
             audioContainer = document.getElementById("audioContainer2");
             context.close();
             startAudios();
-            //console.log(context.State = 'suspended');
             x=1;
             break;
         case 1:
@@ -115,10 +114,19 @@ function nextTrack(){
     }    
 }
 
+var isPlaying = false;
 //linked to a pause button, simply pauses the audio
-function pauseAudios(){
-    audioContainer.pause();
-}
+
+function pauseAudios() {
+    isPlaying ? audioContainer.pause() : audioContainer.play();
+  };
+  
+  audioContainer.onplaying = function() {
+    isPlaying = true;
+  };
+  audioContainer.onpause = function() {
+    isPlaying = false;
+  };
 
 //function handles the fade in and out of the tracks. 
 function musicFade(sValue){
