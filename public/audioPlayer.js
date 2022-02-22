@@ -28,26 +28,27 @@ Advance tutorial for WEb Audio API:
 https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Advanced_techniques#demo
 Repository of Web Audio Advance Example:
 https://github.com/mdn/webaudio-examples/blob/master/step-sequencer/index.html
+yet another tutorial on WAAPI
+https://k6.io/blog/webaudio_explained/
 */
 
 //audio = "audio1";
 // allocating variables for each container with music.
-audio = document.getElementById("audioContainer1");
+const audio = document.getElementById("audioContainer1");
 
 audio.volume = 0;
 
 // function loops and plays the music just the first track for now.
-function startAudios(){
+function setupContext(){
     try{
         ctx = window.AudioContext ? new AudioContext() : webkitAudioContext();
-
-        //ctx = new AudioContext();
+        ctx = new AudioContext();
     }
     catch(e){
         alert("This browser does not support Web Audio API.");
     }
     //here we create/open the node 
-    var source = ctx.createMediaElementSource(audio);
+    var source =  ctx.createMediaElementSource(audio);
 
     //here we add bass filter/fx to the node
     bassFilter = ctx.createBiquadFilter();
@@ -63,54 +64,18 @@ function startAudios(){
     source.connect(bassFilter);
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(ctx.destination);
-
+    
     audio.loop = true;
-
     audio.play();
-
+    
+    //line below is important
     //setInterval()
 }
 
-window.addEventListener("mousedown", startAudios);
-let x=0;
-function nextTrack(){
-    switch(x){
-        case 0:
-            console.log("Audio2");
-            audio.loop = false;
-            pauseAudios();
-            audio = document.getElementById("audioContainer2");
-            ctx.suspend();
-            startAudios();
-            x=1;
-            break;
-        case 1:
-            console.log("Audio3");
-            audio.loop = false;
-            pauseAudios();
-            audio = document.getElementById("audioContainer3");
-            ctx.close();
-            startAudios();
-            x=2;
-            break;
-        case 2:
-            console.log("Audio5");
-            audio.loop = false;
-            pauseAudios();
-            audio = document.getElementById("audioContainer5");
-            ctx.close();
-            startAudios();
-            x=0;
-            break;
-        default:
-            console.log("player broke");
 
-    }  
-}
 
+//pause audio
 var isPlaying = false;
-//linked to a pause button, simply pauses the audio
-
 function pauseAudios() {
     isPlaying ? audio.pause() : audio.play();
   };
@@ -121,11 +86,6 @@ function pauseAudios() {
   audio.onpause = function() {
     isPlaying = false;
   };
-
-//function handles the fade in and out of the tracks. 
-function musicFade(sValue){
-    
-}
 
 //volume controls 
 function setVolume (uiVolume){
