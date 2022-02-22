@@ -31,24 +31,34 @@ https://github.com/mdn/webaudio-examples/blob/master/step-sequencer/index.html
 yet another tutorial on WAAPI
 https://k6.io/blog/webaudio_explained/
 */
+ctx = window.AudioContext ? new AudioContext() : webkitAudioContext();
+ctx = new AudioContext();
 
-//audio = "audio1";
-// allocating variables for each container with music.
 const audio = document.getElementById("audioContainer1");
-
+setupContext(audio);
 audio.volume = 0;
+audio.loop = true;
+audio.play();
+const audio1 = document.getElementById("audioContainer2");
+setupContext(audio1);
+audio1.volume = 0;
+audio1.loop = true;
+audio1.play();
+const audio2 = document.getElementById("audioContainer3");
+setupContext(audio2);
+audio2.volume = 0;
+audio2.loop = true;
+audio2.play();
+const audio3 = document.getElementById("audioContainer4");
+setupContext(audio3);
+audio3.volume = 0;
+audio3.loop = true;
+audio3.play();
 
 // function loops and plays the music just the first track for now.
-function setupContext(){
-    try{
-        ctx = window.AudioContext ? new AudioContext() : webkitAudioContext();
-        ctx = new AudioContext();
-    }
-    catch(e){
-        alert("This browser does not support Web Audio API.");
-    }
+function setupContext(audioS){
     //here we create/open the node 
-    var source =  ctx.createMediaElementSource(audio);
+    var source =  ctx.createMediaElementSource(audioS);
 
     //here we add bass filter/fx to the node
     bassFilter = ctx.createBiquadFilter();
@@ -64,9 +74,6 @@ function setupContext(){
     source.connect(bassFilter);
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(ctx.destination);
-    
-    audio.loop = true;
-    audio.play();
     
     //line below is important
     //setInterval()
