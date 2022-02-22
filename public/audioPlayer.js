@@ -38,29 +38,31 @@ audio.volume = 0;
 
 // function loops and plays the music just the first track for now.
 function startAudios(){
-    //context =  window.AudioContext ? new AudioContext() : webkitAudioContext();
+    try{
+        ctx = window.AudioContext ? new AudioContext() : webkitAudioContext();
 
-    context = new AudioContext();
-
+        //ctx = new AudioContext();
+    }
+    catch(e){
+        alert("This browser does not support Web Audio API.");
+    }
     //here we create/open the node 
-    var source = context.createMediaElementSource(audio);
-    var dist = context.createWaveShaper(); 
-    var gain = context.createGain();
+    var source = ctx.createMediaElementSource(audio);
 
     //here we add bass filter/fx to the node
-    bassFilter = context.createBiquadFilter();
+    bassFilter = ctx.createBiquadFilter();
     bassFilter.type = "lowshelf";
     bassFilter.frequency.value = 200; 
 
     // here we add treble filter/fx to the node.
-    trebleFilter = context.createBiquadFilter();
+    trebleFilter = ctx.createBiquadFilter();
     trebleFilter.type = "highshelf"; 
     trebleFilter.frequency.value = 2000;
 
     //connecting the filter nodes to the audio source and send it to the destination (window)
     source.connect(bassFilter);
     bassFilter.connect(trebleFilter); 
-    trebleFilter.connect(context.destination);
+    trebleFilter.connect(ctx.destination);
 
     audio.loop = true;
 
@@ -68,13 +70,42 @@ function startAudios(){
 
     //setInterval()
 }
-//new approach
-function playBack(){
 
-}
-
+//window.addEventListener("mousedown", startAudios);
+let x=0;
 function nextTrack(){
-    
+    switch(x){
+        case 0:
+            console.log("Audio2");
+            audio.loop = false;
+            pauseAudios();
+            audio = document.getElementById("audioContainer2");
+            ctx.suspend();
+            startAudios();
+            x=1;
+            break;
+        case 1:
+            console.log("Audio3");
+            audio.loop = false;
+            pauseAudios();
+            audio = document.getElementById("audioContainer3");
+            ctx.close();
+            startAudios();
+            x=2;
+            break;
+        case 2:
+            console.log("Audio5");
+            audio.loop = false;
+            pauseAudios();
+            audio = document.getElementById("audioContainer5");
+            ctx.close();
+            startAudios();
+            x=0;
+            break;
+        default:
+            console.log("player broke");
+
+    }  
 }
 
 var isPlaying = false;
