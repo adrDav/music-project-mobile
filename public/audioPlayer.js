@@ -71,7 +71,7 @@ function startAudios(){
     //setInterval()
 }
 
-//window.addEventListener("mousedown", startAudios);
+window.addEventListener("mousedown", startAudios);
 let x=0;
 function nextTrack(){
     switch(x){
