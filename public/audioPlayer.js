@@ -30,29 +30,20 @@ Repository of Web Audio Advance Example:
 https://github.com/mdn/webaudio-examples/blob/master/step-sequencer/index.html
 */
 
-let context;
-//audioContainer = "audioContainer1";
-
+//audio = "audio1";
 // allocating variables for each container with music.
-audioContainer = document.getElementById("audioContainer1");
+audio = document.getElementById("audioContainer1");
 
-let x=0;
-//DONT DELETE BELOW 2 LINES
-//apperently this should have worked for Iphones but did not
-//audioContainer.crossOrigin = "anonymous";
-// muted containers from start. Volume goes from 0 to 1 (decimal numbers).
-audioContainer.volume = 0;
+audio.volume = 0;
 
 // function loops and plays the music just the first track for now.
 function startAudios(){
-    context =  window.AudioContext ? new AudioContext() : webkitAudioContext();
+    //context =  window.AudioContext ? new AudioContext() : webkitAudioContext();
 
     context = new AudioContext();
-    //holds current track being played 
-    console.log(audioContainer);
-    
+
     //here we create/open the node 
-    var source = context.createMediaElementSource(audioContainer);
+    var source = context.createMediaElementSource(audio);
     var dist = context.createWaveShaper(); 
     var gain = context.createGain();
 
@@ -71,60 +62,32 @@ function startAudios(){
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(context.destination);
 
-    audioContainer.loop = true;
+    audio.loop = true;
 
-    audioContainer.play();
+    audio.play();
 
     //setInterval()
 }
+//new approach
+function playBack(){
+
+}
 
 function nextTrack(){
-
-    switch(x){
-        case 0:
-            console.log("Audio2");
-            audioContainer.loop = false;
-            pauseAudios();
-            audioContainer = document.getElementById("audioContainer2");
-            context.close();
-            startAudios();
-            x=1;
-            break;
-        case 1:
-            console.log("Audio3");
-            audioContainer.loop = false;
-            pauseAudios();
-            audioContainer = document.getElementById("audioContainer3");
-            context.close();
-            startAudios();
-            x=2;
-            break;
-        case 2:
-            console.log("Audio5");
-            audioContainer.loop = false;
-            pauseAudios();
-            audioContainer = document.getElementById("audioContainer5");
-            context.close();
-            startAudios();
-            x=0;
-            break;
-        default:
-            console.log("player broke");
-
-    }    
+    
 }
 
 var isPlaying = false;
 //linked to a pause button, simply pauses the audio
 
 function pauseAudios() {
-    isPlaying ? audioContainer.pause() : audioContainer.play();
+    isPlaying ? audio.pause() : audio.play();
   };
   
-  audioContainer.onplaying = function() {
+  audio.onplaying = function() {
     isPlaying = true;
   };
-  audioContainer.onpause = function() {
+  audio.onpause = function() {
     isPlaying = false;
   };
 
@@ -135,7 +98,7 @@ function musicFade(sValue){
 
 //volume controls 
 function setVolume (uiVolume){
-    audioContainer.volume = uiVolume/100;
+    audio.volume = uiVolume/100;
 }
 
 // function determines if coordinates are inside a polygon.
