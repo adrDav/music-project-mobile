@@ -31,20 +31,27 @@ https://github.com/mdn/webaudio-examples/blob/master/step-sequencer/index.html
 yet another tutorial on WAAPI
 https://k6.io/blog/webaudio_explained/
 */
+
 //window.AudioContext ? new AudioContext() : webkitAudioContext();
 ctx0 = new AudioContext();
 ctx1 = new AudioContext();
 ctx2 = new AudioContext();
 //ctx3 = new AudioContext();
 
+let channels = 2;
+
 const audio = document.getElementById("audioContainer1");
+
 var audioSource1 = ctx0.createMediaElementSource(audio);
 filterController(audioSource1,ctx0);
 audio.volume = 0;
+
 audio.loop = true;
+audio.volume = 0;
 audio.play();
 
 const audio1 = document.getElementById("audioContainer2");
+
 var audioSource2 = ctx1.createMediaElementSource(audio1);
 filterController(audioSource2,ctx1);
 audio1.volume = 0;
@@ -57,6 +64,7 @@ filterController(audioSource3,ctx2);
 audio2.volume = 0;
 audio2.loop = true;
 audio2.play();
+
 
 
 function filterController(source, ctx){
@@ -87,8 +95,6 @@ function setupContext(audioS, ctx){
     //line below is important
     //setInterval()
 }
-
-
 
 //pause audio
 var isPlaying = false;
