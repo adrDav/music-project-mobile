@@ -31,36 +31,35 @@ https://github.com/mdn/webaudio-examples/blob/master/step-sequencer/index.html
 yet another tutorial on WAAPI
 https://k6.io/blog/webaudio_explained/
 */
-ctx = window.AudioContext ? new AudioContext() : webkitAudioContext();
-ctx = new AudioContext();
+//window.AudioContext ? new AudioContext() : webkitAudioContext();
+ctx0 = new AudioContext();
+ctx1 = new AudioContext();
+ctx2 = new AudioContext();
+//ctx3 = new AudioContext();
 
 const audio = document.getElementById("audioContainer1");
-setupContext(audio);
+var audioSource1 = ctx0.createMediaElementSource(audio);
+filterController(audioSource1,ctx0);
 audio.volume = 0;
 audio.loop = true;
 audio.play();
+
 const audio1 = document.getElementById("audioContainer2");
-setupContext(audio1);
+var audioSource2 = ctx1.createMediaElementSource(audio1);
+filterController(audioSource2,ctx1);
 audio1.volume = 0;
 audio1.loop = true;
 audio1.play();
+
 const audio2 = document.getElementById("audioContainer3");
-setupContext(audio2);
+var audioSource3 = ctx2.createMediaElementSource(audio2);
+filterController(audioSource3,ctx2);
 audio2.volume = 0;
 audio2.loop = true;
 audio2.play();
-const audio3 = document.getElementById("audioContainer4");
-setupContext(audio3);
-audio3.volume = 0;
-audio3.loop = true;
-audio3.play();
 
-// function loops and plays the music just the first track for now.
-function setupContext(audioS){
-    //here we create/open the node 
-    var source =  ctx.createMediaElementSource(audioS);
 
-    //here we add bass filter/fx to the node
+function filterController(source, ctx){
     bassFilter = ctx.createBiquadFilter();
     bassFilter.type = "lowshelf";
     bassFilter.frequency.value = 200; 
@@ -74,6 +73,16 @@ function setupContext(audioS){
     source.connect(bassFilter);
     bassFilter.connect(trebleFilter); 
     trebleFilter.connect(ctx.destination);
+
+}
+
+// function loops and plays the music just the first track for now.
+function setupContext(audioS, ctx){
+    //here we create/open the node 
+    var source =  ctx.createMediaElementSource(audioS);
+
+    //here we add bass filter/fx to the node
+    
     
     //line below is important
     //setInterval()
