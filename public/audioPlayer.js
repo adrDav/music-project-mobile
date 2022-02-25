@@ -167,13 +167,27 @@ function inside(point, vs) {
 
 // function handles the logic of the zones in the map.
 function testMusic(){
-    const zone_one = new zoneOne();;
-    var vertices = [[zone_one.get_first_lat, zone_one.get_first_lng],
+    const zone_one = new zoneOne();
+    const zone_two = new zoneTwo();
+    const zone_three = new zoneThree();
+
+
+    var verZoneOne = [[zone_one.get_first_lat, zone_one.get_first_lng],
                     [zone_one.get_second_lat, zone_one.get_second_lng],
                     [zone_one.get_third_lat, zone_one.get_third_lng],
-                    [zone_one.get_fourth_lat, zone_one.get_fourth_lng]
-                
-                ];
+                    [zone_one.get_fourth_lat, zone_one.get_fourth_lng]];
+    
+    var verZoneTwo = [[zone_two.get_first_lat, zone_two.get_first_lng],
+                      [zone_two.get_second_lat, zone_two.get_second_lng],
+                      [zone_two.get_second_lng, zone_two.get_third_lng]
+                    ];
+    
+    var verZoneTwo = [[zone_three.get_first_lat, zone_three.get_first_lng],
+                      [zone_three.get_second_lat, zone_three.get_second_lng],
+                      [zone_three.get_third_lat, zone_three.get_third_lng]
+                    ];
+
+    
     updated = getLocation();
 
     lat = updated.latitude;
@@ -182,7 +196,7 @@ function testMusic(){
     console.log(lat);
     console.log(lng);
 
-    if(inside([lat, lng],vertices)){
+    if(inside([lat, lng],verZoneOne)){
         console.log("In location");
         audio.volume = 1;
     } 
@@ -190,7 +204,7 @@ function testMusic(){
         console.log("Not in location");
         audio.volume = 0; 
     }
-    if(inside([lat, lng],vertices)){
+    if(inside([lat, lng],verZoneTwo)){
         console.log("In location");
         audio1.volume = 1;
     } 
@@ -198,7 +212,7 @@ function testMusic(){
         console.log("Not in location");
         audio1.volume = 0; 
     }
-    if(inside([lat, lng],vertices)){
+    if(inside([lat, lng],verZoneTwo)){
         console.log("In location");
         audio2.volume = 1;
     } 
@@ -206,7 +220,7 @@ function testMusic(){
         console.log("Not in location");
         audio2.volume = 0; 
     }
-    if(inside([lat, lng],vertices)){
+    if(inside([lat, lng],verZoneTwo)){
         console.log("In location");
         audio3.volume = 1;
     } 
