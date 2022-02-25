@@ -23,6 +23,7 @@ https://github.com/mdn/webaudio-examples/blob/master/step-sequencer/index.html
 yet another tutorial on WAAPI
 https://k6.io/blog/webaudio_explained/
 */
+window.addEventListener("click", console.log("hey"));
 
 //window.AudioContext ? new AudioContext() : webkitAudioContext();
 ctx = new AudioContext();
