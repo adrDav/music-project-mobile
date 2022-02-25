@@ -24,7 +24,7 @@
     <audio id="audioContainer9" src="audios/Ex1_sprite_12.03.20-zone9.mp3" type="audio/mpeg"></audio>
     <audio id="audioContainer10" src="audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg"></audio>
     
-    <button type="button" onclick="testMusic()"> START PLAYING</button>
+    <button type="button" onclick="testMusic(), playAudio()"> START PLAYING</button>
     <button type="button" onClick="getLocation()" >CONNECT</button><div>
     <!--<button type="button" onClick="pauseAudios()" >PAUSE AUDIO</button>-->
     <!--<button type="button" onClick="nextTrack()"  >NEXT TRACK</button></div>-->
@@ -41,7 +41,7 @@
             <p class="hide-when-no-tracking" style="color:white">
                 latitude: <span id="latitude"></span></br>
                 longitude: <span id="longitude"></span></br>
-                inzone: <span        >
+                inzone: <span         >
                 </p>
                 </label>
                 
