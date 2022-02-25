@@ -23,7 +23,7 @@ https://github.com/mdn/webaudio-examples/blob/master/step-sequencer/index.html
 yet another tutorial on WAAPI
 https://k6.io/blog/webaudio_explained/
 */
-window.addEventListener("click", console.log("hey"));
+//window.addEventListener("click", console.log("hey"));
 
 //window.AudioContext ? new AudioContext() : webkitAudioContext();
 ctx = new AudioContext();
@@ -126,25 +126,27 @@ trebleFilter4.connect(ctx4.destination);
 
 //play and loop all audios
 
-audio.loop = true;
 audio.volume = 0;
-audio.play();
-
-audio1.loop = true;
 audio1.volume = 0;
-audio1.play();
-
-audio2.loop = true;
 audio2.volume = 0;
-audio2.play();
-
-audio3.loop = true;
 audio3.volume = 0;
-audio3.play();
-
-audio4.loop = true;
 audio4.volume = 0;
-audio4.play();
+
+audio.loop = true;
+audio1.loop = true;
+audio2.loop = true;
+audio3.loop = true;
+audio4.loop = true;
+
+window.addEventListener("click", playAudio());
+
+function playAudio(){
+    audio.play();
+    audio1.play();
+    audio2.play();
+    audio3.play();
+    audio4.play();
+}
 
 // function determines if coordinates are inside a polygon.
 function inside(point, vs) {
@@ -218,13 +220,10 @@ function testMusic(){
 
     if(inside([lat, lng],verZoneOne)){
         console.log("In location");
-        document.write("In location.");
-        
         audio.volume = 1;
     } 
     else{
         console.log("Not in location");
-        document.write("NOt In location.");
         audio.volume = 0; 
     }
     if(inside([lat, lng],verZoneTwo)){
