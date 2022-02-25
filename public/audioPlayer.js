@@ -170,23 +170,42 @@ function testMusic(){
     const zone_one = new zoneOne();
     const zone_two = new zoneTwo();
     const zone_three = new zoneThree();
+    const zone_four = new zoneFour();
+    const zone_five = new zoneFive();
 
 
-    var verZoneOne = [[zone_one.get_first_lat, zone_one.get_first_lng],
-                    [zone_one.get_second_lat, zone_one.get_second_lng],
-                    [zone_one.get_third_lat, zone_one.get_third_lng],
-                    [zone_one.get_fourth_lat, zone_one.get_fourth_lng]];
+    var verZoneOne = [
+        [zone_one.get_first_lat, zone_one.get_first_lng],
+        [zone_one.get_second_lat, zone_one.get_second_lng],
+        [zone_one.get_third_lat, zone_one.get_third_lng],
+        [zone_one.get_fourth_lat, zone_one.get_fourth_lng]
+    ];
     
-    var verZoneTwo = [[zone_two.get_first_lat, zone_two.get_first_lng],
-                      [zone_two.get_second_lat, zone_two.get_second_lng],
-                      [zone_two.get_second_lng, zone_two.get_third_lng]
-                    ];
+    var verZoneTwo = [
+        [zone_two.get_first_lat, zone_two.get_first_lng],
+        [zone_two.get_second_lat, zone_two.get_second_lng],
+        [zone_two.get_second_lng, zone_two.get_third_lng]
+    ];
     
-    var verZoneTwo = [[zone_three.get_first_lat, zone_three.get_first_lng],
-                      [zone_three.get_second_lat, zone_three.get_second_lng],
-                      [zone_three.get_third_lat, zone_three.get_third_lng]
-                    ];
+    var verZoneThree = [
+        [zone_three.get_first_lat, zone_three.get_first_lng],
+        [zone_three.get_second_lat, zone_three.get_second_lng],
+        [zone_three.get_third_lat, zone_three.get_third_lng]
+    ];
+    
+    var verZoneFour = [
+        [zone_four.get_first_lat, zone_four.get_first_lng],
+        [zone_four.get_second_lat, zone_four.get_second_lng],
+        [zone_four.get_third_lat, zone_four.get_third_lng],
+        [zone_four.get_fourth_lat, zone_four.get_fourth_lng]
+    ];
 
+    var verZoneFive = [
+        [zone_five.get_first_lat, zone_five.get_first_lng],
+        [zone_five.get_second_lat, zone_five.get_second_lng],
+        [zone_five.get_third_lat, zone_five.get_third_lng],
+        [zone_five.get_fourth_lat, zone_five.get_fourth_lng]
+    ];
     
     updated = getLocation();
 
@@ -212,7 +231,7 @@ function testMusic(){
         console.log("Not in location");
         audio1.volume = 0; 
     }
-    if(inside([lat, lng],verZoneTwo)){
+    if(inside([lat, lng],verZoneThree)){
         console.log("In location");
         audio2.volume = 1;
     } 
@@ -220,7 +239,7 @@ function testMusic(){
         console.log("Not in location");
         audio2.volume = 0; 
     }
-    if(inside([lat, lng],verZoneTwo)){
+    if(inside([lat, lng],verZoneFour)){
         console.log("In location");
         audio3.volume = 1;
     } 
@@ -228,7 +247,7 @@ function testMusic(){
         console.log("Not in location");
         audio3.volume = 0; 
     }
-    if(inside([lat, lng],vertices)){
+    if(inside([lat, lng],verZoneFive)){
         console.log("In location");
         audio4.volume = 1;
     } 
