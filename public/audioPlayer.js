@@ -11,14 +11,6 @@
 - All-pass filter Creates phaser effects (dont know what it means)
 */
 
-//Web Audio API 
-/* Reminder VVV
-* bug fix: need to have AudioContext inside of a function for some reason, 
-* because chrome (specifically) doesnt like it when it is not properly shut down/started?.
-* have to test it with iOS safari and other browesers, because from what i read,
-* some browsers wont work if AudioContext is not initilized at the start.  
-*/
-
 /*
 How to make multiple audio streams(?):
 https://stackoverflow.com/questions/46292957/web-audio-with-multiple-streams
@@ -44,10 +36,6 @@ ctx7 = new AudioContext();
 ctx8 = new AudioContext();
 ctx9 = new AudioContext();
 
-//ctx3 = new AudioContext();
-
-
-
 const audio = document.getElementById("audioContainer1");
 const audio1 = document.getElementById("audioContainer2");
 const audio2 = document.getElementById("audioContainer3");
@@ -69,6 +57,8 @@ var audioSource7 = ctx6.createMediaElementSource(audio6);
 var audioSource8 = ctx7.createMediaElementSource(audio7);
 var audioSource9 = ctx8.createMediaElementSource(audio8);
 var audioSource10 = ctx9.createMediaElementSource(audio9);
+
+// lowshelf nodes
 
 bassFilter = ctx.createBiquadFilter();
 bassFilter.type = "lowshelf";
@@ -94,6 +84,8 @@ bassFilter5 = ctx5.createBiquadFilter();
 bassFilter5.type = "lowshelf";
 bassFilter5.frequency.value = 200;
 
+// highself nodes
+
 trebleFilter = ctx.createBiquadFilter();
 trebleFilter.type = "highshelf"; 
 trebleFilter.frequency.value = 2000;
@@ -118,6 +110,7 @@ trebleFilter5 = ctx5.createBiquadFilter();
 trebleFilter5.type = "highshelf"; 
 trebleFilter5.frequency.value = 2000;
 
+//connected nodes
 audioSource1.connect(bassFilter);
 bassFilter.connect(trebleFilter); 
 trebleFilter.connect(ctx.destination);
@@ -142,28 +135,30 @@ audioSource6.connect(bassFilter5);
 bassFilter5.connect(trebleFilter5); 
 trebleFilter5.connect(ctx5.destination);
 
+//play and loop all audios
+
 audio.loop = true;
 audio.volume = 0;
 audio.play();
 
-audio1.volume = 0;
 audio1.loop = true;
+audio1.volume = 0;
 audio1.play();
 
-audio2.volume = 0;
 audio2.loop = true;
+audio2.volume = 0;
 audio2.play();
 
 audio3.loop = true;
 audio3.volume = 0;
 audio3.play();
 
-audio4.volume = 0;
 audio4.loop = true;
+audio4.volume = 0;
 audio4.play();
 
-audio5.volume = 0;
 audio5.loop = true;
+audio5.volume = 0;
 audio5.play();
 
 //volume controls 
