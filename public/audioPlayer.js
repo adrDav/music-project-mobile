@@ -218,10 +218,13 @@ function testMusic(){
 
     if(inside([lat, lng],verZoneOne)){
         console.log("In location");
+        document.write("In location.");
+        
         audio.volume = 1;
     } 
     else{
         console.log("Not in location");
+        document.write("NOt In location.");
         audio.volume = 0; 
     }
     if(inside([lat, lng],verZoneTwo)){
