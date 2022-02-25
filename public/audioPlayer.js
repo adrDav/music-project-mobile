@@ -78,11 +78,7 @@ bassFilter3.frequency.value = 200;
 
 bassFilter4 = ctx4.createBiquadFilter();
 bassFilter4.type = "lowshelf";
-bassFilter4.frequency.value = 200; 
-
-bassFilter5 = ctx5.createBiquadFilter();
-bassFilter5.type = "lowshelf";
-bassFilter5.frequency.value = 200;
+bassFilter4.frequency.value = 200;
 
 // highself nodes
 
@@ -106,10 +102,6 @@ trebleFilter4 = ctx4.createBiquadFilter();
 trebleFilter4.type = "highshelf"; 
 trebleFilter4.frequency.value = 2000;
 
-trebleFilter5 = ctx5.createBiquadFilter();
-trebleFilter5.type = "highshelf"; 
-trebleFilter5.frequency.value = 2000;
-
 //connected nodes
 audioSource1.connect(bassFilter);
 bassFilter.connect(trebleFilter); 
@@ -130,10 +122,6 @@ trebleFilter3.connect(ctx3.destination);
 audioSource5.connect(bassFilter4);
 bassFilter4.connect(trebleFilter4); 
 trebleFilter4.connect(ctx4.destination);
-
-audioSource6.connect(bassFilter5);
-bassFilter5.connect(trebleFilter5); 
-trebleFilter5.connect(ctx5.destination);
 
 //play and loop all audios
 
@@ -157,20 +145,6 @@ audio4.loop = true;
 audio4.volume = 0;
 audio4.play();
 
-audio5.loop = true;
-audio5.volume = 0;
-audio5.play();
-
-//volume controls 
-function setVolume (uiVolume){
-    audio.volume = uiVolume/100;
-    audio1.volume = uiVolume/100;
-    audio2.volume = uiVolume/100;
-    audio3.volume = uiVolume/100;
-    audio4.volume = uiVolume/100;
-    audio5.volume = uiVolume/100;
-}
-
 // function determines if coordinates are inside a polygon.
 function inside(point, vs) {
     // ray-casting algorithm based on
@@ -192,12 +166,14 @@ function inside(point, vs) {
 }
 
 // function handles the logic of the zones in the map.
-/*function testMusic(){
+function testMusic(){
     const zone_one = new zoneOne();;
     var vertices = [[zone_one.get_first_lat, zone_one.get_first_lng],
                     [zone_one.get_second_lat, zone_one.get_second_lng],
                     [zone_one.get_third_lat, zone_one.get_third_lng],
-                    [zone_one.get_fourth_lat, zone_one.get_fourth_lng]];
+                    [zone_one.get_fourth_lat, zone_one.get_fourth_lng]
+                
+                ];
     updated = getLocation();
 
     lat = updated.latitude;
@@ -208,9 +184,43 @@ function inside(point, vs) {
 
     if(inside([lat, lng],vertices)){
         console.log("In location");
-        increaseMusic();
-    } else{
+        audio.volume = 1;
+    } 
+    else{
         console.log("Not in location");
-        fadeMusic();
+        audio.volume = 0; 
     }
-}*/
+    if(inside([lat, lng],vertices)){
+        console.log("In location");
+        audio1.volume = 1;
+    } 
+    else{
+        console.log("Not in location");
+        audio1.volume = 0; 
+    }
+    if(inside([lat, lng],vertices)){
+        console.log("In location");
+        audio2.volume = 1;
+    } 
+    else{
+        console.log("Not in location");
+        audio2.volume = 0; 
+    }
+    if(inside([lat, lng],vertices)){
+        console.log("In location");
+        audio3.volume = 1;
+    } 
+    else{
+        console.log("Not in location");
+        audio3.volume = 0; 
+    }
+    if(inside([lat, lng],vertices)){
+        console.log("In location");
+        audio4.volume = 1;
+    } 
+    else{
+        console.log("Not in location");
+        audio4.volume = 0; 
+    }
+    
+}
