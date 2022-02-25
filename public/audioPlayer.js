@@ -138,7 +138,7 @@ audio2.loop = true;
 audio3.loop = true;
 audio4.loop = true;
 
-window.addEventListener("click", playAudio());
+window.addEventListener("click", playAudio(), testMusic());
 
 function playAudio(){
     audio.play();
