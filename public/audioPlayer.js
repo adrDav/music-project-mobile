@@ -62,86 +62,118 @@ const audio9 = document.getElementById("audioContainer10");
 var audioSource1 = ctx.createMediaElementSource(audio);
 var audioSource2 = ctx1.createMediaElementSource(audio1);
 var audioSource3 = ctx2.createMediaElementSource(audio2);
-var audioSource4 = ctx.createMediaElementSource(audio3);
-var audioSource5 = ctx1.createMediaElementSource(audio4);
-var audioSource6 = ctx2.createMediaElementSource(audio5);
-var audioSource7 = ctx.createMediaElementSource(audio6);
-var audioSource8 = ctx1.createMediaElementSource(audio7);
-var audioSource9 = ctx2.createMediaElementSource(audio8);
-var audioSource10 = ctx.createMediaElementSource(audio9);
+var audioSource4 = ctx3.createMediaElementSource(audio3);
+var audioSource5 = ctx4.createMediaElementSource(audio4);
+var audioSource6 = ctx5.createMediaElementSource(audio5);
+var audioSource7 = ctx6.createMediaElementSource(audio6);
+var audioSource8 = ctx7.createMediaElementSource(audio7);
+var audioSource9 = ctx8.createMediaElementSource(audio8);
+var audioSource10 = ctx9.createMediaElementSource(audio9);
 
 bassFilter = ctx.createBiquadFilter();
 bassFilter.type = "lowshelf";
 bassFilter.frequency.value = 200; 
 
-trebleFilter = ctx.createBiquadFilter();
-trebleFilter.type = "highshelf"; 
-trebleFilter.frequency.value = 2000;
-
-audioSource1.connect(bassFilter);
-bassFilter.connect(trebleFilter); 
-trebleFilter.connect(ctx.destination);
-
-audio.loop = true;
-audio.volume = 0;
-audio.play();
-
-
-
-
 bassFilter1 = ctx1.createBiquadFilter();
 bassFilter1.type = "lowshelf";
 bassFilter1.frequency.value = 200; 
+
+bassFilter2 = ctx2.createBiquadFilter();
+bassFilter2.type = "lowshelf";
+bassFilter2.frequency.value = 200;
+
+bassFilter3 = ctx3.createBiquadFilter();
+bassFilter3.type = "lowshelf";
+bassFilter3.frequency.value = 200; 
+
+bassFilter4 = ctx4.createBiquadFilter();
+bassFilter4.type = "lowshelf";
+bassFilter4.frequency.value = 200; 
+
+bassFilter5 = ctx5.createBiquadFilter();
+bassFilter5.type = "lowshelf";
+bassFilter5.frequency.value = 200;
+
+trebleFilter = ctx.createBiquadFilter();
+trebleFilter.type = "highshelf"; 
+trebleFilter.frequency.value = 2000;
 
 trebleFilter1 = ctx1.createBiquadFilter();
 trebleFilter1.type = "highshelf"; 
 trebleFilter1.frequency.value = 2000;
 
-audioSource2.connect(bassFilter1);
-bassFilter1.connect(trebleFilter1); 
-trebleFilter1.connect(ctx1.destination);
-
-audio1.volume = 0;
-audio1.loop = true;
-audio1.play();
- 
-
-
-bassFilter2 = ctx2.createBiquadFilter();
-bassFilter2.type = "lowshelf";
-bassFilter2.frequency.value = 200; 
-
 trebleFilter2 = ctx2.createBiquadFilter();
 trebleFilter2.type = "highshelf"; 
 trebleFilter2.frequency.value = 2000;
+
+trebleFilter3 = ctx3.createBiquadFilter();
+trebleFilter3.type = "highshelf"; 
+trebleFilter3.frequency.value = 2000;
+
+trebleFilter4 = ctx4.createBiquadFilter();
+trebleFilter4.type = "highshelf"; 
+trebleFilter4.frequency.value = 2000;
+
+trebleFilter5 = ctx5.createBiquadFilter();
+trebleFilter5.type = "highshelf"; 
+trebleFilter5.frequency.value = 2000;
+
+audioSource1.connect(bassFilter);
+bassFilter.connect(trebleFilter); 
+trebleFilter.connect(ctx.destination);
+
+audioSource2.connect(bassFilter1);
+bassFilter1.connect(trebleFilter1); 
+trebleFilter1.connect(ctx1.destination);
 
 audioSource3.connect(bassFilter2);
 bassFilter2.connect(trebleFilter2); 
 trebleFilter2.connect(ctx2.destination);
 
+audioSource4.connect(bassFilter3);
+bassFilter3.connect(trebleFilter3); 
+trebleFilter3.connect(ctx3.destination);
+
+audioSource5.connect(bassFilter4);
+bassFilter4.connect(trebleFilter4); 
+trebleFilter4.connect(ctx4.destination);
+
+audioSource6.connect(bassFilter5);
+bassFilter5.connect(trebleFilter5); 
+trebleFilter5.connect(ctx5.destination);
+
+audio.loop = true;
+audio.volume = 0;
+audio.play();
+
+audio1.volume = 0;
+audio1.loop = true;
+audio1.play();
+
 audio2.volume = 0;
 audio2.loop = true;
 audio2.play();
 
+audio3.loop = true;
+audio3.volume = 0;
+audio3.play();
 
-//pause audio
-var isPlaying = false;
-function pauseAudios() {
-    isPlaying ? audio.pause() : audio.play();
-  };
-  
-  audio.onplaying = function() {
-    isPlaying = true;
-  };
-  audio.onpause = function() {
-    isPlaying = false;
-  };
+audio4.volume = 0;
+audio4.loop = true;
+audio4.play();
+
+audio5.volume = 0;
+audio5.loop = true;
+audio5.play();
 
 //volume controls 
 function setVolume (uiVolume){
     audio.volume = uiVolume/100;
     audio1.volume = uiVolume/100;
     audio2.volume = uiVolume/100;
+    audio3.volume = uiVolume/100;
+    audio4.volume = uiVolume/100;
+    audio5.volume = uiVolume/100;
 }
 
 // function determines if coordinates are inside a polygon.
