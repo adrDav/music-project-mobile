@@ -36,12 +36,39 @@ https://k6.io/blog/webaudio_explained/
 ctx = new AudioContext();
 ctx1 = new AudioContext();
 ctx2 = new AudioContext();
+ctx3 = new AudioContext();
+ctx4 = new AudioContext();
+ctx5 = new AudioContext();
+ctx6 = new AudioContext();
+ctx7 = new AudioContext();
+ctx8 = new AudioContext();
+ctx9 = new AudioContext();
+
 //ctx3 = new AudioContext();
 
 
 
 const audio = document.getElementById("audioContainer1");
+const audio1 = document.getElementById("audioContainer2");
+const audio2 = document.getElementById("audioContainer3");
+const audio3 = document.getElementById("audioContainer4");
+const audio4 = document.getElementById("audioContainer5");
+const audio5 = document.getElementById("audioContainer6");
+const audio6 = document.getElementById("audioContainer7");
+const audio7 = document.getElementById("audioContainer8");
+const audio8 = document.getElementById("audioContainer9");
+const audio9 = document.getElementById("audioContainer10");
+
 var audioSource1 = ctx.createMediaElementSource(audio);
+var audioSource2 = ctx1.createMediaElementSource(audio1);
+var audioSource3 = ctx2.createMediaElementSource(audio2);
+var audioSource4 = ctx.createMediaElementSource(audio3);
+var audioSource5 = ctx1.createMediaElementSource(audio4);
+var audioSource6 = ctx2.createMediaElementSource(audio5);
+var audioSource7 = ctx.createMediaElementSource(audio6);
+var audioSource8 = ctx1.createMediaElementSource(audio7);
+var audioSource9 = ctx2.createMediaElementSource(audio8);
+var audioSource10 = ctx.createMediaElementSource(audio9);
 
 bassFilter = ctx.createBiquadFilter();
 bassFilter.type = "lowshelf";
@@ -59,8 +86,8 @@ audio.loop = true;
 audio.volume = 0;
 audio.play();
 
-const audio1 = document.getElementById("audioContainer2");
-var audioSource2 = ctx1.createMediaElementSource(audio1);
+
+
 
 bassFilter1 = ctx1.createBiquadFilter();
 bassFilter1.type = "lowshelf";
@@ -78,8 +105,7 @@ audio1.volume = 0;
 audio1.loop = true;
 audio1.play();
  
-const audio2 = document.getElementById("audioContainer3");
-var audioSource3 = ctx2.createMediaElementSource(audio2);
+
 
 bassFilter2 = ctx2.createBiquadFilter();
 bassFilter2.type = "lowshelf";
