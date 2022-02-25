@@ -33,68 +33,70 @@ https://k6.io/blog/webaudio_explained/
 */
 
 //window.AudioContext ? new AudioContext() : webkitAudioContext();
-ctx0 = new AudioContext();
+ctx = new AudioContext();
 ctx1 = new AudioContext();
 ctx2 = new AudioContext();
 //ctx3 = new AudioContext();
 
-let channels = 2;
+
 
 const audio = document.getElementById("audioContainer1");
+var audioSource1 = ctx.createMediaElementSource(audio);
 
-var audioSource1 = ctx0.createMediaElementSource(audio);
-filterController(audioSource1,ctx0);
-audio.volume = 0;
+bassFilter = ctx.createBiquadFilter();
+bassFilter.type = "lowshelf";
+bassFilter.frequency.value = 200; 
+
+trebleFilter = ctx.createBiquadFilter();
+trebleFilter.type = "highshelf"; 
+trebleFilter.frequency.value = 2000;
+
+audioSource1.connect(bassFilter);
+bassFilter.connect(trebleFilter); 
+trebleFilter.connect(ctx.destination);
 
 audio.loop = true;
 audio.volume = 0;
 audio.play();
 
 const audio1 = document.getElementById("audioContainer2");
-
 var audioSource2 = ctx1.createMediaElementSource(audio1);
-filterController(audioSource2,ctx1);
+
+bassFilter1 = ctx1.createBiquadFilter();
+bassFilter1.type = "lowshelf";
+bassFilter1.frequency.value = 200; 
+
+trebleFilter1 = ctx1.createBiquadFilter();
+trebleFilter1.type = "highshelf"; 
+trebleFilter1.frequency.value = 2000;
+
+audioSource2.connect(bassFilter1);
+bassFilter1.connect(trebleFilter1); 
+trebleFilter1.connect(ctx1.destination);
+
 audio1.volume = 0;
 audio1.loop = true;
 audio1.play();
-
+ 
 const audio2 = document.getElementById("audioContainer3");
 var audioSource3 = ctx2.createMediaElementSource(audio2);
-filterController(audioSource3,ctx2);
+
+bassFilter2 = ctx2.createBiquadFilter();
+bassFilter2.type = "lowshelf";
+bassFilter2.frequency.value = 200; 
+
+trebleFilter2 = ctx2.createBiquadFilter();
+trebleFilter2.type = "highshelf"; 
+trebleFilter2.frequency.value = 2000;
+
+audioSource3.connect(bassFilter2);
+bassFilter2.connect(trebleFilter2); 
+trebleFilter2.connect(ctx2.destination);
+
 audio2.volume = 0;
 audio2.loop = true;
 audio2.play();
 
-
-
-function filterController(source, ctx){
-    bassFilter = ctx.createBiquadFilter();
-    bassFilter.type = "lowshelf";
-    bassFilter.frequency.value = 200; 
-
-    // here we add treble filter/fx to the node.
-    trebleFilter = ctx.createBiquadFilter();
-    trebleFilter.type = "highshelf"; 
-    trebleFilter.frequency.value = 2000;
-
-    //connecting the filter nodes to the audio source and send it to the destination (window)
-    source.connect(bassFilter);
-    bassFilter.connect(trebleFilter); 
-    trebleFilter.connect(ctx.destination);
-
-}
-
-// function loops and plays the music just the first track for now.
-function setupContext(audioS, ctx){
-    //here we create/open the node 
-    var source =  ctx.createMediaElementSource(audioS);
-
-    //here we add bass filter/fx to the node
-    
-    
-    //line below is important
-    //setInterval()
-}
 
 //pause audio
 var isPlaying = false;
@@ -112,6 +114,8 @@ function pauseAudios() {
 //volume controls 
 function setVolume (uiVolume){
     audio.volume = uiVolume/100;
+    audio1.volume = uiVolume/100;
+    audio2.volume = uiVolume/100;
 }
 
 // function determines if coordinates are inside a polygon.

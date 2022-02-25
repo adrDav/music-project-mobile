@@ -4,6 +4,7 @@ $("#uislider").slider({
     slide: function (event, ui) {
         console.log("Bass slider: " , ui.value);
         bassFilter.gain.value = ui.value; 
+        bassFilter1.gain.value = ui.value; 
 
         //take ui.value 0-100 make it the opacity of the yellow element
         $("#yellow-bg").css("opacity", ui.value+'%');      
@@ -29,7 +30,7 @@ $("#uislider3").slider({
         console.log("Treble slider:" , ui.value);
 
         trebleFilter.gain.value = ui.value;
-
+        trebleFilter1.gain.value = ui.value;
         $("#green-bg").css("opacity", ui.value+"%");
     }
 });
