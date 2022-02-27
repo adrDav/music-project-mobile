@@ -130,11 +130,11 @@ trebleFilter4.connect(ctx4.destination);
 
 
 function playAudio(){
-    audio.volume = 0;
-    audio1.volume = 0;
-    audio2.volume = 0;
-    audio3.volume = 0;
-    audio4.volume = 0;
+    audio.volume = 0.3;
+    audio1.volume = 0.3;
+    audio2.volume = 0.3;
+    audio3.volume = 0.3;
+    audio4.volume = 0.3;
 
     audio.loop = true;
     audio1.loop = true;
@@ -225,7 +225,7 @@ function testMusic(){
     } 
     else{
         console.log("Not in location");
-        audio.volume = 0; 
+        //audio.volume = 0; 
     }
     if(inside([lat, lng],verZoneTwo)){
         console.log("In location");
@@ -233,7 +233,7 @@ function testMusic(){
     } 
     else{
         console.log("Not in location");
-        audio1.volume = 0; 
+        //audio1.volume = 0; 
     }
     if(inside([lat, lng],verZoneThree)){
         console.log("In location");
@@ -241,7 +241,7 @@ function testMusic(){
     } 
     else{
         console.log("Not in location");
-        audio2.volume = 0; 
+        //audio2.volume = 0; 
     }
     if(inside([lat, lng],verZoneFour)){
         console.log("In location");
@@ -249,7 +249,7 @@ function testMusic(){
     } 
     else{
         console.log("Not in location");
-        audio3.volume = 0; 
+        //audio3.volume = 0; 
     }
     if(inside([lat, lng],verZoneFive)){
         console.log("In location");
@@ -257,7 +257,7 @@ function testMusic(){
     } 
     else{
         console.log("Not in location");
-        audio4.volume = 0; 
+        //audio4.volume = 0; 
     }
     
 }
