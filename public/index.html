@@ -41,7 +41,7 @@
             <p class="hide-when-no-tracking" style="color:white">
                 latitude: <span id="latitude"></span></br>
                 longitude: <span id="longitude"></span></br>
-                inzone: <span         >
+                inzone: <span id="inzone"></span> </br>
                 </p>
                 </label>
                 
@@ -118,6 +118,8 @@ const audio6 = document.getElementById("audioContainer7");
 const audio7 = document.getElementById("audioContainer8");
 const audio8 = document.getElementById("audioContainer9");
 const audio9 = document.getElementById("audioContainer10");
+
+var inzone = "default"; 
 function connectCtx(){
     window.AudioContext ? new AudioContext() : webkitAudioContext();
     ctx = new AudioContext();
@@ -257,6 +259,7 @@ function testMusic(){
     const zone_four = new zoneFour();
     const zone_five = new zoneFive();
 
+    
 
     var verZoneOne = [
         [zone_one.get_first_lat, zone_one.get_first_lng],
