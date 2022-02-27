@@ -122,8 +122,6 @@ window.addEventListener("click", (event)=> {
     audioSource5.connect(bassFilter4);
     bassFilter4.connect(trebleFilter4); 
     trebleFilter4.connect(ctx4.destination);
-
-
 })
 //play and loop all audios
 
