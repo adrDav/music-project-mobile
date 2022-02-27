@@ -119,7 +119,6 @@ const audio7 = document.getElementById("audioContainer8");
 const audio8 = document.getElementById("audioContainer9");
 const audio9 = document.getElementById("audioContainer10");
 
-var inzone = "default"; 
 function connectCtx(){
     window.AudioContext ? new AudioContext() : webkitAudioContext();
     ctx = new AudioContext();
@@ -303,7 +302,7 @@ function testMusic(){
     console.log(lng);
 
     if(inside([lat, lng],verZoneOne)){
-        console.log("In location");
+        document.write("Zone 1.");
         audio.volume = 1;
     } 
     else{
