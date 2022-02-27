@@ -23,7 +23,7 @@ https://github.com/mdn/webaudio-examples/blob/master/step-sequencer/index.html
 yet another tutorial on WAAPI
 https://k6.io/blog/webaudio_explained/
 */
-window.addEventListener("submit", (event)=> {
+function connectCtx(){
     window.AudioContext ? new AudioContext() : webkitAudioContext();
     ctx = new AudioContext();
     ctx1 = new AudioContext();
@@ -122,7 +122,7 @@ window.addEventListener("submit", (event)=> {
     audioSource5.connect(bassFilter4);
     bassFilter4.connect(trebleFilter4); 
     trebleFilter4.connect(ctx4.destination);
-})
+}
 //play and loop all audios
 
 function playAudio(){
