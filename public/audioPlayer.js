@@ -24,7 +24,7 @@ yet another tutorial on WAAPI
 https://k6.io/blog/webaudio_explained/
 */
 //window.addEventListener("click", console.log("hey"));
-
+function connectCtx(){
 window.AudioContext ? new AudioContext() : webkitAudioContext();
 ctx = new AudioContext();
 ctx1 = new AudioContext();
@@ -124,10 +124,8 @@ audioSource5.connect(bassFilter4);
 bassFilter4.connect(trebleFilter4); 
 trebleFilter4.connect(ctx4.destination);
 
+}
 //play and loop all audios
-
-
-
 
 function playAudio(){
     audio.volume = 0.3;
