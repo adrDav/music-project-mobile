@@ -25,7 +25,7 @@ https://k6.io/blog/webaudio_explained/
 */
 //window.addEventListener("click", console.log("hey"));
 
-//window.AudioContext ? new AudioContext() : webkitAudioContext();
+window.AudioContext ? new AudioContext() : webkitAudioContext();
 ctx = new AudioContext();
 ctx1 = new AudioContext();
 ctx2 = new AudioContext();
@@ -126,20 +126,22 @@ trebleFilter4.connect(ctx4.destination);
 
 //play and loop all audios
 
-audio.volume = 0;
-audio1.volume = 0;
-audio2.volume = 0;
-audio3.volume = 0;
-audio4.volume = 0;
 
-audio.loop = true;
-audio1.loop = true;
-audio2.loop = true;
-audio3.loop = true;
-audio4.loop = true;
 
 
 function playAudio(){
+    audio.volume = 0;
+    audio1.volume = 0;
+    audio2.volume = 0;
+    audio3.volume = 0;
+    audio4.volume = 0;
+
+    audio.loop = true;
+    audio1.loop = true;
+    audio2.loop = true;
+    audio3.loop = true;
+    audio4.loop = true;
+
     audio.play();
     audio1.play();
     audio2.play();
