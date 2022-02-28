@@ -10,6 +10,7 @@ async function showLocation(position) {
     // print into the HTML file.
     document.getElementById('latitude').textContent = lat;
     document.getElementById('longitude').textContent = lng;
+    
     // POST request to server.
     const options = {
         method: 'POST',
@@ -28,7 +29,8 @@ function errorHandler(err) {
         alert("Error: Position is unavailable!");
     }
 }
-
+//no request for iOS
+//https://stackoverflow.com/questions/48293914/geolocation-in-javascript-on-ios-safari
 function getLocation() {
     if(navigator.geolocation) {
        // timeout at 60000 milliseconds (60 seconds)
