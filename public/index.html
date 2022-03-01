@@ -216,12 +216,6 @@ function connectCtx(){
         bassFilter4.connect(trebleFilter4); 
         trebleFilter4.connect(ctx4.destination);
 
-        audio.volume = 0;
-        audio1.volume = 0;
-        audio2.volume = 0;
-        audio3.volume = 0;
-        audio4.volume = 0;
-
         audio.loop = true;
         audio1.loop = true;
         audio2.loop = true;
@@ -233,6 +227,12 @@ function connectCtx(){
         audio2.play();
         audio3.play();
         audio4.play();
+
+        audio.volume = 0;
+        audio1.volume = 0;
+        audio2.volume = 0;
+        audio3.volume = 0;
+        audio4.volume = 0;
         ctxConnected = true;
     }
 }
