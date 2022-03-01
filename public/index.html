@@ -98,7 +98,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <!--<script src="./audioPlayer.js"></script>-->
-    <script src="./geoLocate.js"></script>
+    <!--<script src="./geoLocate.js"></script>-->
     <script src="./main.js"></script>
     <script src="./zoneOne.js"></script>
     <script src="./zoneTwo.js"></script>
@@ -350,6 +350,50 @@ function testMusic(){
         audio4.volume = 0; 
     }
     
+}
+
+var coordinates = {};
+
+async function showLocation(position) {
+    // obtain coordinates from the API.
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    // coordinates stores new coordinates.
+    coordinates = {latitude: lat, longitude: lng};
+    // print into the HTML file.
+    document.getElementById('latitude').textContent = lat;
+    document.getElementById('longitude').textContent = lng;
+    
+    // POST request to server.
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(coordinates)
+    };
+    const response = await fetch('/', options);
+}
+
+function errorHandler(err) {
+    if(err.code == 1) {
+        alert("Error: Access is denied!");
+    } else if( err.code == 2) {
+        alert("Error: Position is unavailable!");
+    }
+}
+//no request for iOS
+//https://stackoverflow.com/questions/48293914/geolocation-in-javascript-on-ios-safari
+function getLocation() {
+    if(navigator.geolocation) {
+       // timeout at 60000 milliseconds (60 seconds)
+       var options = {timeout:60000};
+       navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
+       // return the updated variables.
+       return coordinates;
+    } else {
+       alert("Sorry, browser does not support geolocation!");
+    }
 }
 
 </script>
