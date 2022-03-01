@@ -47,7 +47,7 @@
     <button type="button" onclick="testMusic()"> START PLAYING</button>
     <button type="button" onClick="connectCtx()" >CONNECT</button><div>
     <!--<button type="button" onClick="pauseAudios()" >PAUSE AUDIO</button>-->
-    <!--<button type="button" onClick= "safariAudioTest()"  >SAFARi</button></div>-->
+    <!--<button type="button" onClick= "audioContainer1.play()"  >SAFARi</button></div>-->
 
     <link rel="stylesheet"
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
@@ -249,13 +249,13 @@ audio4.loop = true;
 audio1.play();
 audio2.play();
 audio3.play();
-audio4.play();
+audio4.play(); */
 
 audio.volume = 0;
 audio1.volume = 0;
 audio2.volume = 0;
 audio3.volume = 0;
-audio4.volume = 0; */
+audio4.volume = 0; 
 
 //play and loop all audios
 
@@ -333,7 +333,6 @@ function testMusic(){
 
     if(inside([lat, lng],verZoneOne)){
         console.log("In location");
-        window.print("in zone 1");
         audio.play();
         audio.volume = 1;
     } 
@@ -343,7 +342,6 @@ function testMusic(){
     }
     if(inside([lat, lng],verZoneTwo)){
         console.log("In location");
-        window.print("in zone 2");
         audio1.play();
         audio1.volume = 1;
     } 
@@ -353,7 +351,6 @@ function testMusic(){
     }
     if(inside([lat, lng],verZoneThree)){
         console.log("In location");
-        window.print("in zone 3");
         audio2.play();
         audio2.volume = 1;
     } 
@@ -363,7 +360,6 @@ function testMusic(){
     }
     if(inside([lat, lng],verZoneFour)){
         console.log("In location");
-        window.print("in zone 4");
         audio3.play();
         audio3.volume = 1;
     } 
@@ -373,7 +369,6 @@ function testMusic(){
     }
     if(inside([lat, lng],verZoneFive)){
         console.log("In location");
-        window.print("in zone 5");
         audio4.play();
         audio4.volume = 1;
     } 
