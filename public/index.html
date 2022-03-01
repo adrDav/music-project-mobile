@@ -13,16 +13,36 @@
 
     <!-- pauses all current tracks -->
     
-    <audio id="audioContainer1" src="audios/Mendelssohn__Octet Excerpt Violin 1.mp3" type="audio/mpeg"></audio>
-    <audio id="audioContainer2" src="audios/Mendelssohn__Octet Excerpt Violin 2.mp3" type="audio/mpeg"></audio>
-    <audio id="audioContainer3" src="audios/Mendelssohn__Octet Excerpt Violin 3.mp3" type="audio/mpeg"></audio>
-    <audio id="audioContainer4" src="audios/Mendelssohn__Octet Excerpt Violin 4.mp3" type="audio/mpeg"></audio>
-    <audio id="audioContainer5" src="audios/Mendelssohn__Octet Excerpt Viola 1.mp3" type="audio/mpeg"></audio>
-    <audio id="audioContainer6" src="audios/Mendelssohn__Octet Excerpt Viola 2.mp3" type="audio/mpeg"></audio>
-    <audio id="audioContainer7" src="audios/Mendelssohn__Octet Excerpt Cello 1.mp3" type="audio/mpeg"></audio>
-    <audio id="audioContainer8" src="audios/Mendelssohn__Octet Excerpt Cello 2.mp3" type="audio/mpeg"></audio>
-    <audio id="audioContainer9" src="audios/Ex1_sprite_12.03.20-zone9.mp3" type="audio/mpeg"></audio>
-    <audio id="audioContainer10" src="audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg"></audio>
+    <audio id="audioContainer1">
+        <source src="audios/Mendelssohn__Octet Excerpt Violin 1.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audioContainer2">
+        <source src="audios/Mendelssohn__Octet Excerpt Violin 2.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audioContainer3">
+        <source src="audios/Mendelssohn__Octet Excerpt Violin 3.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audioContainer4">
+        <source src="audios/Mendelssohn__Octet Excerpt Violin 4.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audioContainer5">
+        <source src="audios/Mendelssohn__Octet Excerpt Viola 1.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audioContainer6">
+        <source src="audios/Mendelssohn__Octet Excerpt Viola 2.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audioContainer7">
+        <source src="audios/Mendelssohn__Octet Excerpt Cello 1.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audioContainer8">
+        <source src="audios/Mendelssohn__Octet Excerpt Cello 2.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audioContainer9">
+        <source src="audios/Ex1_sprite_12.03.20-zone9.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audioContainer10">
+        <source src="audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
+    </audio>
     
     <button type="button" onclick="testMusic()"> START PLAYING</button>
     <button type="button" onClick="connectCtx()" >CONNECT</button><div>
@@ -41,7 +61,7 @@
             <p class="hide-when-no-tracking" style="color:white">
                 latitude: <span id="latitude"></span></br>
                 longitude: <span id="longitude"></span></br>
-                inzone: <span id="inzone"></span> </br>
+                
                 </p>
                 </label>
                 
@@ -215,33 +235,27 @@ function connectCtx(){
         audioSource5.connect(bassFilter4);
         bassFilter4.connect(trebleFilter4); 
         trebleFilter4.connect(ctx4.destination);
-
-        audio.loop = true;
-        audio1.loop = true;
-        audio2.loop = true;
-        audio3.loop = true;
-        audio4.loop = true;
-
-        audio.play();
-        audio1.play();
-        audio2.play();
-        audio3.play();
-        audio4.play();
-
-        audio.volume = 0;
-        audio1.volume = 0;
-        audio2.volume = 0;
-        audio3.volume = 0;
-        audio4.volume = 0;
         ctxConnected = true;
     }
 }
+
+audio.loop = true;
+audio1.loop = true;
+audio2.loop = true;
+audio3.loop = true;
+audio4.loop = true;
+
+/* audio.play();
+audio1.play();
+audio2.play();
+audio3.play();
+audio4.play();
 
 audio.volume = 0;
 audio1.volume = 0;
 audio2.volume = 0;
 audio3.volume = 0;
-audio4.volume = 0;
+audio4.volume = 0; */
 
 //play and loop all audios
 
@@ -320,6 +334,7 @@ function testMusic(){
     if(inside([lat, lng],verZoneOne)){
         console.log("In location");
         window.print("in zone 1");
+        audio.play();
         audio.volume = 1;
     } 
     else{
@@ -329,6 +344,7 @@ function testMusic(){
     if(inside([lat, lng],verZoneTwo)){
         console.log("In location");
         window.print("in zone 2");
+        audio1.play();
         audio1.volume = 1;
     } 
     else{
@@ -338,6 +354,7 @@ function testMusic(){
     if(inside([lat, lng],verZoneThree)){
         console.log("In location");
         window.print("in zone 3");
+        audio2.play();
         audio2.volume = 1;
     } 
     else{
@@ -347,6 +364,7 @@ function testMusic(){
     if(inside([lat, lng],verZoneFour)){
         console.log("In location");
         window.print("in zone 4");
+        audio3.play();
         audio3.volume = 1;
     } 
     else{
@@ -356,6 +374,7 @@ function testMusic(){
     if(inside([lat, lng],verZoneFive)){
         console.log("In location");
         window.print("in zone 5");
+        audio4.play();
         audio4.volume = 1;
     } 
     else{
@@ -385,7 +404,7 @@ async function showLocation(position) {
         },
         body: JSON.stringify(coordinates)
     };
-    //const response = await fetch('/', options);
+    const response = await fetch('/', options);
 }
 
 function errorHandler(err) {
