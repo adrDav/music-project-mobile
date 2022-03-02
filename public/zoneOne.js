@@ -10,7 +10,6 @@ class zoneOne {
         this.fourth_lat = 31.769928;
         this.fourth_lng = -106.505274;
     
-       
         /* this.first_lat = 31.767615; 
         this.first_lng = -106.502585;
 
