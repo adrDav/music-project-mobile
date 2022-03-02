@@ -125,6 +125,11 @@
     <script src="./zoneThree.js"></script>
     <script src="./zoneFour.js"></script>
     <script src="./zoneFive.js"></script>
+    <script src="./zoneSix.js"></script>
+    <script src="./zoneSeven.js"></script>
+    <script src="./zoneEight.js"></script>
+    <script src="./zoneNine.js"></script>
+
 
     <!--script below is for testing safari iphone browser.-->
  
@@ -475,6 +480,42 @@ function testMusic(){
     else{
         console.log("Not in location 5");
         audio4.volume = 0; 
+    }
+    if(inside([lat, lng],verZoneSix)){
+        console.log("In location 6");
+        audio5.play();
+        audio5.volume = 1;
+    } 
+    else{
+        console.log("Not in location 6");
+        audio5.volume = 0; 
+    }
+    if(inside([lat, lng],verZoneSeven)){
+        console.log("In location 7");
+        audio6.play();
+        audio6.volume = 1;
+    } 
+    else{
+        console.log("Not in location 7");
+        audio6.volume = 0; 
+    }
+    if(inside([lat, lng],verZoneEight)){
+        console.log("In location 8");
+        audio7.play();
+        audio7.volume = 1;
+    } 
+    else{
+        console.log("Not in location 8");
+        audio7.volume = 0; 
+    }
+    if(inside([lat, lng],verZoneNine)){
+        console.log("In location 9");
+        audio8.play();
+        audio8.volume = 1;
+    } 
+    else{
+        console.log("Not in location 9");
+        audio8.volume = 0; 
     }
     
 }

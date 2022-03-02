@@ -1,10 +1,10 @@
-class zoneFour {
+class zoneNine {
     constructor(){
         this.first_lat = 31.770863;
         this.first_lng = -106.504678;
 
         this.second_lat = 31.770931;
-        this.second_lng = --106.504596;
+        this.second_lng = -106.504596;
 
         this.third_lat = 31.770857;
         this.third_lng = -106.504508;
