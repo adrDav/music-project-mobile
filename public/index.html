@@ -193,7 +193,28 @@ function connectCtx(){
         bassFilter4.type = "lowshelf";
         bassFilter4.frequency.value = 200;
 
+        bassFilter5 = ctx5.createBiquadFilter();
+        bassFilter5.type = "lowshelf";
+        bassFilter5.frequency.value = 200;
+
+        bassFilter6 = ctx6.createBiquadFilter();
+        bassFilter6.type = "lowshelf";
+        bassFilter6.frequency.value = 200;
+
+        bassFilter7 = ctx7.createBiquadFilter();
+        bassFilter7.type = "lowshelf";
+        bassFilter7.frequency.value = 200;
+
+        bassFilter8 = ctx8.createBiquadFilter();
+        bassFilter8.type = "lowshelf";
+        bassFilter8.frequency.value = 200;
+        
+        bassFilter9 = ctx9.createBiquadFilter();
+        bassFilter9.type = "lowshelf";
+        bassFilter9.frequency.value = 200;
+        
         // highself nodes
+
 
         trebleFilter = ctx.createBiquadFilter();
         trebleFilter.type = "highshelf"; 
@@ -215,6 +236,26 @@ function connectCtx(){
         trebleFilter4.type = "highshelf"; 
         trebleFilter4.frequency.value = 2000;
 
+        trebleFilter5 = ctx5.createBiquadFilter();
+        trebleFilter5.type = "highshelf"; 
+        trebleFilter5.frequency.value = 2000;
+
+        trebleFilter6 = ctx6.createBiquadFilter();
+        trebleFilter6.type = "highshelf"; 
+        trebleFilter6.frequency.value = 2000;
+
+        trebleFilter7 = ctx7.createBiquadFilter();
+        trebleFilter7.type = "highshelf"; 
+        trebleFilter7.frequency.value = 2000;
+
+        trebleFilter8 = ctx8.createBiquadFilter();
+        trebleFilter8.type = "highshelf"; 
+        trebleFilter8.frequency.value = 2000;
+
+        trebleFilter9 = ctx9.createBiquadFilter();
+        trebleFilter9.type = "highshelf"; 
+        trebleFilter9.frequency.value = 2000;
+
         //connected nodes
         audioSource1.connect(bassFilter);
         bassFilter.connect(trebleFilter); 
@@ -235,6 +276,27 @@ function connectCtx(){
         audioSource5.connect(bassFilter4);
         bassFilter4.connect(trebleFilter4); 
         trebleFilter4.connect(ctx4.destination);
+
+        audioSource6.connect(bassFilter5);
+        bassFilter5.connect(trebleFilter5); 
+        trebleFilter5.connect(ctx5.destination);
+
+        audioSource7.connect(bassFilter6);
+        bassFilter6.connect(trebleFilter6); 
+        trebleFilter6.connect(ctx6.destination);
+
+        audioSource8.connect(bassFilter7);
+        bassFilter7.connect(trebleFilter7); 
+        trebleFilter7.connect(ctx7.destination);
+
+        audioSource9.connect(bassFilter8);
+        bassFilter8.connect(trebleFilter8); 
+        trebleFilter8.connect(ctx8.destination);
+
+        audioSource10.connect(bassFilter9);
+        bassFilter9.connect(trebleFilter9); 
+        trebleFilter9.connect(ctx9.destination);
+        
         ctxConnected = true;
     }
 }
@@ -244,6 +306,11 @@ audio1.loop = true;
 audio2.loop = true;
 audio3.loop = true;
 audio4.loop = true;
+audio5.loop = true;
+audio6.loop = true;
+audio7.loop = true;
+audio8.loop = true;
+audio9.loop = true;
 
 /* audio.play();
 audio1.play();
@@ -255,7 +322,12 @@ audio.volume = 0;
 audio1.volume = 0;
 audio2.volume = 0;
 audio3.volume = 0;
-audio4.volume = 0; 
+audio4.volume = 0;
+audio5.volume = 0;
+audio6.volume = 0;
+audio7.volume = 0;
+audio8.volume = 0;
+audio9.volume = 0;  
 
 //play and loop all audios
 
@@ -285,7 +357,11 @@ const zone_three = new zoneThree();
 const zone_four = new zoneFour();
 const zone_five = new zoneFive();
 
-
+const zone_six = new zoneSix();
+const zone_seven = new zoneSeven();
+const zone_eight = new zoneEight();
+const zone_nine = new zoneNine();
+const zone_ten = new zoneTen();
 
 var verZoneOne = [
     [zone_one.get_first_lat, zone_one.get_first_lng],
