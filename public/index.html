@@ -44,7 +44,7 @@
         <source src="audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
     </audio>
     
-    <button type="button" onclick="testMusic()"> START PLAYING</button>
+    <button type="button" onclick="callTestMusic()"> START PLAYING</button>
     <button type="button" onClick="connectCtx()" >CONNECT</button><div>
     <!--<button type="button" onClick="pauseAudios()" >PAUSE AUDIO</button>-->
     <!--<button type="button" onClick= "audioContainer1.play()"  >SAFARi</button></div>-->
@@ -158,7 +158,6 @@ function connectCtx(){
         ctx6 = new AudioContext();
         ctx7 = new AudioContext();
         ctx8 = new AudioContext();
-        ctx9 = new AudioContext();
 
         var audioSource1 = ctx.createMediaElementSource(audio);
         var audioSource2 = ctx1.createMediaElementSource(audio1);
@@ -169,7 +168,6 @@ function connectCtx(){
         var audioSource7 = ctx6.createMediaElementSource(audio6);
         var audioSource8 = ctx7.createMediaElementSource(audio7);
         var audioSource9 = ctx8.createMediaElementSource(audio8);
-        var audioSource10 = ctx9.createMediaElementSource(audio9);
 
         // lowshelf nodes
 
@@ -208,10 +206,6 @@ function connectCtx(){
         bassFilter8 = ctx8.createBiquadFilter();
         bassFilter8.type = "lowshelf";
         bassFilter8.frequency.value = 200;
-        
-        bassFilter9 = ctx9.createBiquadFilter();
-        bassFilter9.type = "lowshelf";
-        bassFilter9.frequency.value = 200;
         
         // highself nodes
 
@@ -252,9 +246,6 @@ function connectCtx(){
         trebleFilter8.type = "highshelf"; 
         trebleFilter8.frequency.value = 2000;
 
-        trebleFilter9 = ctx9.createBiquadFilter();
-        trebleFilter9.type = "highshelf"; 
-        trebleFilter9.frequency.value = 2000;
 
         //connected nodes
         audioSource1.connect(bassFilter);
@@ -293,10 +284,6 @@ function connectCtx(){
         bassFilter8.connect(trebleFilter8); 
         trebleFilter8.connect(ctx8.destination);
 
-        audioSource10.connect(bassFilter9);
-        bassFilter9.connect(trebleFilter9); 
-        trebleFilter9.connect(ctx9.destination);
-        
         ctxConnected = true;
     }
 }
@@ -310,7 +297,7 @@ audio5.loop = true;
 audio6.loop = true;
 audio7.loop = true;
 audio8.loop = true;
-audio9.loop = true;
+
 
 /* audio.play();
 audio1.play();
@@ -327,7 +314,7 @@ audio5.volume = 0;
 audio6.volume = 0;
 audio7.volume = 0;
 audio8.volume = 0;
-audio9.volume = 0;  
+
 
 //play and loop all audios
 
@@ -357,12 +344,13 @@ const zone_three = new zoneThree();
 const zone_four = new zoneFour();
 const zone_five = new zoneFive();
 
+/*
 const zone_six = new zoneSix();
 const zone_seven = new zoneSeven();
 const zone_eight = new zoneEight();
 const zone_nine = new zoneNine();
 const zone_ten = new zoneTen();
-
+*/
 var verZoneOne = [
     [zone_one.get_first_lat, zone_one.get_first_lng],
     [zone_one.get_second_lat, zone_one.get_second_lng],
@@ -396,6 +384,15 @@ var verZoneFive = [
     [zone_five.get_fourth_lat, zone_five.get_fourth_lng]
 ];
 
+var intervalInit = false;
+function callTestMusic(){
+    if(intervalInit == false){
+        console.log("Interval initialized")
+        var intervalid = setInterval(testMusic, 5000)
+        intervalInit = true;
+    }   
+    
+}
 // function handles the logic of the zones in the map.
 function testMusic(){
     
