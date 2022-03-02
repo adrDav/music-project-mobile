@@ -44,7 +44,7 @@
         <source src="audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
     </audio>
     
-    <button type="button" onclick="callTestMusic()"> START PLAYING</button>
+    <button type="button" onclick="testMusic()"> START PLAYING</button>
     <button type="button" onClick="connectCtx()" >CONNECT</button><div>
     <!--<button type="button" onClick="pauseAudios()" >PAUSE AUDIO</button>-->
     <!--<button type="button" onClick= "audioContainer1.play()"  >SAFARi</button></div>-->
@@ -416,7 +416,7 @@ var verZoneNine = [
 
 
 
-var intervalInit = false;
+/* var intervalInit = false;
 function callTestMusic(){
     if(intervalInit == false){
         console.log("Interval initialized")
@@ -424,7 +424,7 @@ function callTestMusic(){
         intervalInit = true;
     }   
     
-}
+} */
 // function handles the logic of the zones in the map.
 function testMusic(){
     
@@ -443,6 +443,7 @@ function testMusic(){
     } 
     else{
         console.log("Not in location 1");
+        audio.play();
         audio.volume = 1; 
     }
     if(inside([lat, lng],verZoneTwo)){
