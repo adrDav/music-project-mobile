@@ -1,6 +1,22 @@
 //https://www.javatpoint.com/expressjs-tutorial   express node.js
 //https://www.youtube.com/watch?v=VShtPwEkDD0 node.js tut
 
+const http = require('http')
+const port = 3000
+const server = http.createServer(function(req, res){
+
+})
+
+server.listen(port, function(error) {
+    if(error){
+        console.log('Something went wrong', error)
+    }
+    else{
+        console.log('Server is listening on port ' + port)
+    }
+})
+
+/* 
 const express = require('express');
 const app = express();
 app.listen(8000, () => console.log('listening at 8000'));
@@ -21,6 +37,6 @@ app.post('/audioPlayer.js', (request, response) => {
     response.send(temp_data);
 });
 
-
+ */
 
 
