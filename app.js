@@ -1,10 +1,12 @@
 //https://www.javatpoint.com/expressjs-tutorial   express node.js
+//https://www.youtube.com/watch?v=HkK5lGx9DRU&t=60s express node.js tutorial
 //https://www.youtube.com/watch?v=VShtPwEkDD0 node.js tut
 
 const http = require('http')
 const port = 3000
 const server = http.createServer(function(req, res){
-
+    res.write('Hello world')
+    res.end()
 })
 
 server.listen(port, function(error) {
