@@ -1,3 +1,6 @@
+//https://www.javatpoint.com/expressjs-tutorial   express node.js
+//https://www.youtube.com/watch?v=VShtPwEkDD0 node.js tut
+
 const express = require('express');
 const app = express();
 app.listen(8000, () => console.log('listening at 8000'));
