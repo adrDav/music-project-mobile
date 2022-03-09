@@ -2,21 +2,20 @@
 //https://www.youtube.com/watch?v=HkK5lGx9DRU&t=60s express node.js tutorial
 //https://www.youtube.com/watch?v=VShtPwEkDD0 node.js tut
 
-const http = require('http')
-const port = 3000
-const server = http.createServer(function(req, res){
-    res.write('Hello world')
-    res.end()
-})
+const http = require('http');
 
-server.listen(port, function(error) {
-    if(error){
-        console.log('Something went wrong', error)
-    }
-    else{
-        console.log('Server is listening on port ' + port)
-    }
-})
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World');
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
 
 /* 
 const express = require('express');
