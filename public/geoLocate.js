@@ -34,7 +34,12 @@ function errorHandler(err) {
 function getLocation() {
     if(navigator.geolocation) {
        // timeout at 60000 milliseconds (60 seconds)
-       var options = {timeout:60000};
+       var options = {
+           
+        enableHighAccuracy: true,
+        timeout:60000,
+        maximumAge: 0
+    };
        navigator.geolocation.getCurrentPosition(showLocation, errorHandler, options);
        // return the updated variables.
        return coordinates;

@@ -3,6 +3,8 @@
 //https://www.youtube.com/watch?v=VShtPwEkDD0 node.js tut
 
 const http = require('http');
+const express = require('express');
+const app = express();
 
 const hostname = '127.0.0.1';
 const port = 3000;
