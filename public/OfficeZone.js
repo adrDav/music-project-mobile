@@ -1,13 +1,13 @@
-class zoneEight {
+class OfficeZone {
     constructor(){    
-        this.first_lat = 31.767935; 
-        this.first_lng = -106.502453;
+        this.first_lat =31.790466; 
+        this.first_lng = -106.512167;
 
-        this.second_lat = 31.767488;
+        this.second_lat = 31.788653;
         this.second_lng = -106.502066;
 
-        this.third_lat = 31.767999;
-        this.third_lng = -106.501852;
+        this.third_lat = 31.790404;
+        this.third_lng = -106.509519;
     }
     
     get get_first_lat(){

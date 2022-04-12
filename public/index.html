@@ -5,6 +5,20 @@
 <!--viewport allows for porper resizing on mobile devices ,K.-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<!--<script src="./audioPlayer.js"></script>-->
+<!--<script src="./geoLocate.js"></script>-->
+<script src="./main.js"></script>
+<script src="./zoneOne.js"></script>
+<script src="./zoneTwo.js"></script>
+<script src="./zoneThree.js"></script>
+<script src="./zoneFour.js"></script>
+<script src="./zoneFive.js"></script>
+<script src="./zoneSix.js"></script>
+<script src="./zoneSeven.js"></script>
+<script src="./zoneEight.js"></script>
+<script src="./zoneNine.js"></script>
 
 </head>
 <body>
@@ -44,10 +58,13 @@
         <source src="audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
     </audio>
     
-    <button type="button" onclick="testMusic()"> START PLAYING</button>
+    <button type="button" onclick="playMusic()"> START PLAYING</button>
     <button type="button" onClick="connectCtx()" >CONNECT</button><div>
-    <!--<button type="button" onClick="pauseAudios()" >PAUSE AUDIO</button>-->
-    <!--<button type="button" onClick= "audioContainer1.play()"  >SAFARi</button></div>-->
+    <button id='joinGame' >JOIN SERVER</button> 
+    <button id = 'inZone1' >zone 1</button>
+    <button id = 'inZone2' >zone 2</button>
+    <button id = 'inZone3' >zone 3</button>
+    
 
     <link rel="stylesheet"
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
@@ -68,72 +85,31 @@
     </div>
 </div>
 
-<div>
-    <!-- Volume Slider  
-    <h3 style="color:white">Volume slider: </h3>
-    <div id="bluebox"></div>
-
-    <div id="holderion">
-        <div id="uislider2"></div>
-        <div class="color2" style="padding: 0px; background-color: blue;">
-            <div id="orange-bg" style="background-color: #FF4500; height:10px;min-width:100%; opacity:0%"></div>
-        </div>
-        <input type="text2" id="idnumber2" display: none;">
-    </div>
-    <div id="orangebox"></div>
-    <div>-->
-
-    <!-- Bass Slider  -->
-    <h3 style="color:white">Bass slider: </h3>
-    <div id="greybox"></div>
-    <div id="holderion2">
-            <div id="uislider"></div>
-            <div class="color" style="padding:0px; background-color: gray;">
-                <div id="yellow-bg" style="background-color: yellow; height:10px;min-width:100%; opacity:0%"></div>
-            </div>
-            <input type="text" id="idnumber" display: none;">
-        </div>
-        <div id="yellowbox"></div>
-    
-    </div>
-    <!-- treble Slider  -->
-    <h3 style="color:white">Treble slider: </h3>
-    <div id="greybox"></div>
-    <div id="holderion3">
-            <div id="uislider3"></div>
-            <div class="color" style="padding:0px; background-color: red;">
-                <div id="green-bg" style="background-color: rgb(0, 255, 0); height:10px;min-width:100%; opacity:0%"></div>
-            </div>
-            <input type="text" id="idnumber3" display: none;">
-        </div>
-        <div id="yellowbox"></div>
-    
-    </div>
-    
-    <!--<div> class = "sliderContainer">
-        <input type = "range" min="0" max="100" value="50" class="slider" id="myRange">
-    </div>-->
-    
-</div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <!--<script src="./audioPlayer.js"></script>-->
-    <!--<script src="./geoLocate.js"></script>-->
-    <script src="./main.js"></script>
-    <script src="./zoneOne.js"></script>
-    <script src="./zoneTwo.js"></script>
-    <script src="./zoneThree.js"></script>
-    <script src="./zoneFour.js"></script>
-    <script src="./zoneFive.js"></script>
-    <script src="./zoneSix.js"></script>
-    <script src="./zoneSeven.js"></script>
-    <script src="./zoneEight.js"></script>
-    <script src="./zoneNine.js"></script>
-
-
-    <!--script below is for testing safari iphone browser.-->
+<!--script below is for testing safari iphone browser.-->
  
 <script>
+/*
+let clientId =  null;
+let currZone = null;
+let ws = new WebSocket("ws://localhost:9090")
+
+
+const btnInZone1 = document.getElementById("inZone1");
+const btnInZone2 = document.getElementById("inZone2");
+const btnInZone3 = document.getElementById("inZone3");
+
+const zones = {};
+
+const btnJoin = document.getElementById("joinGame");
+
+    btnJoin.addEventListener("click", e=>{
+        const payLoad ={
+            "method" : "join",
+            "clientID" : clientId
+        }
+        ws.send(JSON.stringify(payLoad));
+    })
+*/
 const audio = document.getElementById("audioContainer1");
 const audio1 = document.getElementById("audioContainer2");
 const audio2 = document.getElementById("audioContainer3");
@@ -352,6 +328,7 @@ const zone_six = new zoneSix();
 const zone_seven = new zoneSeven();
 const zone_eight = new zoneEight();
 const zone_nine = new zoneNine();
+const Office_zone = new OfficeZone();
 
 var verZoneOne = [
     [zone_one.get_first_lat, zone_one.get_first_lng],
@@ -414,19 +391,25 @@ var verZoneNine = [
     [zone_nine.get_fourth_lat, zone_nine.get_fourth_lng]
 ];
 
+var verOfficeZone = [
+    [Office_zone.get_first_lat, Office_zone.get_first_lng],
+    [Office_zone.get_second_lat, Office_zone.get_second_lng],
+    [Office_zone.get_third_lat, Office_zone.get_third_lng]
+];
+
 
 
 var intervalInit = false;
-function callTestMusic(){
+function callplayMusic(){
     if(intervalInit == false){
         console.log("Interval initialized")
-        var intervalid = setInterval(testMusic, 5000)
+        var intervalid = setInterval(playMusic, 5000)
         intervalInit = true;
     }   
     
 }
 // function handles the logic of the zones in the map.
-function testMusic(){
+function playMusic(){
     
     updated = getLocation();
 
@@ -517,6 +500,16 @@ function testMusic(){
         console.log("Not in location 9");
         audio8.volume = 0; 
     }
+
+    if(inside([lat, lng],verOfficeZone)){
+        console.log("In OFFICE");
+        audio1.play();
+        audio1.volume = 1;
+    } 
+    else{
+        console.log("Not in OFFICE");
+        audio1.volume = 0; 
+    }
     
 }
 
@@ -532,7 +525,7 @@ async function showLocation(position) {
     document.getElementById('latitude').textContent = lat;
     document.getElementById('longitude').textContent = lng;
     
-    // POST request to server.
+    /*// POST request to server.
     const options = {
         method: 'POST',
         headers: {
@@ -540,7 +533,7 @@ async function showLocation(position) {
         },
         body: JSON.stringify(coordinates)
     };
-    const response = await fetch('/', options);
+    const response = await fetch('/', options);*/
 }
 
 function errorHandler(err) {
