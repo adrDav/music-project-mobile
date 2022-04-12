@@ -15,6 +15,9 @@ httpServer.listen(9090, () => console.log("Listening.. on 9090"))
 //hashmap clients, and object becomes a hashmap
 var clients = {}; 
 var zone1 = {};
+var zone2 = {};
+var zone3 = {};
+var zone4 = {};
 
 const wsServer = new websocketServer({
     "httpServer": httpServer
@@ -45,15 +48,23 @@ wsServer.on("request", request => {
 
     if(result.method === "inZone2"){
       clientID = result.clientID;
-      zone1[clientID] = 2;
+      zone2[clientID] = 2;
       //console.log(JSON.stringify(zone1));
       
     }
+
+    
    
-    var keys = Object.keys(clients);
-    console.log(Object.keys(clients).length);
+    var keys = Object.keys(zone1);
+    console.log(Object.keys(zone1).length);
     keys.forEach(key=>{
-      console.log(key + '|' + clients[key]);
+      console.log(key + '|' + zone1[key]);
+    });
+
+    var keys = Object.keys(zone2);
+    console.log(Object.keys(zone2).length);
+    keys.forEach(key=>{
+      console.log(key + '|' + zone2[key]);
     });
 
 })

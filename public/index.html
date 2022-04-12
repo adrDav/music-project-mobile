@@ -92,7 +92,7 @@
 function S4() {
   return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
 }
-
+//global unique ID
 const guid = () => (S4() + S4() + "-" + S4() + "-4" + S4().substr(0,3) + "-" + S4() + "-" + S4() + S4() + S4()).toLowerCase();
 let clientId =  guid();
 let currZone = null;
@@ -112,13 +112,19 @@ const btnInZone2 = document.getElementById("inZone2");
     btnInZone2.addEventListener("click", e=>{
         const payLoad={
             "method" : "inZone2",
-            "clientID" : 4567
+            "clientID" : clientId
         }
         ws.send(JSON.stringify(payLoad));
     })
 const btnInZone3 = document.getElementById("inZone3");
 
-
+    btnInZone3.addEventListener("click", e=>{
+        const payLoad={
+            "method" : "inZone3",
+            "clientID" : clientId
+        }
+        ws.send(JSON.stringify(payLoad));
+    })
 
 const zones = {};
 
