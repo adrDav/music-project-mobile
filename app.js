@@ -13,8 +13,8 @@ const websocketServer = require("websocket").server
 const httpServer = http.createServer();
 httpServer.listen(9090, () => console.log("Listening.. on 9090"))
 //hashmap clients, and object becomes a hashmap
-const clients = {}; 
-const zones = {};
+var clients = {}; 
+var zone1 = {};
 
 const wsServer = new websocketServer({
     "httpServer": httpServer
@@ -30,13 +30,32 @@ wsServer.on("request", request => {
     
     if(result.method === "join"){
       const clientID = result.clientID;
+      clients[clientID]  = 1;
       
       console.log("A user has joined with the ClientID   ");
       console.log(JSON.stringify(clientID))
     }
     
-  
-  
+    if(result.method === "inZone1"){
+      clientID = result.clientID;
+      zone1[clientID] = 1;
+      //console.log(JSON.stringify(zone1));
+      
+    }
+
+    if(result.method === "inZone2"){
+      clientID = result.clientID;
+      zone1[clientID] = 2;
+      //console.log(JSON.stringify(zone1));
+      
+    }
+   
+    var keys = Object.keys(clients);
+    console.log(Object.keys(clients).length);
+    keys.forEach(key=>{
+      console.log(key + '|' + clients[key]);
+    });
+
 })
 function S4() {
   return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 

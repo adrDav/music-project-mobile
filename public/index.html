@@ -19,6 +19,7 @@
 <script src="./zoneSeven.js"></script>
 <script src="./zoneEight.js"></script>
 <script src="./zoneNine.js"></script>
+<script src="./OfficeZone.js"></script>
 
 </head>
 <body>
@@ -88,15 +89,36 @@
 <!--script below is for testing safari iphone browser.-->
  
 <script>
-/*
-let clientId =  null;
+function S4() {
+  return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
+}
+
+const guid = () => (S4() + S4() + "-" + S4() + "-4" + S4().substr(0,3) + "-" + S4() + "-" + S4() + S4() + S4()).toLowerCase();
+let clientId =  guid();
 let currZone = null;
 let ws = new WebSocket("ws://localhost:9090")
 
 
 const btnInZone1 = document.getElementById("inZone1");
+    btnInZone1.addEventListener("click", e=>{
+        const payLoad={
+            "method" : "inZone1",
+            "clientID" : clientId
+        }
+        ws.send(JSON.stringify(payLoad));
+    })
+
 const btnInZone2 = document.getElementById("inZone2");
+    btnInZone2.addEventListener("click", e=>{
+        const payLoad={
+            "method" : "inZone2",
+            "clientID" : 4567
+        }
+        ws.send(JSON.stringify(payLoad));
+    })
 const btnInZone3 = document.getElementById("inZone3");
+
+
 
 const zones = {};
 
@@ -109,7 +131,12 @@ const btnJoin = document.getElementById("joinGame");
         }
         ws.send(JSON.stringify(payLoad));
     })
-*/
+
+
+
+
+
+
 const audio = document.getElementById("audioContainer1");
 const audio1 = document.getElementById("audioContainer2");
 const audio2 = document.getElementById("audioContainer3");
