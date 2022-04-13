@@ -62,6 +62,7 @@
     <button type="button" onclick="playMusic()"> START PLAYING</button>
     <button type="button" onClick="connectCtx()" >CONNECT</button><div>
     <button id='joinGame' >JOIN SERVER</button> 
+    <button id='Close' >DISCONNECT SERVER</button> 
     <button id = 'inZone1' >zone 1</button>
     <button id = 'inZone2' >zone 2</button>
     <button id = 'inZone3' >zone 3</button>
@@ -96,6 +97,7 @@ function S4() {
 const guid = () => (S4() + S4() + "-" + S4() + "-4" + S4().substr(0,3) + "-" + S4() + "-" + S4() + S4() + S4()).toLowerCase();
 let clientId =  guid();
 let currZone = null;
+let zones = {};
 let ws = new WebSocket("ws://localhost:9090")
 
 
@@ -126,7 +128,7 @@ const btnInZone3 = document.getElementById("inZone3");
         ws.send(JSON.stringify(payLoad));
     })
 
-const zones = {};
+
 
 const btnJoin = document.getElementById("joinGame");
 
@@ -139,8 +141,14 @@ const btnJoin = document.getElementById("joinGame");
     })
 
 
-
-
+const btnClose = document.getElementById("Close");
+    btnClose.addEventListener("click", e=>{
+        const payLoad ={
+            "method" : "close",
+            "clientID" : clientId
+        }
+        ws.send(JSON.stringify(payLoad));
+    })
 
 
 const audio = document.getElementById("audioContainer1");
