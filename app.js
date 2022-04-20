@@ -49,7 +49,6 @@ wsServer.on("request", request => {
       delete zone1[clientID];
       delete zone2[clientID];
       
-      
     }
     
     if(result.method === "inZone1"){

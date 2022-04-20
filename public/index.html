@@ -461,6 +461,11 @@ function playMusic(){
     console.log(lng);
 
     if(inside([lat, lng],verZoneOne)){
+        const payLoad={
+            "method" : "inZone1",
+            "clientID" : clientId
+        }
+        ws.send(JSON.stringify(payLoad));
         console.log("In location 1");
         audio.play();
         audio.volume = 1;
@@ -470,6 +475,11 @@ function playMusic(){
         audio.volume = 0; 
     }
     if(inside([lat, lng],verZoneTwo)){
+        const payLoad={
+            "method" : "inZone2",
+            "clientID" : clientId
+        }
+        ws.send(JSON.stringify(payLoad));
         console.log("In location 2");
         audio1.play();
         audio1.volume = 1;
@@ -479,6 +489,10 @@ function playMusic(){
         audio1.volume = 0; 
     }
     if(inside([lat, lng],verZoneThree)){
+        const payLoad={
+            "method" : "inZone3",
+            "clientID" : clientId
+        }
         console.log("In location 3");
         audio2.play();
         audio2.volume = 1;
