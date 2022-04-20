@@ -54,12 +54,20 @@ wsServer.on("request", request => {
     if(result.method === "inZone1"){
       clientID = result.clientID;
       zone1[clientID] = 1;
+      /*
+        send value that will be added to the highshelf or lowshelf 
+      */
       
     }
 
     if(result.method === "inZone2"){
       clientID = result.clientID;
       zone2[clientID] = 2;
+      
+    }
+    if(result.method === "inZone3"){
+      clientID = result.clientID;
+      zone3[clientID] = 3;
       
     }
 
