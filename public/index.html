@@ -471,6 +471,12 @@ function playMusic(){
         audio.volume = 1;
     } 
     else{
+        const payLoad={
+            "method" : "notInZone1",
+            "clientID" : clientId
+        }
+        ws.send(JSON.stringify(payLoad));
+        
         console.log("Not in location 1");
         audio.volume = 0; 
     }
@@ -485,6 +491,11 @@ function playMusic(){
         audio1.volume = 1;
     } 
     else{
+        const payLoad={
+            "method" : "notInZone2",
+            "clientID" : clientId
+        }
+        ws.send(JSON.stringify(payLoad));
         console.log("Not in location 2");
         audio1.volume = 0; 
     }
@@ -498,6 +509,11 @@ function playMusic(){
         audio2.volume = 1;
     } 
     else{
+        const payLoad={
+            "method" : "notInZone3",
+            "clientID" : clientId
+        }
+        ws.send(JSON.stringify(payLoad));
         console.log("Not in location 3");
         audio2.volume = 0; 
     }

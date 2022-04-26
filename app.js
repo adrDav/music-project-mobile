@@ -46,29 +46,37 @@ wsServer.on("request", request => {
     if(result.method === "close"){
       const clientID = result.clientID;
       delete clients[clientID];
-      delete zone1[clientID];
-      delete zone2[clientID];
-      
     }
     
     if(result.method === "inZone1"){
       clientID = result.clientID;
       zone1[clientID] = 1;
-      /*
-        send value that will be added to the highshelf or lowshelf 
-      */
-      
+      // send value to be added to the low and high selfs  
     }
+    if(result.method === "notInZone1"){
+      const clientID = result.clientID;
+      delete zone1[clientID];
+    }
+
 
     if(result.method === "inZone2"){
       clientID = result.clientID;
       zone2[clientID] = 2;
       
     }
+    if(result.method === "notInZone2"){
+      const clientID = result.clientID;
+      delete zone2[clientID];
+    }
+
     if(result.method === "inZone3"){
       clientID = result.clientID;
       zone3[clientID] = 3;
-      
+    }
+
+    if(result.method === "notInZone3"){
+      const clientID = result.clientID;
+      delete zone2[clientID];
     }
 
     console.log("count of users in server : ");
