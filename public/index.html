@@ -504,6 +504,7 @@ function playMusic(){
             "method" : "inZone3",
             "clientID" : clientId
         }
+        ws.send(JSON.stringify(payLoad));
         console.log("In location 3");
         audio2.play();
         audio2.volume = 1;

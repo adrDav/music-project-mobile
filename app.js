@@ -5,13 +5,16 @@
 const res = require('express/lib/response');
 const http = require('http');
 const app = require('express')();
-
+const fs = require('fs');//is this necessary ?
+const { stringify } = require('querystring');
 app.get("/", (req,res)=> res.sendFile(__dirname + "/index.html"))
 
 app.listen(9091, ()=>console.log("Listening on http port 9091"))
 const websocketServer = require("websocket").server
 const httpServer = http.createServer();
 httpServer.listen(9090, () => console.log("Listening.. on 9090"))
+
+
 
 
 //hashmap clients, and object becomes a hashmap
@@ -46,11 +49,16 @@ wsServer.on("request", request => {
     if(result.method === "close"){
       const clientID = result.clientID;
       delete clients[clientID];
+      delete zone1[clientID];
+      delete zone2[clientID];
+      delete zone3[clientID];
+      
     }
     
     if(result.method === "inZone1"){
       clientID = result.clientID;
       zone1[clientID] = 1;
+      //clientID.send(stringify())
       // send value to be added to the low and high selfs  
     }
     if(result.method === "notInZone1"){
@@ -78,6 +86,10 @@ wsServer.on("request", request => {
       const clientID = result.clientID;
       delete zone2[clientID];
     }
+    /*
+    function updateSystem(){
+      clients.clientID.forEach(c => {})
+    }*/
 
     console.log("count of users in server : ");
     var keys = Object.keys(clients);
