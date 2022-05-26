@@ -109,5 +109,11 @@ wsServer.on("request", request => {
       console.log(key + '|' + zone2[key]);
     });
 
+    console.log("users in zone 3 :");
+    var keys = Object.keys(zone3);
+    keys.forEach(key=>{
+      console.log(key + '|' + zone3[key]);
+    });
+
 })
 })
