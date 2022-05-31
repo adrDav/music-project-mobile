@@ -29,28 +29,28 @@
     <!-- pauses all current tracks -->
     
     <audio id="audioContainer1">
-        <source src="Novick Audio/1.mp3" type="audio/mpeg">
+        <source src="audios/Ex1_sprite_12.03.20-zone1.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer2">
-        <source src="Novick Audio/2.mp3" type="audio/mpeg">
+        <source src="audios/Ex1_sprite_12.03.20-zone2.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer3">
-        <source src="Novick Audio/3.mp3" type="audio/mpeg">
+        <source src="audios/Ex1_sprite_12.03.20-zone3.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer4">
-        <source src="Novick Audio/4.mp3" type="audio/mpeg">
+        <source src="audios/Ex1_sprite_12.03.20-zone4.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer5">
-        <source src="Novick Audio/5.mp3" type="audio/mpeg">
+        <source src="audios/Ex1_sprite_12.03.20-zone5.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer6">
-        <source src="Novick Audio/6.mp3" type="audio/mpeg">
+        <source src="audios/Ex1_sprite_12.03.20-zone6.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer7">
-        <source src="Novick Audio/7.mp3" type="audio/mpeg">
+        <source src="audios/Ex1_sprite_12.03.20-zone7.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer8">
-        <source src="Novick Audio/8.mp3" type="audio/mpeg">
+        <source src="audios/Ex1_sprite_12.03.20-zone8.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer9">
         <source src="audios/Ex1_sprite_12.03.20-zone9.mp3" type="audio/mpeg">
@@ -61,12 +61,41 @@
     
     <button type="button" onclick="playMusic()"> START PLAYING</button>
     <button type="button" onClick="connectCtx()" >CONNECT</button><div>
-    <button id='joinGame' >JOIN SERVER</button> 
+    <button id='joinServer' >JOIN SERVER</button> 
     <button id='Close' >DISCONNECT SERVER</button> 
     <button id = 'inZone1' >zone 1</button>
     <button id = 'inZone2' >zone 2</button>
     <button id = 'inZone3' >zone 3</button>
     
+    <p>Frequency Track #1</p>
+
+    <input type='range' max=20000 value=10 step=1 id='FrequencySlider1'>
+    <span id='FrequencyLabel1'></span>
+
+    <p>Fre Gain Track #1</p>
+
+    <input type='range' max=25 value=1 step=1 id='GainSlider1'>
+    <span id='GainLabel1'></span>
+
+    <p>Frequency Track #8</p>
+
+    <input type='range' max=20000 value=10 step=1 id='FrequencySlider8'>
+    <span id='FrequencyLabel8'></span>
+
+    <p>Fre Gain Track #8</p>
+
+    <input type='range' max=25 value=1 step=1 id='GainSlider8'>
+    <span id='GainLabel8'></span>
+
+    <p>Frequency Track #9</p>
+
+    <input type='range' max=20000 value=10 step=1 id='FrequencySlider9'>
+    <span id='FrequencyLabel9'></span>
+
+    <p>Fre Gain Track #9</p>
+
+    <input type='range' max=25 value=1 step=1 id='GainSlider9'>
+    <span id='GainLabel9'></span>
 
     <link rel="stylesheet"
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
@@ -130,7 +159,7 @@ const btnInZone3 = document.getElementById("inZone3");
 
 
 
-const btnJoin = document.getElementById("joinGame");
+const btnJoin = document.getElementById("joinServer");
 
     btnJoin.addEventListener("click", e=>{
         const payLoad ={
@@ -151,166 +180,108 @@ const btnClose = document.getElementById("Close");
     })
 
 
-const audio = document.getElementById("audioContainer1");
-const audio1 = document.getElementById("audioContainer2");
-const audio2 = document.getElementById("audioContainer3");
-const audio3 = document.getElementById("audioContainer4");
-const audio4 = document.getElementById("audioContainer5");
-const audio5 = document.getElementById("audioContainer6");
-const audio6 = document.getElementById("audioContainer7");
-const audio7 = document.getElementById("audioContainer8");
-const audio8 = document.getElementById("audioContainer9");
-const audio9 = document.getElementById("audioContainer10");
+const audio1 = document.getElementById("audioContainer1");
+const audio2 = document.getElementById("audioContainer2");
+const audio3 = document.getElementById("audioContainer3");
+const audio4 = document.getElementById("audioContainer4");
+const audio5 = document.getElementById("audioContainer5");
+const audio6 = document.getElementById("audioContainer6");
+const audio7 = document.getElementById("audioContainer7");
+const audio8 = document.getElementById("audioContainer8");
+const audio9 = document.getElementById("audioContainer9");
+const audio10 = document.getElementById("audioContainer10");
 
 var ctxConnected = false;
 var inzone = 0;
+
+ctx = new AudioContext();
+
+var biquadFilter1 = ctx.createBiquadFilter();
+var gainNode1 = ctx.createGain();
+
+var biquadFilter8 = ctx.createBiquadFilter();
+var gainNode8 = ctx.createGain();
+var biquadFilter9 = ctx.createBiquadFilter();
+var gainNode9 = ctx.createGain();
+
 function connectCtx(){
     if(ctxConnected){
         console.log("audio contexts already initialized");
     }
     else if(!ctxConnected){
 
-        window.AudioContext ? new AudioContext() : webkitAudioContext();
-        ctx = new AudioContext();
-        ctx1 = new AudioContext();
-        ctx2 = new AudioContext();
-        ctx3 = new AudioContext();
-        ctx4 = new AudioContext();
-        ctx5 = new AudioContext();
-        ctx6 = new AudioContext();
-        ctx7 = new AudioContext();
-        ctx8 = new AudioContext();
-
-        var audioSource1 = ctx.createMediaElementSource(audio);
-        var audioSource2 = ctx1.createMediaElementSource(audio1);
-        var audioSource3 = ctx2.createMediaElementSource(audio2);
-        var audioSource4 = ctx3.createMediaElementSource(audio3);
-        var audioSource5 = ctx4.createMediaElementSource(audio4);
-        var audioSource6 = ctx5.createMediaElementSource(audio5);
-        var audioSource7 = ctx6.createMediaElementSource(audio6);
-        var audioSource8 = ctx7.createMediaElementSource(audio7);
-        var audioSource9 = ctx8.createMediaElementSource(audio8);
-
-        // lowshelf nodes
-
-        bassFilter = ctx.createBiquadFilter();
-        bassFilter.type = "lowshelf";
-        bassFilter.frequency.value = 200; 
-
-        bassFilter1 = ctx1.createBiquadFilter();
-        bassFilter1.type = "lowshelf";
-        bassFilter1.frequency.value = 200; 
-
-        bassFilter2 = ctx2.createBiquadFilter();
-        bassFilter2.type = "lowshelf";
-        bassFilter2.frequency.value = 200;
-
-        bassFilter3 = ctx3.createBiquadFilter();
-        bassFilter3.type = "lowshelf";
-        bassFilter3.frequency.value = 200; 
-
-        bassFilter4 = ctx4.createBiquadFilter();
-        bassFilter4.type = "lowshelf";
-        bassFilter4.frequency.value = 200;
-
-        bassFilter5 = ctx5.createBiquadFilter();
-        bassFilter5.type = "lowshelf";
-        bassFilter5.frequency.value = 200;
-
-        bassFilter6 = ctx6.createBiquadFilter();
-        bassFilter6.type = "lowshelf";
-        bassFilter6.frequency.value = 200;
-
-        bassFilter7 = ctx7.createBiquadFilter();
-        bassFilter7.type = "lowshelf";
-        bassFilter7.frequency.value = 200;
-
-        bassFilter8 = ctx8.createBiquadFilter();
-        bassFilter8.type = "lowshelf";
-        bassFilter8.frequency.value = 200;
+        ctx.resume()
         
-        // highself nodes
+        var audioSource1 = ctx.createMediaElementSource(audio1);
+        var audioSource2 = ctx.createMediaElementSource(audio2);
+        var audioSource3 = ctx.createMediaElementSource(audio3);
+        var audioSource4 = ctx.createMediaElementSource(audio4);
+        var audioSource5 = ctx.createMediaElementSource(audio5);
+        var audioSource6 = ctx.createMediaElementSource(audio6);
+        var audioSource7 = ctx.createMediaElementSource(audio7);
+        var audioSource8 = ctx.createMediaElementSource(audio8);
+        var audioSource9 = ctx.createMediaElementSource(audio9);
 
+        
+        audioSource1.connect(biquadFilter1);
+        biquadFilter1.connect(gainNode1);
+        gainNode1.connect(ctx.destination);
 
-        trebleFilter = ctx.createBiquadFilter();
-        trebleFilter.type = "highshelf"; 
-        trebleFilter.frequency.value = 2000;
+        biquadFilter1.type = "bandpass";
+        biquadFilter1.frequency.value = 600;
+        biquadFilter1.gain.value = 25;
+        
+        audioSource8.connect(biquadFilter8);
+        biquadFilter8.connect(gainNode8);
+        gainNode8.connect(ctx.destination);
 
-        trebleFilter1 = ctx1.createBiquadFilter();
-        trebleFilter1.type = "highshelf"; 
-        trebleFilter1.frequency.value = 2000;
+        biquadFilter8.type = "bandpass";
+        biquadFilter8.frequency.value = 600;
+        biquadFilter8.gain.value = 25;
+        
+        audioSource9.connect(biquadFilter9);
+        biquadFilter9.connect(gainNode9);
+        gainNode9.connect(ctx.destination);
 
-        trebleFilter2 = ctx2.createBiquadFilter();
-        trebleFilter2.type = "highshelf"; 
-        trebleFilter2.frequency.value = 2000;
-
-        trebleFilter3 = ctx3.createBiquadFilter();
-        trebleFilter3.type = "highshelf"; 
-        trebleFilter3.frequency.value = 2000;
-
-        trebleFilter4 = ctx4.createBiquadFilter();
-        trebleFilter4.type = "highshelf"; 
-        trebleFilter4.frequency.value = 2000;
-
-        trebleFilter5 = ctx5.createBiquadFilter();
-        trebleFilter5.type = "highshelf"; 
-        trebleFilter5.frequency.value = 2000;
-
-        trebleFilter6 = ctx6.createBiquadFilter();
-        trebleFilter6.type = "highshelf"; 
-        trebleFilter6.frequency.value = 2000;
-
-        trebleFilter7 = ctx7.createBiquadFilter();
-        trebleFilter7.type = "highshelf"; 
-        trebleFilter7.frequency.value = 2000;
-
-        trebleFilter8 = ctx8.createBiquadFilter();
-        trebleFilter8.type = "highshelf"; 
-        trebleFilter8.frequency.value = 2000;
-
-
-        //connected nodes
-        audioSource1.connect(bassFilter);
-        bassFilter.connect(trebleFilter); 
-        trebleFilter.connect(ctx.destination);
-
-        audioSource2.connect(bassFilter1);
-        bassFilter1.connect(trebleFilter1); 
-        trebleFilter1.connect(ctx1.destination);
-
-        audioSource3.connect(bassFilter2);
-        bassFilter2.connect(trebleFilter2); 
-        trebleFilter2.connect(ctx2.destination);
-
-        audioSource4.connect(bassFilter3);
-        bassFilter3.connect(trebleFilter3); 
-        trebleFilter3.connect(ctx3.destination);
-
-        audioSource5.connect(bassFilter4);
-        bassFilter4.connect(trebleFilter4); 
-        trebleFilter4.connect(ctx4.destination);
-
-        audioSource6.connect(bassFilter5);
-        bassFilter5.connect(trebleFilter5); 
-        trebleFilter5.connect(ctx5.destination);
-
-        audioSource7.connect(bassFilter6);
-        bassFilter6.connect(trebleFilter6); 
-        trebleFilter6.connect(ctx6.destination);
-
-        audioSource8.connect(bassFilter7);
-        bassFilter7.connect(trebleFilter7); 
-        trebleFilter7.connect(ctx7.destination);
-
-        audioSource9.connect(bassFilter8);
-        bassFilter8.connect(trebleFilter8); 
-        trebleFilter8.connect(ctx8.destination);
+        biquadFilter9.type = "bandpass";
+        biquadFilter9.frequency.value = 600;
+        biquadFilter9.gain.value = 25;
 
         ctxConnected = true;
+
     }
 }
+FrequencySlider1.oninput = function(){
+    FrequencyLabel1.innerHTML = this.value;
+    biquadFilter1.frequency.value = this.value;
+}
 
-audio.loop = true;
+GainSlider1.oninput = function(){
+    GainLabel1.innerHTML = this.value;
+    gainNode1.gain.value = this.value;
+}
+
+FrequencySlider8.oninput = function(){
+    FrequencyLabel8.innerHTML = this.value;
+    biquadFilter8.frequency.value = this.value;
+}
+
+GainSlider8.oninput = function(){
+    GainLabel8.innerHTML = this.value;
+    gainNode8.gain.value = this.value;
+}
+
+FrequencySlider9.oninput = function(){
+    FrequencyLabel9.innerHTML = this.value;
+    biquadFilter9.frequency.value = this.value;
+}
+
+GainSlider9.oninput = function(){
+    GainLabel9.innerHTML = this.value;
+    gainNode9.gain.value = this.value;
+}
+
+
 audio1.loop = true;
 audio2.loop = true;
 audio3.loop = true;
@@ -319,15 +290,8 @@ audio5.loop = true;
 audio6.loop = true;
 audio7.loop = true;
 audio8.loop = true;
+audio9.loop = true;
 
-
-/* audio.play();
-audio1.play();
-audio2.play();
-audio3.play();
-audio4.play(); */
-
-audio.volume = 0;
 audio1.volume = 0;
 audio2.volume = 0;
 audio3.volume = 0;
@@ -336,6 +300,9 @@ audio5.volume = 0;
 audio6.volume = 0;
 audio7.volume = 0;
 audio8.volume = 0;
+audio9.volume = 0;
+
+
 
 
 //play and loop all audios
@@ -444,7 +411,7 @@ var intervalInit = false;
 function callplayMusic(){
     if(intervalInit == false){
         console.log("Interval initialized")
-        var intervalid = setInterval(playMusic, 5000)
+        var intervalid = setInterval(playMusic(), 500)
         intervalInit = true;
     }   
     
@@ -467,8 +434,8 @@ function playMusic(){
         }
         ws.send(JSON.stringify(payLoad));
         console.log("In location 1");
-        audio.play();
-        audio.volume = 1;
+        audio1.play();
+        audio1.volume = 1;
     } 
     else{
         const payLoad={
@@ -478,7 +445,7 @@ function playMusic(){
         ws.send(JSON.stringify(payLoad));
         
         console.log("Not in location 1");
-        audio.volume = 0; 
+        audio1.volume = 0; 
     }
     if(inside([lat, lng],verZoneTwo)){
         const payLoad={
@@ -487,8 +454,8 @@ function playMusic(){
         }
         ws.send(JSON.stringify(payLoad));
         console.log("In location 2");
-        audio1.play();
-        audio1.volume = 1;
+        audio2.play();
+        audio2.volume = 1;
     } 
     else{
         const payLoad={
@@ -497,7 +464,7 @@ function playMusic(){
         }
         ws.send(JSON.stringify(payLoad));
         console.log("Not in location 2");
-        audio1.volume = 0; 
+        audio2.volume = 0; 
     }
     if(inside([lat, lng],verZoneThree)){
         const payLoad={
@@ -506,8 +473,8 @@ function playMusic(){
         }
         ws.send(JSON.stringify(payLoad));
         console.log("In location 3");
-        audio2.play();
-        audio2.volume = 1;
+        audio3.play();
+        audio3.volume = 1;
     } 
     else{
         const payLoad={
@@ -516,61 +483,62 @@ function playMusic(){
         }
         ws.send(JSON.stringify(payLoad));
         console.log("Not in location 3");
-        audio2.volume = 0; 
+        audio3.volume = 0; 
     }
     if(inside([lat, lng],verZoneFour)){
         console.log("In location 4");
-        audio3.play();
-        audio3.volume = 1;
-    } 
-    else{
-        console.log("Not in location 4");
-        audio3.volume = 0; 
-    }
-    if(inside([lat, lng],verZoneFive)){
-        console.log("In location 5");
         audio4.play();
         audio4.volume = 1;
     } 
     else{
-        console.log("Not in location 5");
+        console.log("Not in location 4");
         audio4.volume = 0; 
     }
-    if(inside([lat, lng],verZoneSix)){
-        console.log("In location 6");
+    if(inside([lat, lng],verZoneFive)){
+        console.log("In location 5");
         audio5.play();
         audio5.volume = 1;
     } 
     else{
-        console.log("Not in location 6");
+        console.log("Not in location 5");
         audio5.volume = 0; 
     }
-    if(inside([lat, lng],verZoneSeven)){
-        console.log("In location 7");
+    if(inside([lat, lng],verZoneSix)){
+        console.log("In location 6");
         audio6.play();
         audio6.volume = 1;
     } 
     else{
-        console.log("Not in location 7");
+        console.log("Not in location 6");
         audio6.volume = 0; 
     }
-    if(inside([lat, lng],verZoneEight)){
-        console.log("In location 8");
+    if(inside([lat, lng],verZoneSeven)){
+        console.log("In location 7");
         audio7.play();
         audio7.volume = 1;
     } 
     else{
-        console.log("Not in location 8");
+        console.log("Not in location 7");
         audio7.volume = 0; 
     }
-    if(inside([lat, lng],verZoneNine)){
-        console.log("In location 9");
+    if(inside([lat, lng],verOfficeZone)){
+        console.log("In location 8");
         audio8.play();
         audio8.volume = 1;
+        
+    } 
+    else{
+        console.log("Not in location 8");
+        audio8.volume = 0; 
+    }
+    if(inside([lat, lng],verOfficeZone)){
+        console.log("In location 9");
+        audio9.play();
+        audio9.volume = 1;
     } 
     else{
         console.log("Not in location 9");
-        audio8.volume = 0; 
+        audio9.volume = 0; 
     }
 
     if(inside([lat, lng],verOfficeZone)){
