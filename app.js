@@ -33,6 +33,7 @@ wsServer.on("request", request => {
   connection.on("open", () => console.log("opened!"))
   connection.on("close", () => { 
     console.log("closed!")
+
   })
   connection.on("message", message => {
   
