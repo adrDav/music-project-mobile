@@ -1,121 +1,70 @@
-//https://www.javatpoint.com/expressjs-tutorial   express node.js
-//https://www.youtube.com/watch?v=HkK5lGx9DRU&t=60s express node.js tutorial
-//https://www.youtube.com/watch?v=VShtPwEkDD0 node.js tut
-
+const express = require('express');
 const res = require('express/lib/response');
-const http = require('http');
-const app = require('express')();
-const fs = require('fs');//is this necessary ?
-const { stringify } = require('querystring');
-app.get("/", (req,res)=> res.sendFile(__dirname + "/index.html"))
+const { Socket } = require('socket.io');
+const app = express();
+const serv = require('http').Server(app);
 
-app.listen(9091, ()=>console.log("Listening on http port 9091"))
-const websocketServer = require("websocket").server
-const httpServer = http.createServer();
-httpServer.listen(9090, () => console.log("Listening.. on 9090"))
-
-
-
-
-//hashmap clients, and object becomes a hashmap
-var clients = {}; 
-var zone1 = {};
-var zone2 = {};
-var zone3 = {};
-var zone4 = {};
-
-const wsServer = new websocketServer({
-    "httpServer": httpServer
-})
-
-wsServer.on("request", request => {
-  const connection = request.accept(null, request.origin);
-  connection.on("open", () => console.log("opened!"))
-  connection.on("close", () => { 
-    console.log("closed!")
-
-  })
-  connection.on("message", message => {
+app.get('/',function(req,res){
+  res.sendFile(__dirname + '/client/index.html');
   
-    const result = JSON.parse(message.utf8Data)
-    var currUserNum=0;
-    if(result.method === "join"){
-      const clientID = result.clientID;
-      clients[clientID]  = currUserNum+1;
-      currUserNum=currUserNum+ 1;
-      
-      console.log("A user has joined with the ClientID   ");
-      console.log(JSON.stringify(clientID))
-    }
+});
 
-    if(result.method === "close"){
-      const clientID = result.clientID;
-      delete clients[clientID];
-      delete zone1[clientID];
-      delete zone2[clientID];
-      delete zone3[clientID];
-      
-    }
-    
-    if(result.method === "inZone1"){
-      clientID = result.clientID;
-      zone1[clientID] = 1;
-      //clientID.send(stringify())
-      // send value to be added to the low and high selfs  
-    }
-    if(result.method === "notInZone1"){
-      const clientID = result.clientID;
-      delete zone1[clientID];
-    }
+app.use('/client', express.static(__dirname + '/client'));
+
+serv.listen(2000);
+console.log('server started');
+
+var SOCKET_LIST = {};
+
+var io = require('socket.io')(serv,{});
+io.sockets.on('connection', function(socket){
+  function S4() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
+  }
+  //global unique ID
+  const guid = () => (S4() + S4() + "-" + S4() + "-4" + S4().substr(0,3) + "-" + S4() + "-" + S4() + S4() + S4()).toLowerCase();
+  //let clientId =  guid();
+
+  socket.id = guid();
+  socket.lat = 0;
+  socket.lng = 0;
+  SOCKET_LIST[socket.id]=socket;
+  console.log('socket connection confirmed');
+  
+  socket.on('disconnect', function(){
+    console.log('user disconnected ID:'+socket.id);
+    delete SOCKET_LIST[socket.id];
+  });
+  
+  //debuggin send and receive data between client and server
+  socket.on('happy', function(data){
+    console.log('we are happy: ' + data.object);
+  });
+
+  socket.emit('serverMsg', {
+    msg:'this is a msg/object from the server'
+  });
+
+});
+
+setInterval(function(){
+  var pack = [];
+  for(var i in SOCKET_LIST){
+    var socket = SOCKET_LIST[i];
+    socket.lat++;
+    socket.lng++;
+    pack.push({
+      lan:socket.lan,
+      lng:socket.lng,
+      //not important 
+      id:socket.id
+    })
+  }
+
+  for(var i in SOCKET_LIST){
+    var socket = SOCKET_LIST[i];
+    socket.emit('newPos', pack);
+  }
 
 
-    if(result.method === "inZone2"){
-      clientID = result.clientID;
-      zone2[clientID] = 2;
-      
-    }
-    if(result.method === "notInZone2"){
-      const clientID = result.clientID;
-      delete zone2[clientID];
-    }
-
-    if(result.method === "inZone3"){
-      clientID = result.clientID;
-      zone3[clientID] = 3;
-    }
-
-    if(result.method === "notInZone3"){
-      const clientID = result.clientID;
-      delete zone2[clientID];
-    }
-    /*
-    function updateSystem(){
-      clients.clientID.forEach(c => {})
-    }*/
-
-    console.log("count of users in server : ");
-    var keys = Object.keys(clients);
-    keys.forEach(key=>{
-      console.log(key + '|' + clients[key]);
-    });
-
-    console.log("users in zone 1 :");
-    var keys = Object.keys(zone1);
-    keys.forEach(key=>{
-      console.log(key + '|' + zone1[key]);
-    });
-
-    console.log("users in zone 2 :");
-    var keys = Object.keys(zone2);
-    keys.forEach(key=>{
-      console.log(key + '|' + zone2[key]);
-    });
-
-    console.log("users in zone 3 :");
-    var keys = Object.keys(zone3);
-    keys.forEach(key=>{
-      console.log(key + '|' + zone3[key]);
-    });
-
-})
-})
+},100/25);

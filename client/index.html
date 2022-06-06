@@ -1,27 +1,24 @@
 <!doctype html> <!-- document declaration  -->
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="client/style.css">
 <!--viewport allows for porper resizing on mobile devices ,K.-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<!--<script src="./audioPlayer.js"></script>-->
-<!--<script src="./geoLocate.js"></script>-->
-<script src="./js/main.js"></script>
-<script src="./js/zoneOne.js"></script>
-<script src="./js/zoneTwo.js"></script>
-<script src="./js/zoneThree.js"></script>
-<script src="./js/zoneFour.js"></script>
-<script src="./js/zoneFive.js"></script>
-<script src="./js/zoneSix.js"></script>
-<script src="./js/zoneSeven.js"></script>
-<script src="./js/zoneEight.js"></script>
-<script src="./js/zoneNine.js"></script>
-<script src="./js/OfficeZone.js"></script>
+<!--<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script> -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="client/js/zoneOne.js"></script>
+<script src="client/js/zoneTwo.js"></script>
+<script src="client/js/zoneThree.js"></script>
+<script src="client/js/zoneFour.js"></script>
+<script src="client/js/zoneFive.js"></script>
+<script src="client/js/zoneSix.js"></script>
+<script src="client/js/zoneSeven.js"></script>
+<script src="client/js/zoneEight.js"></script>
+<script src="client/js/zoneNine.js"></script>
+<script src="client/js/OfficeZone.js"></script>
 
 </head>
 <body>
@@ -31,70 +28,71 @@
     <!-- pauses all current tracks -->
     
     <audio id="audioContainer1">
-        <source src="audios/Ex1_sprite_12.03.20-zone1.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone1.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer2">
-        <source src="audios/Ex1_sprite_12.03.20-zone2.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone2.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer3">
-        <source src="audios/Ex1_sprite_12.03.20-zone3.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone3.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer4">
-        <source src="audios/Ex1_sprite_12.03.20-zone4.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone4.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer5">
-        <source src="audios/Ex1_sprite_12.03.20-zone5.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone5.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer6">
-        <source src="audios/Ex1_sprite_12.03.20-zone6.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone6.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer7">
-        <source src="audios/Ex1_sprite_12.03.20-zone7.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone7.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer8">
-        <source src="audios/Ex1_sprite_12.03.20-zone8.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone8.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer9">
-        <source src="audios/Ex1_sprite_12.03.20-zone9.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone9.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer10">
-        <source src="audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
+        <source src="client/audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
     </audio>
     
-    <button type="button" onclick="playMusic()"> START PLAYING</button>
-    <button type="button" onClick="connectCtx()" >CONNECT</button><div>
+    <button type="button" onclick="playMusic(), connectCtx()"> START PLAYING</button>
+    
     <button id='joinServer' >JOIN SERVER</button> 
     <button id='Close' >DISCONNECT SERVER</button> 
     <button id = 'inZone1' >zone 1</button>
     <button id = 'inZone2' >zone 2</button>
     <button id = 'inZone3' >zone 3</button>
+    <button type="button" onclick="happy()">Happy</button>
     
-    <p>Frequency Track #1</p>
+    <p style="color:white" >Frequency Track #1</p>
 
     <input type='range' max=20000 value=10 step=1 id='FrequencySlider1'>
     <span id='FrequencyLabel1'></span>
 
-    <p>Fre Gain Track #1</p>
+    <p style="color:white">Fre Gain Track #1</p>
 
     <input type='range' max=25 value=1 step=1 id='GainSlider1'>
     <span id='GainLabel1'></span>
 
-    <p>Frequency Track #8</p>
+    <p style="color:white">Frequency Track #8</p>
 
     <input type='range' max=20000 value=10 step=1 id='FrequencySlider8'>
     <span id='FrequencyLabel8'></span>
 
-    <p>Fre Gain Track #8</p>
+    <p style="color:white">Fre Gain Track #8</p>
 
     <input type='range' max=25 value=1 step=1 id='GainSlider8'>
     <span id='GainLabel8'></span>
 
-    <p>Frequency Track #9</p>
+    <p style="color:white">Frequency Track #9</p>
 
     <input type='range' max=20000 value=10 step=1 id='FrequencySlider9'>
     <span id='FrequencyLabel9'></span>
 
-    <p>Fre Gain Track #9</p>
+    <p style="color:white">Fre Gain Track #9</p>
 
     <input type='range' max=25 value=1 step=1 id='GainSlider9'>
     <span id='GainLabel9'></span>
@@ -102,86 +100,33 @@
     <link rel="stylesheet"
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
    
-    <!-- 
-    <div>
-    <div class="container">
-        <h1 style="color:white">Track Location: </h1>
-        <label class="switch" for="track-me">
-            <input id="track-me" type="checkbox" style="display:none;" checked>
-            <span class="slider"></span>
-            <p class="hide-when-no-tracking" style="color:white">
-                latitude: <span id="latitude"></span></br>
-                longitude: <span id="longitude"></span></br>
-                
-                </p>
-                </label>
-                
-    </div> -->
 </div>
-
-<!--script below is for testing safari iphone browser.-->
  
 <script>
-function S4() {
-  return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
-}
-//global unique ID
-const guid = () => (S4() + S4() + "-" + S4() + "-4" + S4().substr(0,3) + "-" + S4() + "-" + S4() + S4() + S4()).toLowerCase();
-let clientId =  guid();
-let currZone = null;
-let zones = {};
-let ws = new WebSocket("ws://localhost:9090")
+//connect to the server with the associated port, url + domain
+const socket = io();
 
+var happy = function(){
+    socket.emit('happy',{
+        object:'this is an msg/object being send from client to server '
+    });
+};
 
-const btnInZone1 = document.getElementById("inZone1");
-    btnInZone1.addEventListener("click", e=>{
-        const payLoad={
-            "method" : "inZone1",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
-    })
+socket.on('serverMsg', function(data){
+    console.log(data.msg);
+});
 
-const btnInZone2 = document.getElementById("inZone2");
-    btnInZone2.addEventListener("click", e=>{
-        const payLoad={
-            "method" : "inZone2",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
-    })
-const btnInZone3 = document.getElementById("inZone3");
-
-    btnInZone3.addEventListener("click", e=>{
-        const payLoad={
-            "method" : "inZone3",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
-    })
+socket.on('newPos', function(data){
+    for(var i =0; i < data.length; i++){
+        console.log('userPos',data[i].lng, data[i].lat);
+    }
+    
+});
 
 
 
-const btnJoin = document.getElementById("joinServer");
 
-    btnJoin.addEventListener("click", e=>{
-        const payLoad ={
-            "method" : "join",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
-    })
-
-
-const btnClose = document.getElementById("Close");
-    btnClose.addEventListener("click", e=>{
-        const payLoad ={
-            "method" : "close",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
-    })
-
+ctx = new AudioContext();
 
 const audio1 = document.getElementById("audioContainer1");
 const audio2 = document.getElementById("audioContainer2");
@@ -196,9 +141,6 @@ const audio10 = document.getElementById("audioContainer10");
 
 
 var ctxConnected = false;
-var inzone = 0;
-
-ctx = new AudioContext();
 
 var biquadFilter1 = ctx.createBiquadFilter();
 var gainNode1 = ctx.createGain();
@@ -235,8 +177,8 @@ function connectCtx(){
         console.log("audio contexts already initialized");
     }
     else if(!ctxConnected){
-
-        ctx.resume()
+        
+        ctx.resume();
         
         var audioSource1 = ctx.createMediaElementSource(audio1);
         var audioSource2 = ctx.createMediaElementSource(audio2);
@@ -249,10 +191,8 @@ function connectCtx(){
         var audioSource9 = ctx.createMediaElementSource(audio9);
         var audioSource10 = ctx.createMediaElementSource(audio10);
 
-        
         audioSource1.connect(biquadFilter1).connect(gainNode1).connect(ctx.destination);
         
-
         biquadFilter1.type = "bandpass";
         biquadFilter1.frequency.value = 600;
         biquadFilter1.gain.value = 25;
@@ -315,7 +255,7 @@ function connectCtx(){
 
     }
 }
-//delete this later   afret debug
+
 FrequencySlider1.oninput = function(){
     FrequencyLabel1.innerHTML = this.value;
     biquadFilter1.frequency.value = this.value;
@@ -493,60 +433,30 @@ function playMusic(){
     console.log(lng);
 
     if(inside([lat, lng],verZoneOne)){
-        const payLoad={
-            "method" : "inZone1",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
         console.log("In location 1");
         audio1.play();
         audio1.volume = 1;
     } 
     else{
-        const payLoad={
-            "method" : "notInZone1",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
         
         console.log("Not in location 1");
         audio1.volume = 0; 
     }
     if(inside([lat, lng],verZoneTwo)){
-        const payLoad={
-            "method" : "inZone2",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
         console.log("In location 2");
         audio2.play();
         audio2.volume = 1;
     } 
     else{
-        const payLoad={
-            "method" : "notInZone2",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
         console.log("Not in location 2");
         audio2.volume = 0; 
     }
     if(inside([lat, lng],verZoneThree)){
-        const payLoad={
-            "method" : "inZone3",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
         console.log("In location 3");
         audio3.play();
         audio3.volume = 1;
     } 
     else{
-        const payLoad={
-            "method" : "notInZone3",
-            "clientID" : clientId
-        }
-        ws.send(JSON.stringify(payLoad));
         console.log("Not in location 3");
         audio3.volume = 0; 
     }
@@ -627,18 +537,9 @@ async function showLocation(position) {
     // coordinates stores new coordinates.
     coordinates = {latitude: lat, longitude: lng};
     // print into the HTML file.
-    document.getElementById('latitude').textContent = lat;
-    document.getElementById('longitude').textContent = lng;
-    
-    /*// POST request to server.
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(coordinates)
-    };
-    const response = await fetch('/', options);*/
+    //document.getElementById('latitude').textContent = lat;
+    //document.getElementById('longitude').textContent = lng;
+
 }
 
 function errorHandler(err) {
