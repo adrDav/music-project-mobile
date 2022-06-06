@@ -191,6 +191,7 @@ const audio8 = document.getElementById("audioContainer8");
 const audio9 = document.getElementById("audioContainer9");
 const audio10 = document.getElementById("audioContainer10");
 
+
 var ctxConnected = false;
 var inzone = 0;
 
@@ -199,10 +200,32 @@ ctx = new AudioContext();
 var biquadFilter1 = ctx.createBiquadFilter();
 var gainNode1 = ctx.createGain();
 
+var biquadFilter2 = ctx.createBiquadFilter();
+var gainNode2 = ctx.createGain();
+
+var biquadFilter3 = ctx.createBiquadFilter();
+var gainNode3 = ctx.createGain();
+
+var biquadFilter4 = ctx.createBiquadFilter();
+var gainNode4 = ctx.createGain();
+
+var biquadFilter5 = ctx.createBiquadFilter();
+var gainNode5 = ctx.createGain();
+
+var biquadFilter6 = ctx.createBiquadFilter();
+var gainNode6 = ctx.createGain();
+
+var biquadFilter7 = ctx.createBiquadFilter();
+var gainNode7 = ctx.createGain();
+
 var biquadFilter8 = ctx.createBiquadFilter();
 var gainNode8 = ctx.createGain();
+
 var biquadFilter9 = ctx.createBiquadFilter();
 var gainNode9 = ctx.createGain();
+
+var biquadFilter10 = ctx.createBiquadFilter();
+var gainNode10 = ctx.createGain();
 
 function connectCtx(){
     if(ctxConnected){
@@ -221,36 +244,75 @@ function connectCtx(){
         var audioSource7 = ctx.createMediaElementSource(audio7);
         var audioSource8 = ctx.createMediaElementSource(audio8);
         var audioSource9 = ctx.createMediaElementSource(audio9);
+        var audioSource10 = ctx.createMediaElementSource(audio10);
 
         
-        audioSource1.connect(biquadFilter1);
-        biquadFilter1.connect(gainNode1);
-        gainNode1.connect(ctx.destination);
+        audioSource1.connect(biquadFilter1).connect(gainNode1).connect(ctx.destination);
+        
 
         biquadFilter1.type = "bandpass";
         biquadFilter1.frequency.value = 600;
         biquadFilter1.gain.value = 25;
+
+        audioSource2.connect(biquadFilter2).connect(gainNode2).connect(ctx.destination);
+
+        biquadFilter2.type = "bandpass";
+        biquadFilter2.frequency.value = 600;
+        biquadFilter2.gain.value = 25;
+
+        audioSource3.connect(biquadFilter3).connect(gainNode3).connect(ctx.destination);
+
+        biquadFilter3.type = "bandpass";
+        biquadFilter3.frequency.value = 600;
+        biquadFilter3.gain.value = 25;
+
+        audioSource4.connect(biquadFilter4).connect(gainNode4).connect(ctx.destination);
+
+        biquadFilter4.type = "bandpass";
+        biquadFilter4.frequency.value = 600;
+        biquadFilter4.gain.value = 25;
+
+        audioSource5.connect(biquadFilter5).connect(gainNode5).connect(ctx.destination);
+
+        biquadFilter5.type = "bandpass";
+        biquadFilter5.frequency.value = 600;
+        biquadFilter5.gain.value = 25;
         
-        audioSource8.connect(biquadFilter8);
-        biquadFilter8.connect(gainNode8);
-        gainNode8.connect(ctx.destination);
+        audioSource6.connect(biquadFilter6).connect(gainNode6).connect(ctx.destination);
+
+        biquadFilter6.type = "bandpass";
+        biquadFilter6.frequency.value = 600;
+        biquadFilter6.gain.value = 25;
+
+        audioSource7.connect(biquadFilter7).connect(gainNode7).connect(ctx.destination);
+
+        biquadFilter7.type = "bandpass";
+        biquadFilter7.frequency.value = 600;
+        biquadFilter7.gain.value = 25;
+
+        audioSource8.connect(biquadFilter8).connect(gainNode8).connect(ctx.destination);
 
         biquadFilter8.type = "bandpass";
         biquadFilter8.frequency.value = 600;
         biquadFilter8.gain.value = 25;
         
-        audioSource9.connect(biquadFilter9);
-        biquadFilter9.connect(gainNode9);
-        gainNode9.connect(ctx.destination);
+        audioSource9.connect(biquadFilter9).connect(gainNode9).connect(ctx.destination);
 
         biquadFilter9.type = "bandpass";
         biquadFilter9.frequency.value = 600;
         biquadFilter9.gain.value = 25;
 
+        audioSource10.connect(biquadFilter10).connect(gainNode10).connect(ctx.destination);
+
+        biquadFilter10.type = "bandpass";
+        biquadFilter10.frequency.value = 600;
+        biquadFilter10.gain.value = 25;
+
         ctxConnected = true;
 
     }
 }
+//delete this later   afret debug
 FrequencySlider1.oninput = function(){
     FrequencyLabel1.innerHTML = this.value;
     biquadFilter1.frequency.value = this.value;

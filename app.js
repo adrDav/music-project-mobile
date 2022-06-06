@@ -37,10 +37,11 @@ wsServer.on("request", request => {
   connection.on("message", message => {
   
     const result = JSON.parse(message.utf8Data)
-    
+    var currUserNum=0;
     if(result.method === "join"){
       const clientID = result.clientID;
-      clients[clientID]  = 1;
+      clients[clientID]  = currUserNum+1;
+      currUserNum=currUserNum+ 1;
       
       console.log("A user has joined with the ClientID   ");
       console.log(JSON.stringify(clientID))
