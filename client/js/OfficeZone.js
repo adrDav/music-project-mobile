@@ -1,14 +1,24 @@
 class OfficeZone {
-    constructor(){    
-        this.first_lat = 31.7810; 
-        this.first_lng =  -106.489;
+    constructor(){  
+        /*
+        31.7810
+        -106.489
 
-        this.second_lat = 31.7790; 
-        this.second_lng = -106.4875;
+        31.7790
+        -106.4875
+
+        31.7820
+        -106.4867*/
+
+        this.first_lat = 31.7390; 
+        this.first_lng =  -106.490;
+
+        this.second_lat = 31.7410; 
+        this.second_lng = -106.485;
 
 
-        this.third_lat = 31.7820;
-        this.third_lng = -106.4867;
+        this.third_lat = 31.7360;
+        this.third_lng = -106.485;
     }
     
     get get_first_lat(){
