@@ -154,23 +154,18 @@ const audio10 = document.getElementById("audioContainer10");
 var ctxConnected = false;
 
 var biQLow1 = ctx.createBiquadFilter();
-var biQHigh1 = ctx.createBiquadFilter();
 var gainNode1 = ctx.createGain();
 
 var biQLow2 = ctx.createBiquadFilter();
-var biQHigh2 = ctx.createBiquadFilter();
 var gainNode2 = ctx.createGain();
 
 var biQLow3 = ctx.createBiquadFilter();
-var biQHigh3 = ctx.createBiquadFilter();
 var gainNode3 = ctx.createGain();
 
 var biQLow4 = ctx.createBiquadFilter();
-var biQHigh4 = ctx.createBiquadFilter();
 var gainNode4 = ctx.createGain();
 
 var biQLow5 = ctx.createBiquadFilter();
-var biQHigh5 = ctx.createBiquadFilter();
 var gainNode5 = ctx.createGain();
 
 var biQLow6 = ctx.createBiquadFilter();
@@ -178,19 +173,15 @@ var biQHigh6 = ctx.createBiquadFilter();
 var gainNode6 = ctx.createGain();
 
 var biQLow7 = ctx.createBiquadFilter();
-var biQHigh7 = ctx.createBiquadFilter();
 var gainNode7 = ctx.createGain();
 
 var biQLow8 = ctx.createBiquadFilter();
-var biQHigh8 = ctx.createBiquadFilter();
 var gainNode8 = ctx.createGain();
 
 var biQLow9 = ctx.createBiquadFilter();
-var biQHigh9 = ctx.createBiquadFilter();
 var gainNode9 = ctx.createGain();
 
 var biQLow10 = ctx.createBiquadFilter();
-var biQHigh10 = ctx.createBiquadFilter();
 var gainNode10 = ctx.createGain();
 
 function connectCtx(){
@@ -213,133 +204,68 @@ function connectCtx(){
         var audioSource10 = ctx.createMediaElementSource(audio10);
 
         audioSource1.connect(biQLow1).connect(gainNode1).connect(ctx.destination);
-        audioSource1.connect(biQHigh1).connect(gainNode1).connect(ctx.destination);
-
 
         biQLow1.type = "lowpass"; //low pass first, middel c is 250 hz
         biQLow1.frequency.value = 1000; 
         biQLow1.gain.value = 25;
-       
-
-        biQHigh1.type = "highpass";
-        biQHigh1.frequency.value = 1000;
-        biQHigh1.gain.value = 25;
-       
 
         audioSource2.connect(biQLow2).connect(gainNode2).connect(ctx.destination);
-        audioSource2.connect(biQHigh2).connect(gainNode2).connect(ctx.destination);
 
         biQLow2.type = "lowshelf";
         biQLow2.frequency.value = 1000;
-        biQLow2.gain.value = 25;
-       
-        biQHigh2.type = "highshelf";
-        biQHigh2.frequency.value = 1000;
-        biQHigh2.gain.value = 25;
-        
+        biQLow2.gain.value = 25;        
 
         audioSource3.connect(biQLow3).connect(gainNode3).connect(ctx.destination);
-        audioSource3.connect(biQHigh3).connect(gainNode3).connect(ctx.destination);
 
         biQLow3.type = "lowshelf";
         biQLow3.frequency.value = 1000;
         biQLow3.gain.value = 25;
-        
-        biQHigh3.type = "highshelf";
-        biQHigh3.frequency.value = 1000;
-        biQHigh3.gain.value = 25;
-        
 
         audioSource4.connect(biQLow4).connect(gainNode4).connect(ctx.destination);
-        audioSource4.connect(biQHigh4).connect(gainNode4).connect(ctx.destination);
 
         biQLow4.type = "lowshelf";
         biQLow4.frequency.value = 1000;
         biQLow4.gain.value = 25;
         biQLow4.detune.value = 100;
 
-        biQHigh4.type = "highshelf";
-        biQHigh4.frequency.value = 1000;
-        biQHigh4.gain.value = 25;
-        biQHigh4.detune.value = 100;
-
         audioSource5.connect(biQLow5).connect(gainNode5).connect(ctx.destination);
-        audioSource5.connect(biQHigh5).connect(gainNode5).connect(ctx.destination);
 
         biQLow5.type = "lowshelf";
         biQLow5.frequency.value = 1000;
         biQLow5.gain.value = 25;
         biQLow5.detune.value = 100;
-        
-        biQHigh5.type = "highshelf";
-        biQHigh5.frequency.value = 1000;
-        biQHigh5.gain.value = 25;
-        biQHigh5.detune.value = 100;
 
         audioSource6.connect(biQLow6).connect(gainNode6).connect(ctx.destination);
-        audioSource6.connect(biQHigh6).connect(gainNode6).connect(ctx.destination);
 
         biQLow6.type = "lowshelf";
         biQLow6.frequency.value = 1000;
         biQLow6.gain.value = 25;
         biQLow6.detune.value = 100;
 
-        biQHigh6.type = "highshelf";
-        biQHigh6.frequency.value = 1000;
-        biQHigh6.gain.value = 25;
-        biQHigh6.detune.value = 100;
-
         audioSource7.connect(biQLow7).connect(gainNode7).connect(ctx.destination);
-        audioSource7.connect(biQHigh7).connect(gainNode7).connect(ctx.destination);
 
         biQLow7.type = "lowshelf";
         biQLow7.frequency.value = 1000;
         biQLow7.gain.value = 25;
         biQLow7.detune.value = 100;
 
-        biQHigh7.type = "highshelf";
-        biQHigh7.frequency.value = 1000;
-        biQHigh7.gain.value = 25;
-        biQHigh7.detune.value = 100;
-
         audioSource8.connect(biQLow8).connect(gainNode8).connect(ctx.destination);
-        audioSource8.connect(biQHigh8).connect(gainNode8).connect(ctx.destination);
         
         biQLow8.type = "lowpass";
         biQLow8.frequency.value = 1000;
         biQLow8.gain.value = 25;
        
-        
-        biQHigh8.type = "highshelf";
-        biQHigh8.frequency.value = 1000;
-        biQHigh8.gain.value = 25;
-       
-
         audioSource9.connect(biQLow9).connect(gainNode9).connect(ctx.destination);
-        audioSource9.connect(biQHigh9).connect(gainNode9).connect(ctx.destination);
 
         biQLow9.type = "lowpass";
         biQLow9.frequency.value = 1000;
         biQLow9.gain.value = 25;
-        
-        biQHigh9.type = "highshelf";
-        biQHigh9.frequency.value = 1000;
-        biQHigh9.gain.value = 25;
-       
 
         audioSource10.connect(biQLow10).connect(gainNode10).connect(ctx.destination);
-        audioSource10.connect(biQHigh10).connect(gainNode10).connect(ctx.destination);
-
+        
         biQLow10.type = "lowpass";
         biQLow10.frequency.value = 1000;
         biQLow10.gain.value = 25;
-        //biQLow10.detune.value = 100;
-
-        biQHigh10.type = "highshelf";
-        biQHigh10.frequency.value = 1000;
-        biQHigh10.gain.value = 25;
-        //biQHigh10.detune.value = 100;
-
 
         ctxConnected = true;
 
