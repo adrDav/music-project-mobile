@@ -58,51 +58,51 @@
         <source src="client/audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
     </audio>
     
-    <button type="button" onclick="playMusic(), connectCtx()"> START PLAYING</button>
+    <button type="button" onclick="playMusic(), connectCtx()"> DON'T PRESS THIS ! is only for testing</button>
     
-    <button type="button" onclick="GPS(), connectCtx()">update GPS</button>
+    <button type="button" onclick="GPS(), connectCtx()">START ! (you may need to press this twice for the GPS to work)</button>
     
-    <p style="color:white" >Frequency low pass Track #1</p>
+    <p style="text-align:left; color: white; " >Frequency low pass Track #1</p>
 
     <input type='range' max=20000 value=10 step=1 id='FrequencySlider1'>
     <span id='FrequencyLabel1'></span>
 
-    <p style="color:white" >Frequency high pass Track #1</p>
+    <p style="text-align:left; color: white; " >Frequency high pass Track #1</p>
 
     <input type='range' max=20000 value=10 step=1 id='FHSlider1'>
     <span id='FHLabel1'></span>
 
-    <p style="color:white">Fre Gain Track #1</p>
+    <p style="text-align:left; color: white; ">Fre Gain Track #1</p>
 
     <input type='range' max=25 value=1 step=1 id='GainSlider1'>
     <span id='GainLabel1'></span>
 
-    <p style="color:white">Frequency low pass Track #8</p>
+    <p style="text-align:left; color: white; ">Frequency low pass Track #8</p>
 
     <input type='range' max=20000 value=10 step=1 id='FrequencySlider8'>
     <span id='FrequencyLabel8'></span>
 
-    <p style="color:white" >Frequency high pass Track #8</p>
+    <p style="text-align:left; color: white; " >Frequency high pass Track #8</p>
 
     <input type='range' max=20000 value=10 step=1 id='FHSlider8'>
     <span id='FHLabel8'></span>
 
-    <p style="color:white">Fre Gain Track #8</p>
+    <p style="text-align:left; color: white; ">Fre Gain Track #8</p>
 
     <input type='range' max=25 value=1 step=1 id='GainSlider8'>
     <span id='GainLabel8'></span>
 
-    <p style="color:white">Frequency low pass Track #9</p>
+    <p style="text-align:left; color: white; ">Frequency low pass Track #9</p>
 
     <input type='range' max=20000 value=10 step=1 id='FrequencySlider9'>
     <span id='FrequencyLabel9'></span>
 
-    <p style="color:white" >Frequency high pass Track #9</p>
+    <p style="text-align:left; color: white; " >Frequency high pass Track #9</p>
 
     <input type='range' max=20000 value=10 step=1 id='FHSlider9'>
     <span id='FHLabel9'></span>
 
-    <p style="color:white">Fre Gain Track #9</p>
+    <p style="text-align:left; color: white; ">Fre Gain Track #9</p>
 
     <input type='range' max=25 value=1 step=1 id='GainSlider9'>
     <span id='GainLabel9'></span>
@@ -116,6 +116,10 @@
 //connect to the server with the associated port, url + domain
 const socket = io();
 
+const limitOfUsers = 40;
+
+var filterLimiter = 20000/limitOfUsers;
+
 var GPS = function(){
     var locat = getLocation();
     socket.emit('userCoords',{
@@ -124,71 +128,83 @@ var GPS = function(){
     });
 };
 
+//this is just a message testing server.
 socket.on('serverMsg', function(data){
     console.log(data.msg);
 });
 
 socket.on('newPos', function(data){
 
-    if(data[0].zones[0]>0){
+    if(data[0].zones[0]>0 & data[0].zones[0] <= limitOfUsers ){
         audio1.volume = 1;
+        biQLow1.frequency.value = filterLimiter*(data[0].zones[0]);
         audio1.play();
     }
     else{audio1.volume =0;}
 
-    if(data[0].zones[1]>0){
+    if(data[0].zones[1]>0  & data[0].zones[1] <= limitOfUsers){
         audio2.volume = 1;
+        biQLow2.frequency.value = filterLimiter*(data[0].zones[1]);
         audio2.play();
     }
     else{audio2.volume =0;}
     
-    if(data[0].zones[2]>0){
+    if(data[0].zones[2]>0 & data[0].zones[2] <= limitOfUsers){
         audio3.volume = 1;
+        biQLow3.frequency.value = filterLimiter*(data[0].zones[2]);
         audio3.play();
     }
     else{audio3.volume =0;}
     
-    if(data[0].zones[3]>0){
+    if(data[0].zones[3]>0 & data[0].zones[3] <= limitOfUsers){
         audio4.volume = 1;
+        biQLow4.frequency.value = filterLimiter*(data[0].zones[3]);
         audio4.play();
     }
     else{audio4.volume =0;}
     
-    if(data[0].zones[4]>0){
+    if(data[0].zones[4]>0 & data[0].zones[4] <= limitOfUsers){
         audio5.volume = 1;
+        biQLow5.frequency.value = filterLimiter*(data[0].zones[4]);
         audio5.play();
     }
     else{audio5.volume =0;}
     
-    if(data[0].zones[5]>0){
+    if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
         audio6.volume = 1;
+        biQLow6.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
         audio6.play();
     }
     else{audio6.volume =0;}
     
-    if(data[0].zones[6]>0){
+    if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
         audio7.volume = 1;
+        biQLow7.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
         audio7.play();
     }
     else{audio7.volume =0;}
     
-    if(data[0].zones[7]>0){
+    if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
         audio8.volume = 1;
+        biQLow8.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
         audio8.play();
     }
     else{audio8.volume =0;}
     
-    if(data[0].zones[8]>0){
+    if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
         audio9.volume = 1;
+        biQLow9.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
         audio9.play();
     }
     else{audio9.volume =0;}
 
-    if(data[0].zones[9]>0){
+    if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
         audio10.volume = 1;
+        biQLow10.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
+        console.log(biQLow10.frequency.value);
         audio10.play();
     }
-    else{audio10.volume =0;}
+    else if (data[0].zones[9]<=0){audio10.volume =0;}
     
     for(var i =0; i < data.length; i++){
         
@@ -265,65 +281,65 @@ function connectCtx(){
         audioSource1.connect(biQLow1).connect(gainNode1).connect(ctx.destination);
 
         biQLow1.type = "lowpass"; //low pass first, middel c is 250 hz
-        biQLow1.frequency.value = 1000; 
+        biQLow1.frequency.value = 0; 
         //biQLow1.gain.value = 25;
 
         audioSource2.connect(biQLow2).connect(gainNode2).connect(ctx.destination);
 
         biQLow2.type = "lowpass";
-        biQLow2.frequency.value = 1000;
+        biQLow2.frequency.value = 0;
         //biQLow2.gain.value = 25;        
 
         audioSource3.connect(biQLow3).connect(gainNode3).connect(ctx.destination);
 
         biQLow3.type = "lowpass";
-        biQLow3.frequency.value = 1000;
+        biQLow3.frequency.value = 0;
         //biQLow3.gain.value = 25;
 
         audioSource4.connect(biQLow4).connect(gainNode4).connect(ctx.destination);
 
         biQLow4.type = "lowpass";
-        biQLow4.frequency.value = 1000;
+        biQLow4.frequency.value = 0;
         biQLow4.gain.value = 25;
         //biQLow4.detune.value = 100;
 
         audioSource5.connect(biQLow5).connect(gainNode5).connect(ctx.destination);
 
         biQLow5.type = "lowpass";
-        biQLow5.frequency.value = 1000;
+        biQLow5.frequency.value = 0;
         biQLow5.gain.value = 25;
         //biQLow5.detune.value = 100;
 
         audioSource6.connect(biQLow6).connect(gainNode6).connect(ctx.destination);
 
         biQLow6.type = "lowpass";
-        biQLow6.frequency.value = 1000;
+        biQLow6.frequency.value = 0;
         biQLow6.gain.value = 25;
         //biQLow6.detune.value = 100;
 
         audioSource7.connect(biQLow7).connect(gainNode7).connect(ctx.destination);
 
         biQLow7.type = "lowpass";
-        biQLow7.frequency.value = 1000;
+        biQLow7.frequency.value = 0;
         biQLow7.gain.value = 25;
         //biQLow7.detune.value = 100;
 
         audioSource8.connect(biQLow8).connect(gainNode8).connect(ctx.destination);
         
         biQLow8.type = "lowpass";
-        biQLow8.frequency.value = 1000;
+        biQLow8.frequency.value = 0;
         //biQLow8.gain.value = 25;
        
         audioSource9.connect(biQLow9).connect(gainNode9).connect(ctx.destination);
 
         biQLow9.type = "lowpass";
-        biQLow9.frequency.value = 1000;
+        biQLow9.frequency.value = 0;
         //biQLow9.gain.value = 25;
 
         audioSource10.connect(biQLow10).connect(gainNode10).connect(ctx.destination);
         
         biQLow10.type = "lowpass";
-        biQLow10.frequency.value = 1000;
+        biQLow10.frequency.value = 0;
         //biQLow10.gain.value = 25;
 
         ctxConnected = true;
