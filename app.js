@@ -116,6 +116,7 @@ io.sockets.on('connection', function(socket){
       if(inside(socket.coords, allZones[i])=== true){
         if(i==0){
           zone1[socket.id]=1;
+          //console.log(zone1[socket.id].length);
         }
         if(i==1){
           zone2[socket.id]=2;
@@ -143,6 +144,7 @@ io.sockets.on('connection', function(socket){
         }
         if(i==9){
           zone10[socket.id]=10;
+          //console.log(Object.keys( zone10).length);
         }
         for(prop in ZONE_LIST){
           console.log(ZONE_LIST[prop]);
@@ -158,7 +160,11 @@ setInterval(function(){
   for(var i in SOCKET_LIST){
     var socket = SOCKET_LIST[i];
     pack.push({
-      zones:ZONE_LIST,
+      zones:[
+        Object.keys(zone1).length,Object.keys(zone2).length,Object.keys(zone3).length,
+        Object.keys(zone4).length,Object.keys(zone5).length,Object.keys(zone6).length,
+        Object.keys(zone7).length,Object.keys(zone8).length,Object.keys(zone9).length,
+        Object.keys(zone10).length],
       coord:socket.coords
     })
   }

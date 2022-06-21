@@ -60,7 +60,7 @@
     
     <button type="button" onclick="playMusic(), connectCtx()"> START PLAYING</button>
     
-    <button type="button" onclick="GPS()">update GPS</button>
+    <button type="button" onclick="GPS(), connectCtx()">update GPS</button>
     
     <p style="color:white" >Frequency low pass Track #1</p>
 
@@ -124,15 +124,75 @@ var GPS = function(){
     });
 };
 
-
-
 socket.on('serverMsg', function(data){
     console.log(data.msg);
 });
 
 socket.on('newPos', function(data){
+
+    if(data[0].zones[0]>0){
+        audio1.volume = 1;
+        audio1.play();
+    }
+    else{audio1.volume =0;}
+
+    if(data[0].zones[1]>0){
+        audio2.volume = 1;
+        audio2.play();
+    }
+    else{audio2.volume =0;}
+    
+    if(data[0].zones[2]>0){
+        audio3.volume = 1;
+        audio3.play();
+    }
+    else{audio3.volume =0;}
+    
+    if(data[0].zones[3]>0){
+        audio4.volume = 1;
+        audio4.play();
+    }
+    else{audio4.volume =0;}
+    
+    if(data[0].zones[4]>0){
+        audio5.volume = 1;
+        audio5.play();
+    }
+    else{audio5.volume =0;}
+    
+    if(data[0].zones[5]>0){
+        audio6.volume = 1;
+        audio6.play();
+    }
+    else{audio6.volume =0;}
+    
+    if(data[0].zones[6]>0){
+        audio7.volume = 1;
+        audio7.play();
+    }
+    else{audio7.volume =0;}
+    
+    if(data[0].zones[7]>0){
+        audio8.volume = 1;
+        audio8.play();
+    }
+    else{audio8.volume =0;}
+    
+    if(data[0].zones[8]>0){
+        audio9.volume = 1;
+        audio9.play();
+    }
+    else{audio9.volume =0;}
+
+    if(data[0].zones[9]>0){
+        audio10.volume = 1;
+        audio10.play();
+    }
+    else{audio10.volume =0;}
+    
     for(var i =0; i < data.length; i++){
-        console.log('userPos',data[i].zones, data[i].coord);
+        
+        console.log('userPos',data[0].zones, data[i].coord, data[0].zones[9]);
     }
     
 });
@@ -169,7 +229,6 @@ var biQLow5 = ctx.createBiquadFilter();
 var gainNode5 = ctx.createGain();
 
 var biQLow6 = ctx.createBiquadFilter();
-var biQHigh6 = ctx.createBiquadFilter();
 var gainNode6 = ctx.createGain();
 
 var biQLow7 = ctx.createBiquadFilter();
@@ -207,72 +266,75 @@ function connectCtx(){
 
         biQLow1.type = "lowpass"; //low pass first, middel c is 250 hz
         biQLow1.frequency.value = 1000; 
-        biQLow1.gain.value = 25;
+        //biQLow1.gain.value = 25;
 
         audioSource2.connect(biQLow2).connect(gainNode2).connect(ctx.destination);
 
-        biQLow2.type = "lowshelf";
+        biQLow2.type = "lowpass";
         biQLow2.frequency.value = 1000;
-        biQLow2.gain.value = 25;        
+        //biQLow2.gain.value = 25;        
 
         audioSource3.connect(biQLow3).connect(gainNode3).connect(ctx.destination);
 
-        biQLow3.type = "lowshelf";
+        biQLow3.type = "lowpass";
         biQLow3.frequency.value = 1000;
-        biQLow3.gain.value = 25;
+        //biQLow3.gain.value = 25;
 
         audioSource4.connect(biQLow4).connect(gainNode4).connect(ctx.destination);
 
-        biQLow4.type = "lowshelf";
+        biQLow4.type = "lowpass";
         biQLow4.frequency.value = 1000;
         biQLow4.gain.value = 25;
-        biQLow4.detune.value = 100;
+        //biQLow4.detune.value = 100;
 
         audioSource5.connect(biQLow5).connect(gainNode5).connect(ctx.destination);
 
-        biQLow5.type = "lowshelf";
+        biQLow5.type = "lowpass";
         biQLow5.frequency.value = 1000;
         biQLow5.gain.value = 25;
-        biQLow5.detune.value = 100;
+        //biQLow5.detune.value = 100;
 
         audioSource6.connect(biQLow6).connect(gainNode6).connect(ctx.destination);
 
-        biQLow6.type = "lowshelf";
+        biQLow6.type = "lowpass";
         biQLow6.frequency.value = 1000;
         biQLow6.gain.value = 25;
-        biQLow6.detune.value = 100;
+        //biQLow6.detune.value = 100;
 
         audioSource7.connect(biQLow7).connect(gainNode7).connect(ctx.destination);
 
-        biQLow7.type = "lowshelf";
+        biQLow7.type = "lowpass";
         biQLow7.frequency.value = 1000;
         biQLow7.gain.value = 25;
-        biQLow7.detune.value = 100;
+        //biQLow7.detune.value = 100;
 
         audioSource8.connect(biQLow8).connect(gainNode8).connect(ctx.destination);
         
         biQLow8.type = "lowpass";
         biQLow8.frequency.value = 1000;
-        biQLow8.gain.value = 25;
+        //biQLow8.gain.value = 25;
        
         audioSource9.connect(biQLow9).connect(gainNode9).connect(ctx.destination);
 
         biQLow9.type = "lowpass";
         biQLow9.frequency.value = 1000;
-        biQLow9.gain.value = 25;
+        //biQLow9.gain.value = 25;
 
         audioSource10.connect(biQLow10).connect(gainNode10).connect(ctx.destination);
         
         biQLow10.type = "lowpass";
         biQLow10.frequency.value = 1000;
-        biQLow10.gain.value = 25;
+        //biQLow10.gain.value = 25;
 
         ctxConnected = true;
 
     }
 }
 
+
+
 //delete it after debug
+
 FrequencySlider1.oninput = function(){
     FrequencyLabel1.innerHTML = this.value;
     biQLow1.frequency.value = this.value;
@@ -318,7 +380,6 @@ GainSlider9.oninput = function(){
     gainNode9.gain.value = this.value;
 }
 
-
 audio1.loop = true;
 audio2.loop = true;
 audio3.loop = true;
@@ -338,9 +399,6 @@ audio6.volume = 0;
 audio7.volume = 0;
 audio8.volume = 0;
 audio9.volume = 0;
-
-
-
 
 //play and loop all audios
 
@@ -529,6 +587,7 @@ function playMusic(){
         console.log("Not in location 8");
         audio8.volume = 0; 
     }
+    
     if(inside([lat, lng],verOfficeZone)){
         console.log("In location 9");
         audio9.play();
