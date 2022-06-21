@@ -111,8 +111,23 @@
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
    
 </div>
- 
+
+
+<body>  
+    <script type="text/javascript">  
+        
+    </script>  
+    <p>  
+        People in zones <b id='checkZones'></b>  
+    </p>  
+    <input type='text' id='myInput' value='Enter Text Here' />  
+    <input type='button' onclick='doChange()' value='Change Text' />  
+</body>
+
 <script>
+
+
+
 //connect to the server with the associated port, url + domain
 const socket = io();
 
@@ -201,7 +216,7 @@ socket.on('newPos', function(data){
     if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
         audio10.volume = 1;
         biQLow10.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
-        console.log(biQLow10.frequency.value);
+        //console.log(biQLow10.frequency.value);
         audio10.play();
     }
     else if (data[0].zones[9]<=0){audio10.volume =0;}
@@ -210,8 +225,10 @@ socket.on('newPos', function(data){
         
         console.log('userPos',data[0].zones, data[i].coord, data[0].zones[9]);
     }
-    
+
 });
+
+
 
 ctx = new AudioContext();
 
