@@ -111,21 +111,15 @@
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
    
 </div>
+     
+<p>users in other zones: <b id='pplInZones'></b></p>  
 
-
-<body>  
-    <script type="text/javascript">  
-        
-    </script>  
-    <p>  
-        People in zones <b id='checkZones'></b>  
-    </p>  
-    <input type='text' id='myInput' value='Enter Text Here' />  
-    <input type='button' onclick='doChange()' value='Change Text' />  
-</body>
 
 <script>
-
+function doChange(dataZones) {  
+    var myInput = dataZones;  
+    document.getElementById('pplInZones').innerHTML = myInput;  
+}  
 
 
 //connect to the server with the associated port, url + domain
@@ -149,7 +143,7 @@ socket.on('serverMsg', function(data){
 });
 
 socket.on('newPos', function(data){
-
+    doChange(data[0].zones);
     if(data[0].zones[0]>0 & data[0].zones[0] <= limitOfUsers ){
         audio1.volume = 1;
         biQLow1.frequency.value = filterLimiter*(data[0].zones[0]);
@@ -367,7 +361,7 @@ function connectCtx(){
 
 
 //delete it after debug
-
+/*
 FrequencySlider1.oninput = function(){
     FrequencyLabel1.innerHTML = this.value;
     biQLow1.frequency.value = this.value;
@@ -411,7 +405,7 @@ FHSlider9.oninput = function(){
 GainSlider9.oninput = function(){
     GainLabel9.innerHTML = this.value;
     gainNode9.gain.value = this.value;
-}
+}*/
 
 audio1.loop = true;
 audio2.loop = true;
@@ -455,7 +449,7 @@ function inside(point, vs) {
     return inside;
 }
 
-
+/*
 var verZoneOne = [
     [31.771011, -106.505353],
     [31.771572, -106.50448],
@@ -522,7 +516,7 @@ var verOfficeZone = [
     [31.7790, -106.4875],
     [31.7820, -106.4867]
 ];
-
+*/
 
 
 var intervalInit = false;
@@ -534,7 +528,7 @@ function callplayMusic(){
     }   
     
 }
-// function handles the logic of the zones in the map.
+/* function handles the logic of the zones in the map.
 function playMusic(){
     
     updated = getLocation();
@@ -650,12 +644,9 @@ async function showLocation(position) {
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
     // coordinates stores new coordinates.
-    coordinates = {latitude: lat, longitude: lng};
-    // print into the HTML file.
-    //document.getElementById('latitude').textContent = lat;
-    //document.getElementById('longitude').textContent = lng;
+    coordinates = {latitude: lat, longitude: lng}
 
-}
+}*/
 
 function errorHandler(err) {
     if(err.code == 1) {
