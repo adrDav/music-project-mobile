@@ -14,7 +14,7 @@ app.get('/',function(req,res){
 
 const serv = http.createServer(app);
 
-serv.listen(process.env.PORT || 2000);
+serv.listen(process.env.PORT || 22);
 console.log('server started');
 
 var SOCKET_LIST = {};
@@ -155,7 +155,7 @@ io.sockets.on('connection', function(socket){
     }
   });
 });
-console.log('so far so good');
+//console.log('so far so good');
 setInterval(function(){
   var pack = [];
 
