@@ -4,11 +4,11 @@ const res = require('express/lib/response');
 const { Socket } = require('socket.io');
 const app = express();
 const path = require('path');
-//const serv = require('http').Server(app);
+const http = require('http');
 
-app.use('/client', express.static(__dirname + '/client'));
+app.use('/public', express.static(__dirname + '/public'));
 app.get('/',function(req,res){
-  res.sendFile(__dirname + '/client/index.html');
+  res.sendFile(__dirname + '/public/index.html');
   
 });
 
@@ -155,7 +155,7 @@ io.sockets.on('connection', function(socket){
     }
   });
 });
-
+console.log('so far so good');
 setInterval(function(){
   var pack = [];
 
