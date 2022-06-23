@@ -3,14 +3,16 @@ const express = require('express');
 const res = require('express/lib/response');
 const { Socket } = require('socket.io');
 const app = express();
-const serv = require('http').Server(app);
+const path = require('path');
+//const serv = require('http').Server(app);
 
+app.use('/client', express.static(__dirname + '/client'));
 app.get('/',function(req,res){
   res.sendFile(__dirname + '/client/index.html');
   
 });
 
-app.use('/client', express.static(__dirname + '/client'));
+const serv = http.createServer(app);
 
 serv.listen(process.env.PORT || 2000);
 console.log('server started');
