@@ -1,7 +1,7 @@
 <!doctype html> <!-- document declaration  -->
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="public/style.css">
 <!--viewport allows for porper resizing on mobile devices ,K.-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,34 +19,34 @@
     <!-- pauses all current tracks -->
     
     <audio id="audioContainer1">
-        <source src="audios/Ex1_sprite_12.03.20-zone1.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone1.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer2">
-        <source src="audios/Ex1_sprite_12.03.20-zone2.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone2.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer3">
-        <source src="audios/Ex1_sprite_12.03.20-zone3.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone3.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer4">
-        <source src="audios/Ex1_sprite_12.03.20-zone4.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone4.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer5">
-        <source src="audios/Ex1_sprite_12.03.20-zone5.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone5.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer6">
-        <source src="audios/Ex1_sprite_12.03.20-zone6.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone6.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer7">
-        <source src="audios/Ex1_sprite_12.03.20-zone7.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone7.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer8">
-        <source src="audios/Ex1_sprite_12.03.20-zone8.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone8.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer9">
-        <source src="audios/Ex1_sprite_12.03.20-zone9.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone9.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer10">
-        <source src="audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
+        <source src="public/audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
     </audio>
     
     <button type="button" onclick="playMusic(), connectCtx()"> DON'T PRESS THIS ! is only for testing</button>
@@ -628,6 +628,7 @@ function playMusic(){
     
 }
 */
+
 var coordinates = {};
 
 async function showLocation(position) {
@@ -639,10 +640,14 @@ async function showLocation(position) {
 
 }
 
-function errorHandler(err) {
-    if(err.code == 1) {
-        alert("Error: Access is denied!");
-    } else if( err.code == 2) {
+function errorHandler(error) {
+    
+    const code = error.code;
+    const message = error.message;
+    if(error.code == 1) {
+        
+        alert("Error: Access is denied!" + message);
+    } else if( error.code == 2) {
         alert("Error: Position is unavailable!");
     }
 }

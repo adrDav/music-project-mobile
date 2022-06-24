@@ -3,18 +3,32 @@ const express = require('express');
 const res = require('express/lib/response');
 const { Socket } = require('socket.io');
 const app = express();
-const path = require('path');
-const http = require('http');
+//const path = require('path');
+const https = require('https');
+const fs = require('fs');
 
 app.use('/public', express.static(__dirname + '/public'));
+
+
 app.get('/',function(req,res){
-  res.sendFile(__dirname + '/public/index.html');
+  res.writeHead(200);
+  res.sendFile(__dirname + '/public/index.html')
   
 });
 
-const serv = http.createServer(app);
+const options = {
+  cert: fs.readFileSync('self_signed.crt'),
+  key: fs.readFileSync('self_signed.key')
 
-serv.listen(process.env.PORT || 22);
+};
+
+const serv = https.createServer(options, app);
+
+const HOST = '129.108.156.19';
+const PORT = 9443;
+serv.listen( PORT,HOST, function(){
+  console.log("I'm listening at %s, on port %s", HOST, PORT);
+} );
 console.log('server started');
 
 var SOCKET_LIST = {};
