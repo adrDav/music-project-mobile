@@ -4,14 +4,14 @@ const res = require('express/lib/response');
 const { Socket } = require('socket.io');
 const app = express();
 //const path = require('path');
-const https = require('https');
+const http = require('http');
 const fs = require('fs');
 
 app.use('/public', express.static(__dirname + '/public'));
 
 
 app.get('/',function(req,res){
-  res.writeHead(200);
+  //res.writeHead(200);
   res.sendFile(__dirname + '/public/index.html')
   
 });
@@ -22,10 +22,10 @@ const options = {
 
 };
 
-const serv = https.createServer(options, app);
+const serv = http.createServer(app);
 
 const HOST = '129.108.156.19';
-const PORT = 9443;
+const PORT = 8081;
 serv.listen( PORT,HOST, function(){
   console.log("I'm listening at %s, on port %s", HOST, PORT);
 } );
