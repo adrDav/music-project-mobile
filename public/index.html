@@ -56,9 +56,6 @@
     <p style="text-align:left; color: white; " >Zone 1 </p>
     <input type="number" id="zone1Users" name="zone1Users" value="0" min="0" max="40">
 
-    <p style="text-align:left; color: white; " >Zone 1 </p>
-    <input type="number" id="zone1Users" name="zone1Users" value="0" min="0" max="40">
-
     <p style="text-align:left; color: white; " >Zone 2 </p>
     <input type="number" id="zone2Users" name="zone2Users" value="0" min="0" max="40">
 
@@ -151,7 +148,7 @@ const socket = io();
 
 const limitOfUsers = 40;
 
-var filterLimiter = 20000/limitOfUsers;
+var filterLimiter = 20*(2**(1/4)*limitOfUsers);
 
 function GPS (){
     var locat = getLocation();
@@ -206,25 +203,29 @@ socket.on('newPos', function(data){
     data[0].zones[8] =  parseInt(document.getElementById('zone9Users').value);
     data[0].zones[9] =  parseInt(document.getElementById('zone10Users').value);
 
+    document.getElementById('zone1Users').value = data[0].zones[0];
+
+
+
     doChange(data[0].zones);
     
     if(data[0].zones[0]>0 & data[0].zones[0] <= limitOfUsers ){
         audio1.volume = 1;
-        biQLow1.frequency.value = filterLimiter*(data[0].zones[0]);
+        biQLow1.frequency.value = 20*(2**(1/4)*(data[0].zones[0]));
         audio1.play();
     }
     else if (data[0].zones[0]<=0) {audio1.volume =0;}
 
     if(data[0].zones[1]>0  & data[0].zones[1] <= limitOfUsers){
         audio2.volume = 1;
-        biQLow2.frequency.value = filterLimiter*(data[0].zones[1]);
+        biQLow2.frequency.value = 20*(2**(1/4)*(data[0].zones[1]));
         audio2.play();
     }
     else  if (data[0].zones[1]<=0) {audio2.volume =0;}
     
     if(data[0].zones[2]>0 & data[0].zones[2] <= limitOfUsers){
         audio3.volume = 1;
-        biQLow3.frequency.value = filterLimiter*(data[0].zones[2]);
+        biQLow3.frequency.value = 20*(2**(1/4)*(data[0].zones[2]));
         console.log(biQLow3.frequency.value);
         audio3.play();
     }
@@ -232,49 +233,49 @@ socket.on('newPos', function(data){
     
     if(data[0].zones[3]>0 & data[0].zones[3] <= limitOfUsers){
         audio4.volume = 1;
-        biQLow4.frequency.value = filterLimiter*(data[0].zones[3]);
+        biQLow4.frequency.value = 20*(2**(1/4)*(data[0].zones[3]));
         audio4.play();
     }
     else if (data[0].zones[3]<=0){audio4.volume =0;}
     
     if(data[0].zones[4]>0 & data[0].zones[4] <= limitOfUsers){
         audio5.volume = 1;
-        biQLow5.frequency.value = filterLimiter*(data[0].zones[4]);
+        biQLow5.frequency.value = 20*(2**(1/4)*(data[0].zones[4]));
         audio5.play();
     }
     else  if (data[0].zones[4]<=0){audio5.volume =0;}
     
     if(data[0].zones[5]>0 & data[0].zones[5] <= limitOfUsers){
         audio6.volume = 1;
-        biQLow6.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
+        biQLow6.frequency.value = 20*(2**(1/4)*(data[0].zones[5]));//dont forget to return these to the normal value
         audio6.play();
     }
     else  if (data[0].zones[5]<=0){audio6.volume =0;}
     
     if(data[0].zones[6]>0 & data[0].zones[6] <= limitOfUsers){
         audio7.volume = 1;
-        biQLow7.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
+        biQLow7.frequency.value = 20*(2**(1/4)*(data[0].zones[6]));//dont forget to return these to the normal value
         audio7.play();
     }
     else if (data[0].zones[6]<=0){audio7.volume =0;}
     
     if(data[0].zones[7]>0 & data[0].zones[7] <= limitOfUsers){
         audio8.volume = 1;
-        biQLow8.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
+        biQLow8.frequency.value = 20*(2**(1/4)*(data[0].zones[7]));//dont forget to return these to the normal value
         audio8.play();
     }
     else if (data[0].zones[7]<=0){audio8.volume =0;}
     
     if(data[0].zones[8]>0 & data[0].zones[8] <= limitOfUsers){
         audio9.volume = 1;
-        biQLow9.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
+        biQLow9.frequency.value = 20*(2**(1/4)*(data[0].zones[8]));//dont forget to return these to the normal value
         audio9.play();
     }
     else if (data[0].zones[8]<=0){audio9.volume =0;}
 
     if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
         audio10.volume = 1;
-        biQLow10.frequency.value = filterLimiter*(data[0].zones[9]);//dont forget to return these to the normal value
+        biQLow10.frequency.value = 20*(2**(1/4)*(data[0].zones[9]));//dont forget to return these to the normal value
         //console.log(biQLow10.frequency.value);
         audio10.play();
     }

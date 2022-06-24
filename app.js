@@ -128,7 +128,7 @@ io.sockets.on('connection', function(socket){
     socket.coords = [data.lat,data.lng]
     console.log(socket.coords);
     for(var i in allZones){
-    
+  
       if(inside(socket.coords, allZones[i])=== true){
         if(i==0){
           zone1[socket.id]=1;
@@ -176,6 +176,7 @@ setInterval(function(){
   for(var i in SOCKET_LIST){
     var socket = SOCKET_LIST[i];
     pack.push({
+      
       zones:[
         Object.keys(zone1).length,Object.keys(zone2).length,Object.keys(zone3).length,
         Object.keys(zone4).length,Object.keys(zone5).length,Object.keys(zone6).length,
