@@ -1,9 +1,13 @@
 <!doctype html> <!-- document declaration  -->
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content ="width=device-width, initial-scale=1.0">
+    
+
 <link rel="stylesheet" href="public/style.css">
 <!--viewport allows for porper resizing on mobile devices ,K.-->
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
@@ -203,7 +207,10 @@ socket.on('newPos', function(data){
     data[0].zones[8] =  parseInt(document.getElementById('zone9Users').value);
     data[0].zones[9] =  parseInt(document.getElementById('zone10Users').value);
 
-    document.getElementById('zone1Users').value = data[0].zones[0];
+    setInterval(function(){
+        getLocation();
+
+    },200)
 
 
 
@@ -226,7 +233,6 @@ socket.on('newPos', function(data){
     if(data[0].zones[2]>0 & data[0].zones[2] <= limitOfUsers){
         audio3.volume = 1;
         biQLow3.frequency.value = 20*(2**(1/4)*(data[0].zones[2]));
-        console.log(biQLow3.frequency.value);
         audio3.play();
     }
     else  if (data[0].zones[2]<=0){audio3.volume =0;}
@@ -327,19 +333,19 @@ function connectCtx(){
 
         biQLow1.type = "lowpass"; //low pass first, middel c is 250 hz
         biQLow1.frequency.value = 0; 
-        //biQLow1.gain.value = 25;
+        biQLow1.gain.value = 25;
 
         audioSource2.connect(biQLow2).connect(gainNode2).connect(ctx.destination);
 
         biQLow2.type = "lowpass";
         biQLow2.frequency.value = 0;
-        //biQLow2.gain.value = 25;        
+        biQLow2.gain.value = 25;        
 
         audioSource3.connect(biQLow3).connect(gainNode3).connect(ctx.destination);
 
         biQLow3.type = "lowpass";
         biQLow3.frequency.value = 0;
-        //biQLow3.gain.value = 25;
+        biQLow3.gain.value = 25;
 
         audioSource4.connect(biQLow4).connect(gainNode4).connect(ctx.destination);
 

@@ -4,8 +4,17 @@ const res = require('express/lib/response');
 const { Socket } = require('socket.io');
 const app = express();
 //const path = require('path');
-const http = require('http');
+const https = require('https');
 const fs = require('fs');
+
+// Parsing the form of body to take
+// input from forms
+const bodyParser = require("body-parser");
+  
+// Configuring express to use body-parser
+// as middle-ware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/public', express.static(__dirname + '/public'));
 
@@ -17,15 +26,14 @@ app.get('/',function(req,res){
 });
 
 const options = {
-  cert: fs.readFileSync('self_signed.crt'),
-  key: fs.readFileSync('self_signed.key')
-
+  key: fs.readFileSync('self_signed.key'),
+  cert: fs.readFileSync('self_signed.crt')
 };
 
-const serv = http.createServer(app);
+const serv = https.createServer(options, app);
 
 const HOST = '129.108.156.19';
-const PORT = 8081;
+const PORT = 443;
 serv.listen( PORT,HOST, function(){
   console.log("I'm listening at %s, on port %s", HOST, PORT);
 } );
