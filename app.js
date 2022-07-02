@@ -10,7 +10,8 @@ const fs = require('fs');
 // Parsing the form of body to take
 // input from forms
 const bodyParser = require("body-parser");
-  
+
+const { constants } = require('crypto')
 // Configuring express to use body-parser
 // as middle-ware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,11 +27,15 @@ app.get('/',function(req,res){
 });
 
 const options = {
-  key: fs.readFileSync('self_signed.key'),
-  cert: fs.readFileSync('self_signed.crt')
+  key: fs.readFileSync('daruk.cs.utep.edu.key'),
+  cert: fs.readFileSync('daruk_cs_utep_edu_cert.cer')
 };
 
-const serv = https.createServer(options, app);
+const serv = https.createServer({secureOptions: constants.SSL_OP_NO_TLSv1 | constants.SSL_OP_NO_TLSv1_1, 
+  //pfx: fs.readFileSync('daruk_cs_utep_edu_cert.cer')
+  key: fs.readFileSync('daruk.cs.utep.edu.key'),
+  cert: fs.readFileSync('daruk_cs_utep_edu_cert.cer')
+}, app);
 
 const HOST = '129.108.156.19';
 const PORT = 443;
