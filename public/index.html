@@ -86,52 +86,7 @@
     
     <p style="text-align:left; color: white; " >Zone 10 </p>
     <input type="number" id="zone10Users" name="zone10Users" value="0" min="0" max="40">
-    <!--<input type="submit"> 
-
-    <p style="text-align:left; color: white; " >Frequency low pass Track #1</p>
-
-    <input type='range' max=20000 value=10 step=1 id='FrequencySlider1'>
-    <span id='FrequencyLabel1'></span>
-
-    <p style="text-align:left; color: white; " >Frequency high pass Track #1</p>
-
-    <input type='range' max=20000 value=10 step=1 id='FHSlider1'>
-    <span id='FHLabel1'></span>
-
-    <p style="text-align:left; color: white; ">Fre Gain Track #1</p>
-
-    <input type='range' max=25 value=1 step=1 id='GainSlider1'>
-    <span id='GainLabel1'></span>
-
-    <p style="text-align:left; color: white; ">Frequency low pass Track #8</p>
-
-    <input type='range' max=20000 value=10 step=1 id='FrequencySlider8'>
-    <span id='FrequencyLabel8'></span>
-
-    <p style="text-align:left; color: white; " >Frequency high pass Track #8</p>
-
-    <input type='range' max=20000 value=10 step=1 id='FHSlider8'>
-    <span id='FHLabel8'></span>
-
-    <p style="text-align:left; color: white; ">Fre Gain Track #8</p>
-
-    <input type='range' max=25 value=1 step=1 id='GainSlider8'>
-    <span id='GainLabel8'></span>
-
-    <p style="text-align:left; color: white; ">Frequency low pass Track #9</p>
-
-    <input type='range' max=20000 value=10 step=1 id='FrequencySlider9'>
-    <span id='FrequencyLabel9'></span>
-
-    <p style="text-align:left; color: white; " >Frequency high pass Track #9</p>
-
-    <input type='range' max=20000 value=10 step=1 id='FHSlider9'>
-    <span id='FHLabel9'></span>
-
-    <p style="text-align:left; color: white; ">Fre Gain Track #9</p>
-
-    <input type='range' max=25 value=1 step=1 id='GainSlider9'>
-    <span id='GainLabel9'></span>-->
+    
 
     <link rel="stylesheet"
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
@@ -147,6 +102,16 @@ function doChange(dataZones) {
     document.getElementById('pplInZones').innerHTML = myInput;  
 }  
 
+const audio1 = document.getElementById("audioContainer1");
+const audio2 = document.getElementById("audioContainer2");
+const audio3 = document.getElementById("audioContainer3");
+const audio4 = document.getElementById("audioContainer4");
+const audio5 = document.getElementById("audioContainer5");
+const audio6 = document.getElementById("audioContainer6");
+const audio7 = document.getElementById("audioContainer7");
+const audio8 = document.getElementById("audioContainer8");
+const audio9 = document.getElementById("audioContainer9");
+const audio10 = document.getElementById("audioContainer10");
 //connect to the server with the associated port, url + domain
 const socket = io();
 
@@ -162,37 +127,6 @@ function GPS (){
     });
 };
 
-ctx = new AudioContext();
-
-var biQLow1 = ctx.createBiquadFilter();
-var gainNode1 = ctx.createGain();
-
-var biQLow2 = ctx.createBiquadFilter();
-var gainNode2 = ctx.createGain();
-
-var biQLow3 = ctx.createBiquadFilter();
-var gainNode3 = ctx.createGain();
-
-var biQLow4 = ctx.createBiquadFilter();
-var gainNode4 = ctx.createGain();
-
-var biQLow5 = ctx.createBiquadFilter();
-var gainNode5 = ctx.createGain();
-
-var biQLow6 = ctx.createBiquadFilter();
-var gainNode6 = ctx.createGain();
-
-var biQLow7 = ctx.createBiquadFilter();
-var gainNode7 = ctx.createGain();
-
-var biQLow8 = ctx.createBiquadFilter();
-var gainNode8 = ctx.createGain();
-
-var biQLow9 = ctx.createBiquadFilter();
-var gainNode9 = ctx.createGain();
-
-var biQLow10 = ctx.createBiquadFilter();
-var gainNode10 = ctx.createGain();
 
 socket.on('newPos', function(data){
 
@@ -206,13 +140,6 @@ socket.on('newPos', function(data){
     data[0].zones[7] =  parseInt(document.getElementById('zone8Users').value);
     data[0].zones[8] =  parseInt(document.getElementById('zone9Users').value);
     data[0].zones[9] =  parseInt(document.getElementById('zone10Users').value);
-
-    setInterval(function(){
-        getLocation();
-
-    },200)
-
-
 
     doChange(data[0].zones);
     
@@ -294,16 +221,6 @@ socket.on('newPos', function(data){
     
 });
 
-const audio1 = document.getElementById("audioContainer1");
-const audio2 = document.getElementById("audioContainer2");
-const audio3 = document.getElementById("audioContainer3");
-const audio4 = document.getElementById("audioContainer4");
-const audio5 = document.getElementById("audioContainer5");
-const audio6 = document.getElementById("audioContainer6");
-const audio7 = document.getElementById("audioContainer7");
-const audio8 = document.getElementById("audioContainer8");
-const audio9 = document.getElementById("audioContainer9");
-const audio10 = document.getElementById("audioContainer10");
 
 
 var ctxConnected = false;
@@ -311,10 +228,42 @@ var ctxConnected = false;
 
 
 function connectCtx(){
+    
     if(ctxConnected){
         console.log("audio contexts already initialized");
     }
     else if(!ctxConnected){
+        const ctx = new AudioContext();
+
+        var biQLow1 = ctx.createBiquadFilter();
+        var gainNode1 = ctx.createGain();
+
+        var biQLow2 = ctx.createBiquadFilter();
+        var gainNode2 = ctx.createGain();
+
+        var biQLow3 = ctx.createBiquadFilter();
+        var gainNode3 = ctx.createGain();
+
+        var biQLow4 = ctx.createBiquadFilter();
+        var gainNode4 = ctx.createGain();
+
+        var biQLow5 = ctx.createBiquadFilter();
+        var gainNode5 = ctx.createGain();
+
+        var biQLow6 = ctx.createBiquadFilter();
+        var gainNode6 = ctx.createGain();
+
+        var biQLow7 = ctx.createBiquadFilter();
+        var gainNode7 = ctx.createGain();
+
+        var biQLow8 = ctx.createBiquadFilter();
+        var gainNode8 = ctx.createGain();
+
+        var biQLow9 = ctx.createBiquadFilter();
+        var gainNode9 = ctx.createGain();
+
+        var biQLow10 = ctx.createBiquadFilter();
+        var gainNode10 = ctx.createGain();
         
         ctx.resume();
         
@@ -394,53 +343,6 @@ function connectCtx(){
     }
 }
 
-//delete it after debug
-
-/*FrequencySlider1.oninput = function(){
-    FrequencyLabel1.innerHTML = this.value;
-    biQLow1.frequency.value = this.value;
-}
-
-FHSlider1.oninput = function(){
-    FHLabel1.innerHTML = this.value;
-    biQHigh1.frequency.value = this.value;
-}
-
-GainSlider1.oninput = function(){
-    GainLabel1.innerHTML = this.value;
-    gainNode1.gain.value = this.value;
-}
-
-FrequencySlider8.oninput = function(){
-    FrequencyLabel8.innerHTML = this.value;
-    biQLow8.frequency.value = this.value;
-}
-
-FHSlider8.oninput = function(){
-    FHLabel8.innerHTML = this.value;
-    biQHigh8.frequency.value = this.value;
-}
-
-GainSlider8.oninput = function(){
-    GainLabel8.innerHTML = this.value;
-    gainNode8.gain.value = this.value;
-}
-
-FrequencySlider9.oninput = function(){
-    FrequencyLabel9.innerHTML = this.value;
-    biQLow9.frequency.value = this.value;
-}
-
-FHSlider9.oninput = function(){
-    FHLabel9.innerHTML = this.value;
-    biQHigh9.frequency.value = this.value;
-}
-
-GainSlider9.oninput = function(){
-    GainLabel9.innerHTML = this.value;
-    gainNode9.gain.value = this.value;
-}*/
-
 audio1.loop = true;
 audio2.loop = true;
 audio3.loop = true;
@@ -483,189 +385,13 @@ function inside(point, vs) {
     return inside;
 }
 
-var verZoneOne = [
-    [31.771011, -106.505353],
-    [31.771572, -106.50448],
-    [31.770785, -106.5033789],
-    [31.769928, -106.505274]
-];
-
-var verZoneTwo = [
-    [31.770973, -106.505293],
-    [31.771267, -106.50482],
-    [31.770883, -106.504641]
-];
-
-var verZoneThree = [
-    [31.770973, -106.505293],
-    [31.770883, -106.504641],
-    [31.770587, -106.505225]
-];
-
-var verZoneFour = [
-    [31.770465, -106.505247],
-    [31.770530, -106.504931],
-    [31.770342, -106.504719],
-    [31.770162, -106.50518]
-];
-
-var verZoneFive = [
-    [31.770883, -106.504641],
-    [31.770732, -106.503878],
-    [31.770481, -106.504262],
-    //[zone_five.get_fourth_lat, zone_five.get_fourth_lng]
-];
-
-var verZoneSix = [
-    [31.770982, -106.505153],
-    [31.771264, -106.504611],
-    [31.770737, -106.504089],
-    [31.770392, -106.504567]
-];
-
-var verZoneSeven = [
-    [31.770957, -106.50495],
-    [31.771119, -106.504621],
-    [31.770771, -106.504239],
-    [31.770562, -106.504508]
-];
-
-var verZoneEight = [
-    [31.771290, -106.504835],
-    [31.771269, -106.504464],
-    [31.770887, -106.504642],
-    //[zone_eight.get_fourth_lat, zone_eight.get_fourth_lng]
-];
-
-var verZoneNine = [
-    [31.770863, -106.504678],
-    [31.770931, -106.504596],
-    [31.770857, -106.504508],
-    [31.770803, -106.504609]
-];
-
-var verOfficeZone = [
-    [31.7810, -106.489],
-    [31.7790, -106.4875],
-    [31.7820, -106.4867]
-];
-
-
 var intervalInit = false;
 function callplayMusic(){
     if(intervalInit == false){
         console.log("Interval initialized")
-        var intervalid = setInterval(playMusic(), 500)
+        var intervalid = setInterval(showLocation(), getLocation() , 500)
         intervalInit = true;
     }   
-    
-}
-//function handles the logic of the zones in the map.
-function playMusic(){
-    
-    updated = getLocation();
-
-    lat = updated.latitude;
-    lng = updated.longitude;
-
-    console.log(lat);
-    console.log(lng);
-
-    if(inside([lat, lng],verZoneOne)){
-        console.log("In location 1");
-        audio1.play();
-        audio1.volume = 1;
-    } 
-    else{
-        console.log("Not in location 1");
-        audio1.volume = 0; 
-    }
-
-    if(inside([lat, lng],verZoneTwo)){
-        console.log("In location 2");
-        audio2.play();
-        audio2.volume = 1;
-    }
-
-    else{
-        console.log("Not in location 2");
-        audio2.volume = 0; 
-    }
-    if(inside([lat, lng],verZoneThree)){
-        console.log("In location 3");
-        audio3.play();
-        audio3.volume = 1;
-    } 
-    else{
-        console.log("Not in location 3");
-        audio3.volume = 0; 
-    }
-    if(inside([lat, lng],verZoneFour)){
-        console.log("In location 4");
-        audio4.play();
-        audio4.volume = 1;
-    } 
-    else{
-        console.log("Not in location 4");
-        audio4.volume = 0; 
-    }
-    if(inside([lat, lng],verZoneFive)){
-        console.log("In location 5");
-        audio5.play();
-        audio5.volume = 1;
-    } 
-    else{
-        console.log("Not in location 5");
-        audio5.volume = 0; 
-    }
-    if(inside([lat, lng],verZoneSix)){
-        console.log("In location 6");
-        audio6.play();
-        audio6.volume = 1;
-    } 
-    else{
-        console.log("Not in location 6");
-        audio6.volume = 0; 
-    }
-    if(inside([lat, lng],verZoneSeven)){
-        console.log("In location 7");
-        audio7.play();
-        audio7.volume = 1;
-    } 
-    else{
-        console.log("Not in location 7");
-        audio7.volume = 0; 
-    }
-    if(inside([lat, lng],verOfficeZone)){
-        console.log("In location 8");
-        audio8.play();
-        audio8.volume = 1;
-        
-    } 
-    else{
-        console.log("Not in location 8");
-        audio8.volume = 0; 
-    }
-    
-    if(inside([lat, lng],verOfficeZone)){
-        console.log("In location 9");
-        audio9.play();
-        audio9.volume = 1;
-    } 
-    else{
-        console.log("Not in location 9");
-        audio9.volume = 0; 
-    }
-
-    if(inside([lat, lng],verOfficeZone)){
-        console.log("In OFFICE");
-        audio1.play();
-        audio1.volume = 1;
-    } 
-    else{
-        console.log("Not in OFFICE");
-        audio1.volume = 0; 
-    }
     
 }
 
