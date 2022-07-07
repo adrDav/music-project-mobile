@@ -145,31 +145,39 @@ io.sockets.on('connection', function(socket){
       if(inside(socket.coords, allZones[i])=== true){
         if(i==0){
           zone1[socket.id]=1;
-          //console.log(zone1[socket.id].length);
+          console.log("in zone1");
         }
         if(i==1){
           zone2[socket.id]=2;
+          console.log("in zone2");
         }
         if(i==2){
           zone3[socket.id]=3;
+          console.log("in zone3");
         }
         if(i==3){
           zone4[socket.id]=4;
+          console.log("in zone4");
         }  
         if(i==4){
           zone5[socket.id]=5;
+          console.log("in zone5");
         }
         if(i==5){
           zone6[socket.id]=6;
+          console.log("in zone6");
         }
         if(i==6){
           zone7[socket.id]=7;
+          console.log("in zone7");
         }
         if(i==7){
           zone8[socket.id]=8;
+          console.log("in zone8");
         }
         if(i==8){
           zone9[socket.id]=9;
+          console.log("in zone9");
         }
         if(i==9){
           zone10[socket.id]=10;
