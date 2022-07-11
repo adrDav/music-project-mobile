@@ -23,34 +23,34 @@
     <!-- pauses all current tracks -->
     
     <audio id="audioContainer1">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone1.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z01_LOOP.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer2">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone2.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z02_LOOP.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer3">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone3.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z03_LOOP.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer4">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone4.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z04_LOOP.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer5">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone5.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z05_LOOP.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer6">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone6.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z06_LOOP.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer7">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone7.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z07_LOOP.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer8">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone8.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z08_LOOP.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer9">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone9.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z09_LOOP.mp3" type="audio/mpeg">
     </audio>
     <audio id="audioContainer10">
-        <source src="public/audios/Ex1_sprite_12.03.20-zone10.mp3" type="audio/mpeg">
+        <source src="public/audios/3Bodies_centplaz_07.08.22_Z10_LOOP.mp3" type="audio/mpeg">
     </audio>
     
     <!--<button type="button" onclick="playMusic(), connectCtx()"> DON'T PRESS THIS ! is only for testing</button>-->
@@ -115,9 +115,9 @@ const audio10 = document.getElementById("audioContainer10");
 //connect to the server with the associated port, url + domain
 const socket = io();
 
-const limitOfUsers = 10;
+const limitOfUsers = 40;
 
-var filterLimiter = 20*(2**(1/1)*limitOfUsers);
+var filterLimiter = 20*(2**(1/4)*limitOfUsers);
 
 function GPS (){
     var locat = getLocation();
@@ -125,6 +125,10 @@ function GPS (){
         lat:locat.latitude,
         lng:locat.longitude
     });
+};
+
+const isPlaying = (audElem) => {
+  return !audElem.paused;
 };
 
 ctx = new AudioContext();
@@ -159,158 +163,109 @@ ctx = new AudioContext();
     var biQLow10 = ctx.createBiquadFilter();
     var gainNode10 = ctx.createGain();
 
+
 socket.on('newPos', function(data){
 
     doChange(data[0].zones);
-
+    data[0].zones[0] =  parseInt(document.getElementById('zone1Users').value);
+    data[0].zones[1] =  parseInt(document.getElementById('zone2Users').value);
+    data[0].zones[2] =  parseInt(document.getElementById('zone3Users').value);
+    data[0].zones[3] =  parseInt(document.getElementById('zone4Users').value);
+    data[0].zones[4] =  parseInt(document.getElementById('zone5Users').value);
+    data[0].zones[5] =  parseInt(document.getElementById('zone6Users').value);
+    data[0].zones[6] =  parseInt(document.getElementById('zone7Users').value);
+    data[0].zones[7] =  parseInt(document.getElementById('zone8Users').value);
+    data[0].zones[8] =  parseInt(document.getElementById('zone9Users').value);
+    data[0].zones[9] =  parseInt(document.getElementById('zone10Users').value);
+    
     if(data[0].zones[0]>0 & data[0].zones[0] <= limitOfUsers ){
         audio1.volume = 1;
-        biQLow1.frequency.value = 20*(2**(1/1)*(data[0].zones[0]));
+        biQLow1.frequency.value = 20*(2**(1/4)*(data[0].zones[0]));
         audio1.play();
     }
     else if (data[0].zones[0]<=0) {audio1.volume =0;}
 
     if(data[0].zones[1]>0  & data[0].zones[1] <= limitOfUsers){
         audio2.volume = 1;
-        biQLow2.frequency.value = 20*(2**(1/1)*(data[0].zones[1]));
+        biQLow2.frequency.value = 20*(2**(1/4)*(data[0].zones[1]));
         audio2.play();
     }
     else  if (data[0].zones[1]<=0) {audio2.volume =0;}
     
     if(data[0].zones[2]>0 & data[0].zones[2] <= limitOfUsers){
         audio3.volume = 1;
-        biQLow3.frequency.value = 20*(2**(1/1)*(data[0].zones[2]));
+        biQLow3.frequency.value = 20*(2**(1/4)*(data[0].zones[2]));
         audio3.play();
     }
     else  if (data[0].zones[2]<=0){audio3.volume =0;}
     
     if(data[0].zones[3]>0 & data[0].zones[3] <= limitOfUsers){
         audio4.volume = 1;
-        biQLow4.frequency.value = 20*(2**(1/1)*(data[0].zones[3]));
+        biQLow4.frequency.value = 20*(2**(1/4)*(data[0].zones[3]));
         audio4.play();
     }
     else if (data[0].zones[3]<=0){audio4.volume =0;}
     
     if(data[0].zones[4]>0 & data[0].zones[4] <= limitOfUsers){
         audio5.volume = 1;
-        biQLow5.frequency.value = 20*(2**(1/1)*(data[0].zones[4]));
+        biQLow5.frequency.value = 20*(2**(1/4)*(data[0].zones[4]));
         audio5.play();
     }
     else  if (data[0].zones[4]<=0){audio5.volume =0;}
     
     if(data[0].zones[5]>0 & data[0].zones[5] <= limitOfUsers){
         audio6.volume = 1;
-        biQLow6.frequency.value = 20*(2**(1/1)*(data[0].zones[5]));//dont forget to return these to the normal value
+        biQLow6.frequency.value = 20*(2**(1/4)*(data[0].zones[5]));//dont forget to return these to the normal value
         audio6.play();
     }
     else  if (data[0].zones[5]<=0){audio6.volume =0;}
     
     if(data[0].zones[6]>0 & data[0].zones[6] <= limitOfUsers){
         audio7.volume = 1;
-        biQLow7.frequency.value = 20*(2**(1/1)*(data[0].zones[6]));//dont forget to return these to the normal value
+        biQLow7.frequency.value = 20*(2**(1/4)*(data[0].zones[6]));//dont forget to return these to the normal value
         audio7.play();
     }
     else if (data[0].zones[6]<=0){audio7.volume =0;}
     
     if(data[0].zones[7]>0 & data[0].zones[7] <= limitOfUsers){
         audio8.volume = 1;
-        biQLow8.frequency.value = 20*(2**(1/1)*(data[0].zones[7]));//dont forget to return these to the normal value
+        biQLow8.frequency.value = 20*(2**(1/4)*(data[0].zones[7]));//dont forget to return these to the normal value
         audio8.play();
     }
     else if (data[0].zones[7]<=0){audio8.volume =0;}
     
     if(data[0].zones[8]>0 & data[0].zones[8] <= limitOfUsers){
         audio9.volume = 1;
-        biQLow9.frequency.value = 20*(2**(1/1)*(data[0].zones[8]));//dont forget to return these to the normal value
+        biQLow9.frequency.value = 20*(2**(1/4)*(data[0].zones[8]));//dont forget to return these to the normal value
         audio9.play();
     }
     else if (data[0].zones[8]<=0){audio9.volume =0;}
 
     if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
         audio10.volume = 1;
-        biQLow10.frequency.value = 20*(2**(1/1)*(data[0].zones[9]));//dont forget to return these to the normal value
-        //console.log(biQLow10.frequency.value);
+        biQLow10.frequency.value = 20*(2**(1/4)*(data[0].zones[9]));//dont forget to return these to the normal value
+       
         audio10.play();
     }
     else if (data[0].zones[9]<=0){audio10.volume =0;}
-    
+    if(!isPlaying(audio10)){
+            console.log('no audio');
+            audio10.currentTime = data[0].timer;
+        }
+        else{
+            console.log('audio');
+            console.log(audio10.currentTime);
+        }
     for(var i =0; i < data.length; i++){
         
-        console.log('userPos',data[0].zones, data[i].coord, data[0].zones[9]);
+        console.log('userPos',data[0].timer,data[0].zones, data[i].coord);
     }
-    
+1
 });
 
 
 
 var ctxConnected = false;
-
-var verZoneOne = [
-    [31.771011, -106.505353],
-    [31.771572, -106.50448],
-    [31.770785, -106.5033789],
-    [31.769928, -106.505274]
-];
-
-var verZoneTwo = [
-    [31.770973, -106.505293],
-    [31.771267, -106.50482],
-    [31.770883, -106.504641]
-];
-
-var verZoneThree = [
-    [31.770973, -106.505293],
-    [31.770883, -106.504641],
-    [31.770587, -106.505225]
-];
-
-var verZoneFour = [
-    [31.770465, -106.505247],
-    [31.770530, -106.504931],
-    [31.770342, -106.504719],
-    [31.770162, -106.50518]
-];
-
-var verZoneFive = [
-    [31.770883, -106.504641],
-    [31.770732, -106.503878],
-    [31.770481, -106.504262],
-    //[zone_five.get_fourth_lat, zone_five.get_fourth_lng]
-];
-
-var verZoneSix = [
-    [31.770982, -106.505153],
-    [31.771264, -106.504611],
-    [31.770737, -106.504089],
-    [31.770392, -106.504567]
-];
-
-var verZoneSeven = [
-    [31.770957, -106.50495],
-    [31.771119, -106.504621],
-    [31.770771, -106.504239],
-    [31.770562, -106.504508]
-];
-
-var verZoneEight = [
-    [31.771290, -106.504835],
-    [31.771269, -106.504464],
-    [31.770887, -106.504642],
-    //[zone_eight.get_fourth_lat, zone_eight.get_fourth_lng]
-];
-
-var verZoneNine = [
-    [31.770863, -106.504678],
-    [31.770931, -106.504596],
-    [31.770857, -106.504508],
-    [31.770803, -106.504609]
-];
-
-var verOfficeZone = [
-    [31.7810, -106.489],
-    [31.7790, -106.4875],
-    [31.7820, -106.4867]
-];
 
 function connectCtx(){
     

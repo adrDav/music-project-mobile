@@ -99,8 +99,9 @@ var allZones = [[//zone 1
                   [31.770857, -106.504508],[31.770803, -106.504609]
                 ],
                 [//zone 10
-                  [31.7810, -106.489],[31.7790, -106.4875],
-                  [31.7820, -106.4867]
+                [31.7833, -106.4989],[31.7810, -106.4979],[31.7833, -106.4959]
+                  /*[31.7810, -106.489],[31.7790, -106.4875],
+                  [31.7820, -106.4867]*/
                 ]];
 
 
@@ -191,13 +192,18 @@ io.sockets.on('connection', function(socket){
   });
 });
 //console.log('so far so good');
+var timer =0;
+
 setInterval(function(){
   var pack = [];
-
+  if(timer ==29){
+    timer = -1;
+  }
+  timer +=1;
   for(var i in SOCKET_LIST){
     var socket = SOCKET_LIST[i];
     pack.push({
-      
+      timer,
       zones:[
         Object.keys(zone1).length,Object.keys(zone2).length,Object.keys(zone3).length,
         Object.keys(zone4).length,Object.keys(zone5).length,Object.keys(zone6).length,
@@ -212,7 +218,7 @@ setInterval(function(){
     socket.emit('newPos', pack);
   }
 //new location every 5 secs
-},5000);
+},1000);
 
 
 // function determines if coordinates are inside a polygon.
