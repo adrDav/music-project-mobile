@@ -196,7 +196,7 @@ var timer =0;
 
 setInterval(function(){
   var pack = [];
-  if(timer ==29){
+  if(timer ==287){
     timer = -1;
   }
   timer +=1;

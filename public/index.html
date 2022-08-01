@@ -8,17 +8,16 @@
 
 <link rel="stylesheet" href="public/style.css">
 <!--viewport allows for porper resizing on mobile devices ,K.-->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 <!--<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>-->
 <script src="/socket.io/socket.io.js"></script>
 
-
-</head>
 <body>
-    
-    <h1 style="color:white">INTERACTIVE MUSIC! </h1>
+   
+<button class="button">PLAY</button>
+</body>
+</html>
 
     <!-- pauses all current tracks -->
     
@@ -53,11 +52,10 @@
         <source src="public/audios/3Bodies_centplaz_07.08.22_Z10_LOOP.mp3" type="audio/mpeg">
     </audio>
     
-    <!--<button type="button" onclick="playMusic(), connectCtx()"> DON'T PRESS THIS ! is only for testing</button>-->
-    
-    <button type="button" onclick="GPS(), connectCtx()">START ! (you may need to press this twice for the GPS to work)</button>
-
-    <p style="text-align:left; color: white; " >Zone 1 </p>
+    <button type="button" onclick="GPS(), createCtx()">START ! (you may need to press this twice for the GPS to work)</button>
+    <button type="button" onclick="startCtx()">TEST</button>
+ 
+    <!--<p style="text-align:left; color: white; " >Zone 1 </p>
     <input type="number" id="zone1Users" name="zone1Users" value="0" min="0" max="40">
 
     <p style="text-align:left; color: white; " >Zone 2 </p>
@@ -85,7 +83,7 @@
     <input type="number" id="zone9Users" name="zone9Users" value="0" min="0" max="40">
     
     <p style="text-align:left; color: white; " >Zone 10 </p>
-    <input type="number" id="zone10Users" name="zone10Users" value="0" min="0" max="40">
+    <input type="number" id="zone10Users" name="zone10Users" value="0" min="0" max="40">-->
     
 
     <link rel="stylesheet"
@@ -97,10 +95,37 @@
 
 
 <script>
-function doChange(dataZones) {  
-    var myInput = dataZones;  
-    document.getElementById('pplInZones').innerHTML = myInput;  
-}  
+var ctx;
+
+var biQLow1;
+var gainNode1
+
+var biQLow2;
+var gainNode2;
+
+var biQLow3;
+var gainNode3;
+
+var biQLow4;
+var gainNode4;
+
+var biQLow5;
+var gainNode5;
+
+var biQLow6;
+var gainNode6;
+
+var biQLow7;
+var gainNode7;
+
+var biQLow8;
+var gainNode8;
+
+var biQLow9;
+var gainNode9;
+
+var biQLow10;
+var gainNode10;
 
 const audio1 = document.getElementById("audioContainer1");
 const audio2 = document.getElementById("audioContainer2");
@@ -112,6 +137,7 @@ const audio7 = document.getElementById("audioContainer7");
 const audio8 = document.getElementById("audioContainer8");
 const audio9 = document.getElementById("audioContainer9");
 const audio10 = document.getElementById("audioContainer10");
+
 //connect to the server with the associated port, url + domain
 const socket = io();
 
@@ -127,153 +153,89 @@ function GPS (){
     });
 };
 
+function doChange(dataZones) {  
+    var myInput = dataZones;  
+    document.getElementById('pplInZones').innerHTML = myInput;  
+}  
+
 const isPlaying = (audElem) => {
   return !audElem.paused;
 };
 
-ctx = new AudioContext();
+function startCtx(){
+    ctx = window.AudioContext ? new AudioContext() : webkitAudioContext();
 
-    var biQLow1 = ctx.createBiquadFilter();
-    var gainNode1 = ctx.createGain();
+    biQLow1 = ctx.createBiquadFilter();
+    gainNode1 = ctx.createGain();
 
-    var biQLow2 = ctx.createBiquadFilter();
-    var gainNode2 = ctx.createGain();
+    biQLow2 = ctx.createBiquadFilter();
+    gainNode2 = ctx.createGain();
 
-    var biQLow3 = ctx.createBiquadFilter();
-    var gainNode3 = ctx.createGain();
+    biQLow3 = ctx.createBiquadFilter();
+    gainNode3 = ctx.createGain();
 
-    var biQLow4 = ctx.createBiquadFilter();
-    var gainNode4 = ctx.createGain();
+    biQLow4 = ctx.createBiquadFilter();
+    gainNode4 = ctx.createGain();
 
-    var biQLow5 = ctx.createBiquadFilter();
-    var gainNode5 = ctx.createGain();
+    biQLow5 = ctx.createBiquadFilter();
+    gainNode5 = ctx.createGain();
 
-    var biQLow6 = ctx.createBiquadFilter();
-    var gainNode6 = ctx.createGain();
+    biQLow6 = ctx.createBiquadFilter();
+    gainNode6 = ctx.createGain();
 
-    var biQLow7 = ctx.createBiquadFilter();
-    var gainNode7 = ctx.createGain();
+    biQLow7 = ctx.createBiquadFilter();
+    gainNode7 = ctx.createGain();
 
-    var biQLow8 = ctx.createBiquadFilter();
-    var gainNode8 = ctx.createGain();
+    biQLow8 = ctx.createBiquadFilter();
+    gainNode8 = ctx.createGain();
 
-    var biQLow9 = ctx.createBiquadFilter();
-    var gainNode9 = ctx.createGain();
+    biQLow9 = ctx.createBiquadFilter();
+    gainNode9 = ctx.createGain();
 
-    var biQLow10 = ctx.createBiquadFilter();
-    var gainNode10 = ctx.createGain();
-
-
-socket.on('newPos', function(data){
-
-    doChange(data[0].zones);
-    data[0].zones[0] =  parseInt(document.getElementById('zone1Users').value);
-    data[0].zones[1] =  parseInt(document.getElementById('zone2Users').value);
-    data[0].zones[2] =  parseInt(document.getElementById('zone3Users').value);
-    data[0].zones[3] =  parseInt(document.getElementById('zone4Users').value);
-    data[0].zones[4] =  parseInt(document.getElementById('zone5Users').value);
-    data[0].zones[5] =  parseInt(document.getElementById('zone6Users').value);
-    data[0].zones[6] =  parseInt(document.getElementById('zone7Users').value);
-    data[0].zones[7] =  parseInt(document.getElementById('zone8Users').value);
-    data[0].zones[8] =  parseInt(document.getElementById('zone9Users').value);
-    data[0].zones[9] =  parseInt(document.getElementById('zone10Users').value);
+    biQLow10 = ctx.createBiquadFilter();
+    gainNode10 = ctx.createGain();
     
-    if(data[0].zones[0]>0 & data[0].zones[0] <= limitOfUsers ){
-        audio1.volume = 1;
-        biQLow1.frequency.value = 20*(2**(1/4)*(data[0].zones[0]));
-        audio1.play();
-    }
-    else if (data[0].zones[0]<=0) {audio1.volume =0;}
+}
+    
 
-    if(data[0].zones[1]>0  & data[0].zones[1] <= limitOfUsers){
-        audio2.volume = 1;
-        biQLow2.frequency.value = 20*(2**(1/4)*(data[0].zones[1]));
-        audio2.play();
-    }
-    else  if (data[0].zones[1]<=0) {audio2.volume =0;}
-    
-    if(data[0].zones[2]>0 & data[0].zones[2] <= limitOfUsers){
-        audio3.volume = 1;
-        biQLow3.frequency.value = 20*(2**(1/4)*(data[0].zones[2]));
-        audio3.play();
-    }
-    else  if (data[0].zones[2]<=0){audio3.volume =0;}
-    
-    if(data[0].zones[3]>0 & data[0].zones[3] <= limitOfUsers){
-        audio4.volume = 1;
-        biQLow4.frequency.value = 20*(2**(1/4)*(data[0].zones[3]));
-        audio4.play();
-    }
-    else if (data[0].zones[3]<=0){audio4.volume =0;}
-    
-    if(data[0].zones[4]>0 & data[0].zones[4] <= limitOfUsers){
-        audio5.volume = 1;
-        biQLow5.frequency.value = 20*(2**(1/4)*(data[0].zones[4]));
-        audio5.play();
-    }
-    else  if (data[0].zones[4]<=0){audio5.volume =0;}
-    
-    if(data[0].zones[5]>0 & data[0].zones[5] <= limitOfUsers){
-        audio6.volume = 1;
-        biQLow6.frequency.value = 20*(2**(1/4)*(data[0].zones[5]));//dont forget to return these to the normal value
-        audio6.play();
-    }
-    else  if (data[0].zones[5]<=0){audio6.volume =0;}
-    
-    if(data[0].zones[6]>0 & data[0].zones[6] <= limitOfUsers){
-        audio7.volume = 1;
-        biQLow7.frequency.value = 20*(2**(1/4)*(data[0].zones[6]));//dont forget to return these to the normal value
-        audio7.play();
-    }
-    else if (data[0].zones[6]<=0){audio7.volume =0;}
-    
-    if(data[0].zones[7]>0 & data[0].zones[7] <= limitOfUsers){
-        audio8.volume = 1;
-        biQLow8.frequency.value = 20*(2**(1/4)*(data[0].zones[7]));//dont forget to return these to the normal value
-        audio8.play();
-    }
-    else if (data[0].zones[7]<=0){audio8.volume =0;}
-    
-    if(data[0].zones[8]>0 & data[0].zones[8] <= limitOfUsers){
-        audio9.volume = 1;
-        biQLow9.frequency.value = 20*(2**(1/4)*(data[0].zones[8]));//dont forget to return these to the normal value
-        audio9.play();
-    }
-    else if (data[0].zones[8]<=0){audio9.volume =0;}
-
-    if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
-        audio10.volume = 1;
-        biQLow10.frequency.value = 20*(2**(1/4)*(data[0].zones[9]));//dont forget to return these to the normal value
-       
-        audio10.play();
-    }
-    else if (data[0].zones[9]<=0){audio10.volume =0;}
-    if(!isPlaying(audio10)){
-            console.log('no audio');
-            audio10.currentTime = data[0].timer;
-        }
-        else{
-            console.log('audio');
-            console.log(audio10.currentTime);
-        }
-    for(var i =0; i < data.length; i++){
-        
-        console.log('userPos',data[0].timer,data[0].zones, data[i].coord);
-    }
-1
-});
-
-
-
-var ctxConnected = false;
-
-function connectCtx(){
+function createCtx(){
     
     if(ctxConnected){
         console.log("audio contexts already initialized");
     }
     else if(!ctxConnected){
-        
+        audio1.play();
+        audio2.play();
+        audio3.play();
+        audio4.play();
+        audio5.play();
+        audio6.play();
+        audio7.play();
+        audio8.play();
+        audio9.play();
+        audio10.play();
+
+        audio1.volume=0;
+        audio2.volume=0;
+        audio3.volume=0;
+        audio4.volume=0;
+        audio5.volume=0;
+        audio6.volume=0;
+        audio7.volume=0;
+        audio8.volume=0;
+        audio9.volume=0;
+        audio10.volume=0;
+
+
+        audio1.loop = true;
+        audio2.loop = true;
+        audio3.loop = true;
+        audio4.loop = true;
+        audio5.loop = true;
+        audio6.loop = true;
+        audio7.loop = true;
+        audio8.loop = true;
+        audio9.loop = true;
         
         ctx.resume();
         
@@ -351,49 +313,109 @@ function connectCtx(){
         ctxConnected = true;
 
     }
+   
 }
 
-audio1.loop = true;
-audio2.loop = true;
-audio3.loop = true;
-audio4.loop = true;
-audio5.loop = true;
-audio6.loop = true;
-audio7.loop = true;
-audio8.loop = true;
-audio9.loop = true;
+socket.on('newPos', function(data){
 
-audio1.volume = 0;
-audio2.volume = 0;
-audio3.volume = 0;
-audio4.volume = 0;
-audio5.volume = 0;
-audio6.volume = 0;
-audio7.volume = 0;
-audio8.volume = 0;
-audio9.volume = 0;
+doChange(data[0].zones);
+/*data[0].zones[0] =  parseInt(document.getElementById('zone1Users').value);
+data[0].zones[1] =  parseInt(document.getElementById('zone2Users').value);
+data[0].zones[2] =  parseInt(document.getElementById('zone3Users').value);
+data[0].zones[3] =  parseInt(document.getElementById('zone4Users').value);
+data[0].zones[4] =  parseInt(document.getElementById('zone5Users').value);
+data[0].zones[5] =  parseInt(document.getElementById('zone6Users').value);
+data[0].zones[6] =  parseInt(document.getElementById('zone7Users').value);
+data[0].zones[7] =  parseInt(document.getElementById('zone8Users').value);
+data[0].zones[8] =  parseInt(document.getElementById('zone9Users').value);
+data[0].zones[9] =  parseInt(document.getElementById('zone10Users').value);*/
+
+if(data[0].zones[0]>0 & data[0].zones[0] <= limitOfUsers ){
+    audio1.volume = 1;
+    biQLow1.frequency.value = 20*(2**(1/4)*(data[0].zones[0]));
+    if(!isPlaying(audio1)){audio1.currentTime = data[0].timer;}
+    audio1.play();
+}
+else if (data[0].zones[0]<=0) {audio1.volume =0;}
+
+if(data[0].zones[1]>0  & data[0].zones[1] <= limitOfUsers){
+    audio2.volume = 1;
+    biQLow2.frequency.value = 20*(2**(1/4)*(data[0].zones[1]));
+    if(!isPlaying(audio2)){audio2.currentTime = data[0].timer;}
+    audio2.play();
+}
+else  if (data[0].zones[1]<=0) {audio2.volume =0;}
+
+if(data[0].zones[2]>0 & data[0].zones[2] <= limitOfUsers){
+    audio3.volume = 1;
+    biQLow3.frequency.value = 20*(2**(1/4)*(data[0].zones[2]));
+    if(!isPlaying(audio3)){audio3.currentTime = data[0].timer;}
+    audio3.play();
+}
+else  if (data[0].zones[2]<=0){audio3.volume =0;}
+
+if(data[0].zones[3]>0 & data[0].zones[3] <= limitOfUsers){
+    audio4.volume = 1;
+    biQLow4.frequency.value = 20*(2**(1/4)*(data[0].zones[3]));
+    if(!isPlaying(audio4)){audio4.currentTime = data[0].timer;}
+    audio4.play();
+}
+else if (data[0].zones[3]<=0){audio4.volume =0;}
+
+if(data[0].zones[4]>0 & data[0].zones[4] <= limitOfUsers){
+    audio5.volume = 1;
+    biQLow5.frequency.value = 20*(2**(1/4)*(data[0].zones[4]));
+    if(!isPlaying(audio5)){audio5.currentTime = data[0].timer;}
+    audio5.play();
+}
+else  if (data[0].zones[4]<=0){audio5.volume =0;}
+
+if(data[0].zones[5]>0 & data[0].zones[5] <= limitOfUsers){
+    audio6.volume = 1;
+    biQLow6.frequency.value = 20*(2**(1/4)*(data[0].zones[5]));//dont forget to return these to the normal value
+    if(!isPlaying(audio6)){audio6.currentTime = data[0].timer;}
+    audio6.play();
+}
+else  if (data[0].zones[5]<=0){audio6.volume =0;}
+
+if(data[0].zones[6]>0 & data[0].zones[6] <= limitOfUsers){
+    audio7.volume = 1;
+    biQLow7.frequency.value = 20*(2**(1/4)*(data[0].zones[6]));//dont forget to return these to the normal value
+    if(!isPlaying(audio7)){audio7.currentTime = data[0].timer;}
+    audio7.play();
+}
+else if (data[0].zones[6]<=0){audio7.volume =0;}
+
+if(data[0].zones[7]>0 & data[0].zones[7] <= limitOfUsers){
+    audio8.volume = 1;
+    biQLow8.frequency.value = 20*(2**(1/4)*(data[0].zones[7]));//dont forget to return these to the normal value
+    if(!isPlaying(audio8)){audio8.currentTime = data[0].timer;}
+    audio8.play();
+}
+else if (data[0].zones[7]<=0){audio8.volume =0;}
+
+if(data[0].zones[8]>0 & data[0].zones[8] <= limitOfUsers){
+    audio9.volume = 1;
+    biQLow9.frequency.value = 20*(2**(1/4)*(data[0].zones[8]));//dont forget to return these to the normal value
+    if(!isPlaying(audio9)){audio9.currentTime = data[0].timer;}
+    audio9.play();
+}
+else if (data[0].zones[8]<=0){audio9.volume =0;}
+
+if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
+    audio10.volume = 1;
+    biQLow10.frequency.value = 20*(2**(1/4)*(data[0].zones[9]));//dont forget to return these to the normal value
+    if(!isPlaying(audio10)){audio10.currentTime = data[0].timer;}
+    audio10.play();
+}
+else if (data[0].zones[9]<=0){audio10.volume =0;}
+});
+
+
+var ctxConnected = false;
 
 //play and loop all audios
 
-// function determines if coordinates are inside a polygon.
-function inside(point, vs) {
-    // ray-casting algorithm based on
-    // https://wrf.ecse.rpi.edu/Research/Short_Notes/pnpoly.html/pnpoly.html
-    
-    var x = point[0], y = point[1];
-    
-    var inside = false;
-    for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
-        var xi = vs[i][0], yi = vs[i][1];
-        var xj = vs[j][0], yj = vs[j][1];
-        
-        var intersect = ((yi > y) != (yj > y))
-            && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-        if (intersect) inside = !inside;
-    }
-    
-    return inside;
-}
 
 var intervalInit = false;
 function callplayMusic(){
@@ -407,7 +429,6 @@ function callplayMusic(){
 
 
 var coordinates = {};
-
 async function showLocation(position) {
     // obtain coordinates from the API.
     var lat = position.coords.latitude;
@@ -417,18 +438,19 @@ async function showLocation(position) {
 
 }
 
+//Error handler
 function errorHandler(error) {
     
     const code = error.code;
     const message = error.message;
     if(error.code == 1) {
-        
+        //In the case of an error the system shall display the error in the console 
         alert("Error: Access is denied!" + message);
     } else if( error.code == 2) {
         alert("Error: Position is unavailable!");
     }
 }
-//no request for iOS
+
 //https://stackoverflow.com/questions/48293914/geolocation-in-javascript-on-ios-safari
 function getLocation() {
     if(navigator.geolocation) {
