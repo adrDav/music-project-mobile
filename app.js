@@ -26,13 +26,18 @@ app.get('/',function(req,res){
   
 });
 
+/*
+set key and certificate options for browser
+these are necessary since we are requesting users
+for their geolocation, they are certificates of trustworthiness
+
+*/
 const options = {
   key: fs.readFileSync('daruk.cs.utep.edu.key'),
   cert: fs.readFileSync('daruk_cs_utep_edu_cert.cer')
 };
 
 const serv = https.createServer({secureOptions: constants.SSL_OP_NO_TLSv1 | constants.SSL_OP_NO_TLSv1_1, 
-  //pfx: fs.readFileSync('daruk_cs_utep_edu_cert.cer')
   key: fs.readFileSync('daruk.cs.utep.edu.key'),
   cert: fs.readFileSync('daruk_cs_utep_edu_cert.cer')
 }, app);
