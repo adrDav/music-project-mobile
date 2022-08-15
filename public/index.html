@@ -9,11 +9,12 @@
     #centerBox {
       top: 50%;
       left: 50%;
-      width: 30em;
-      height: 45em;
+      padding: auto;
+      width: 9cm;
+      height: 15cm;
       margin-top: -20em;
       margin-left: -15em;
-      border: 1px solid #666;
+      border: 3px solid #666;
       background-color: #1b74ce;
       position: fixed;
     }
@@ -29,11 +30,14 @@
 
 <body>
     <div id="centerBox">
-        <h1>Music +</h1>
-        <p>An audience-collaborative composition by </p>
+        <h1>"Music +"</h1>
+        <p>An audience-collaborative composition</p>
+        <p>composition in eight streams</p>
+        <p>in Centennial Plaza by</p>
+
         <h2>Christopher Reyman</h2>
-        <p>vocals by</p>
-        <h2>Maria F. Lozano Gomez</h2>
+        <p>with vocals by</p>
+        <h5>Maria F. Lozano Gomez</h5>
         
         <div>
         <p>Technical production by </p>
@@ -123,7 +127,7 @@
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
    
 </div>
-<p>users in other zones: <b id='pplInZones'></b></p>
+<!--<p>users in other zones: <b id='pplInZones'></b></p>-->
 
 <script>
 var ctx;//context variable 
@@ -199,10 +203,10 @@ function GPS (){
     });
 };
 
-function doChange(dataZones) {  
+/*function doChange(dataZones) {  
     var myInput = dataZones;  
     document.getElementById('pplInZones').innerHTML = myInput;  
-}  
+} */ 
 
 const isPlaying = (audElem) => {
   return !audElem.paused;
@@ -366,7 +370,7 @@ socket.on('newPos', function(data){
 
     GPS ();//every 1 second the server will request the geolocation of the user.
 
-    doChange(data[0].zones);//doChange refreshes the number indicator at the bottom of the page that shows us where users are in what zones.
+    // doChange(data[0].zones);doChange refreshes the number indicator at the bottom of the page that shows us where users are in what zones.
     //debuggin tools allows to emulate people standing in zones. This will not allow for GPS testing! Disable before testing GPS
     /*data[0].zones[0] =  parseInt(document.getElementById('zone1Users').value);
     data[0].zones[1] =  parseInt(document.getElementById('zone2Users').value);

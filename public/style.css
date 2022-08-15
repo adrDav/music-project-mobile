@@ -14,10 +14,11 @@ body {
 
 
 h1 {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    margin-left: 50px;
     font-family: sans-serif;
-    text-align: center;
-	font-size: 40px;
+    text-align: left;
+	font-size: 30px;
 	padding-top: 20px;
 	color: rgb(255, 187, 0);
 
@@ -26,22 +27,25 @@ h1 {
 img {
     border-radius: 4px;
     padding: 5px;
-    width: 150px;
+    width: 80px;
     -ms-transform: translate(-50%, -50%);
-    transform: translate(200%, -100%);
+    transform: translate(250%, -100%);
   }
 
 h2 {
 
     color: rgb(255, 187, 0);
-	text-align: center;
+	text-align: left;
+    margin-top: 0cm;
+    margin-bottom: 0cm;
+    margin-left: 50px;
 	font-size: 19px;
 }
 
 h3{
-    font-size: 20px;
-    padding-top: 4.5cm;
-    padding-right: 4.3cm;
+    font-size: 12px;
+    padding-top: 5cm;
+    padding-right: 3cm;
     margin-top: -20px;
     color: #a8a8a8;
     text-align: right;
@@ -49,15 +53,24 @@ h3{
 }
 
 h4{
-    font-size: 20px;
+    font-size: 12px;
     padding-top: 0.3cm;
-    padding-right: 4.3cm;
+    padding-right: 3cm;
     margin-top: -20px;
     color: #a8a8a8;
     text-align: right;
     font-weight: normal;
 }
 
+h5 {
+
+    color: rgb(255, 187, 0);
+	text-align: left;
+    margin-top: 0cm;
+    margin-bottom: 0.5cm;
+    margin-left: 50px;
+	font-size: 19px;
+}
 
 .color {
     max-width: 98%;
@@ -128,8 +141,14 @@ body {
 	
 p {
 	color: rgb(255, 255, 255);
-	text-align: center;
-	font-size: 18px;
+    font-family: Calibri;
+    padding-top: 0.001cm;
+    padding-right: 0.001cm;
+    margin-top: 0cm;
+    margin-bottom: 0cm;
+	text-align: left;
+    margin-left: 50px;
+	font-size: 16px;
 	
 }
 
@@ -149,7 +168,7 @@ button {
     top: 60%;
     left: 40%;
     -ms-transform: translate(-50%, -50%);
-    transform: translate(-20%, 60%);
+    transform: translate(-20%, 35%);
     cursor: pointer;
     outline: none;
     color: #fff;
