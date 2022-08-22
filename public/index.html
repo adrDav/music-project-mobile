@@ -45,7 +45,7 @@
         <p>Kevin Ramirez </p>
         <p>Adrian Avendano Nevarez </p>
         <p>Thomas Sosa </p>
-        <p>Dr. David Novick </p>
+        <p>David Novick </p>
         <button id="StopBtn"  class="button"  >STOP</button>
         <button id="StartBtn" class="button" onclick="startCtx(),GPS(), createCtx() ">START</button>
         <!--<button class="button2" onclick="">START ! (you may need to press this twice for the GPS to work)</button>-->
@@ -283,6 +283,7 @@ function createCtx(){
         audio9.volume=0;
         audio10.volume=0;
         
+        //needed for iphones user interaction sign
         audio1.play();
         audio2.play();
         audio3.play();
@@ -385,7 +386,6 @@ function createCtx(){
         ctxConnected = true; // set boolean to true so we only init ctx once.
 
     }
-   
 }
 
 socket.on('newPos', function(data){
@@ -416,7 +416,7 @@ socket.on('newPos', function(data){
     }
     else if (data[0].zones[0]<=0) {audio1.volume = 0;}
 
-    if(data[0].zones[1]>0  & data[0].zones[1] <= limitOfUsers){
+    if(data[0].zones[1]>0 & data[0].zones[1] <= limitOfUsers){
         
         biQLow2.frequency.value = 20*(2**(1/(limitOfUsers/10)*(data[0].zones[1])));
         if(!isPlaying(audio2)){audio2.currentTime = data[0].timer;}
@@ -498,10 +498,6 @@ socket.on('newPos', function(data){
     else if (data[0].zones[9]<=0){audio10.volume = 0;}
 });
 
-
-
-
-
 var coordinates = {};
 //get location "lat and lng" and put em in coordinates array
 async function showLocation(position) {
@@ -510,12 +506,10 @@ async function showLocation(position) {
     var lng = position.coords.longitude;
     // coordinates stores new coordinates.
     coordinates = {latitude: lat, longitude: lng}
-
 }
 
 //Error handler
 function errorHandler(error) {
-    
     const code = error.code;
     const message = error.message;
     if(error.code == 1) {
