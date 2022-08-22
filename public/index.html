@@ -477,7 +477,7 @@ socket.on('newPos', function(data){
         audio8.volume = 1;
         audio8.play();
     }
-    else if (data[0].zones[7]<=0){audio8.volume =0;}
+    else if (data[0].zones[7]<=0){audio8.volume = 0;}
 
     if(data[0].zones[8]>0 & data[0].zones[8] <= limitOfUsers){
         
@@ -486,7 +486,7 @@ socket.on('newPos', function(data){
         audio9.volume = 1;
         audio9.play();
     }
-    else if (data[0].zones[8]<=0){audio9.volume =0;}
+    else if (data[0].zones[8]<=0){audio9.volume = 0;}
 
     if(data[0].zones[9]>0 & data[0].zones[9] <= limitOfUsers){
         
@@ -495,7 +495,7 @@ socket.on('newPos', function(data){
         audio10.volume = 1;
         audio10.play();
     }
-    else if (data[0].zones[9]<=0){audio10.volume =0;}
+    else if (data[0].zones[9]<=0){audio10.volume = 0;}
 });
 
 
