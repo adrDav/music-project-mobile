@@ -18,7 +18,7 @@ h1 {
     margin-left: 50px;
     font-family: sans-serif;
     text-align: left;
-	font-size: 30px;
+	font-size: 20px;
 	padding-top: 20px;
 	color: rgb(255, 187, 0);
 
@@ -27,9 +27,9 @@ h1 {
 img {
     border-radius: 4px;
     padding: 5px;
-    width: 80px;
+    width: 70px;
     -ms-transform: translate(-50%, -50%);
-    transform: translate(250%, -100%);
+    transform: translate(230%, -100%);
   }
 
 h2 {
@@ -39,13 +39,13 @@ h2 {
     margin-top: 0cm;
     margin-bottom: 0cm;
     margin-left: 50px;
-	font-size: 19px;
+	font-size: 15px;
 }
 
 h3{
     font-size: 12px;
-    padding-top: 5cm;
-    padding-right: 3cm;
+    padding-top: 4cm;
+    padding-right: 2cm;
     margin-top: -20px;
     color: #a8a8a8;
     text-align: right;
@@ -55,7 +55,7 @@ h3{
 h4{
     font-size: 12px;
     padding-top: 0.3cm;
-    padding-right: 3cm;
+    padding-right: 2cm;
     margin-top: -20px;
     color: #a8a8a8;
     text-align: right;
@@ -69,7 +69,7 @@ h5 {
     margin-top: 0cm;
     margin-bottom: 0.5cm;
     margin-left: 50px;
-	font-size: 19px;
+	font-size: 15px;
 }
 
 .color {
@@ -148,7 +148,7 @@ p {
     margin-bottom: 0cm;
 	text-align: left;
     margin-left: 50px;
-	font-size: 16px;
+	font-size: 11px;
 	
 }
 
@@ -160,21 +160,21 @@ button {
 
 
 .button {
-    padding: 25px 30px;
-    font-size: 30px;
+    padding: 14px 15px;
+    font-size: 15px;
     text-align: center;
     margin: 0;
     position: absolute;
     top: 60%;
     left: 40%;
     -ms-transform: translate(-50%, -50%);
-    transform: translate(-20%, 35%);
+    transform: translate(-20%, 70%);
     cursor: pointer;
     outline: none;
     color: #fff;
     background-color: rgb(82, 150, 74);;
     border: none;
-    border-radius: 15px;
+    border-radius: 8px;
     box-shadow: 0 9px rgb(71, 71, 71);
   }
   
@@ -185,7 +185,7 @@ background-color: #e4e4e4;
 box-shadow: 0 5px #666;
 transform: translateY(4px);
 -ms-transform: translate(-50%, -50%);
-transform: translate(-20%, 55%);
+transform: translate(-20%, 70%);
 }
 
 .button2 {

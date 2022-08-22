@@ -104,9 +104,9 @@ var allZones = [[//zone 1
                   [31.770857, -106.504508],[31.770803, -106.504609]
                 ],
                 [//zone 10
-                [31.7833, -106.4989],[31.7810, -106.4979],[31.7833, -106.4959]
-                  /*[31.7810, -106.489],[31.7790, -106.4875],
-                  [31.7820, -106.4867]*/
+                /*[31.7833, -106.4989],[31.7810, -106.4979],[31.7833, -106.4959]*/
+                  [31.7810, -106.489],[31.7790, -106.4875],
+                  [31.7820, -106.4867]
                 ]];
 
 
@@ -145,7 +145,7 @@ io.sockets.on('connection', function(socket){
 
   socket.on('userCoords', function(data){
     socket.coords = [data.lat,data.lng]
-    console.log(socket.coords);
+    //console.log(socket.coords);
     for(var i in allZones){
   
       if(inside(socket.coords, allZones[i])=== true){
@@ -187,7 +187,7 @@ io.sockets.on('connection', function(socket){
         }
         if(i==9){
           zone10[socket.id]=10;
-          //console.log(Object.keys( zone10).length);
+          console.log("in zone10");
         }
         for(prop in ZONE_LIST){
           console.log(ZONE_LIST[prop]);
@@ -202,7 +202,7 @@ var timer =0;
 setInterval(function(){
   var pack = [];
   if(timer ==287){
-    timer = -1;
+    timer = 0;
   }
   timer +=1;
   for(var i in SOCKET_LIST){
