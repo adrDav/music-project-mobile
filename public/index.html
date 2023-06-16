@@ -4,22 +4,6 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content ="width=device-width, initial-scale=1.0">
-    
-<style>
-    #centerBox {
-    padding: auto;
-    width: 7cm;
-    height: 11cm;
-    margin: 5px;
-      
-    border: 3px solid #666;
-    background-color: #1b74ce;
-    position: fixed;
-    top: 25%;
-    left: 25%;
-    margin: -50px 0 0 -50px;
-    }
-</style>
 
 <link rel="stylesheet" href="public/style.css">
 <!--viewport allows for porper resizing on mobile devices ,K.-->
@@ -46,8 +30,7 @@
         <p>Adrian Avendano Nevarez </p>
         <p>Thomas Sosa </p>
         <p>David Novick </p>
-        <button id="StopBtn"  class="button"  >STOP</button>
-        <button id="StartBtn" class="button" onclick="startCtx(),GPS(), createCtx() ">START</button>
+        <button id="StartBtn" value="Open Curtain" class="button" onclick="startCtx(),GPS(), createCtx(), muteAudio(), change()">START</button>
         <!--<button class="button2" onclick="">START ! (you may need to press this twice for the GPS to work)</button>-->
         </div>
         <div id="departments">
@@ -131,18 +114,11 @@
 <!--<p>users in other zones: <b id='pplInZones'></b></p>-->
 
 <script>
-var btnStart = document.getElementById("StartBtn");
-var btnStart = document.getElementById("StopBtn");
 
-function showMore() {
-    button.style.display="none";
-    d3.style.display="block";
-}
+const elem = document.getElementById("StartBtn");
 
-function showLess() {
-    button.style.display="inline-block";
-    d3.style.display="none";
-}
+
+
 var ctx;//context variable 
 
 var biQLow1;//biquad filter for the audio1
@@ -215,6 +191,46 @@ function GPS (){
         lng:locat.longitude
     });
 };
+
+function change(){
+    
+    if (elem.value=="Close Curtain") {
+        elem.value = "Open Curtain";
+        elem.innerText="START"
+    }
+    else if(elem.value == "Open Curtain") {
+        elem.value = "Close Curtain";
+        elem.innerText = "STOP"
+    }
+}
+
+function muteAudio(){
+    if(elem.value == "Open Curtain"){
+        audio1.muted=false;
+        audio2.muted=false;
+        audio3.muted=false;
+        audio4.muted=false;
+        audio5.muted=false;
+        audio6.muted=false;
+        audio7.muted=false;
+        audio8.muted=false;
+        audio9.muted=false;
+        audio10.muted=false;
+    }
+    else if(elem.value=="Close Curtain"){
+        audio1.muted=true;
+        audio2.muted=true;
+        audio3.muted=true;
+        audio4.muted=true;
+        audio5.muted=true;
+        audio6.muted=true;
+        audio7.muted=true;
+        audio8.muted=true;
+        audio9.muted=true;
+        audio10.muted=true;
+    }
+    
+}
 
 /*function doChange(dataZones) {  
     var myInput = dataZones;  
@@ -389,7 +405,7 @@ function createCtx(){
 }
 
 socket.on('newPos', function(data){
-
+    console.log(data[0].zones);
     GPS ();//every 1 second the server will request the geolocation of the user.
 
     // doChange(data[0].zones);doChange refreshes the number indicator at the bottom of the page that shows us where users are in what zones.
@@ -405,13 +421,13 @@ socket.on('newPos', function(data){
     data[0].zones[8] =  parseInt(document.getElementById('zone9Users').value);
     data[0].zones[9] =  parseInt(document.getElementById('zone10Users').value);*/
 
-    console.log(data[0].timer);
+    //console.log(data[0].timer);
 
     if(data[0].zones[0]>0 & data[0].zones[0] <= limitOfUsers ){ //if more then 0 people inside zone, play audio, but no more then limitOfUsers
         
         biQLow1.frequency.value = 20*(2**(1/(limitOfUsers/10)*(data[0].zones[0])));
         if(!isPlaying(audio1)){audio1.currentTime = data[0].timer;}
-        audio1.volume = 1;
+        audio1.volume = 0.5;
         audio1.play();
     }
     else if (data[0].zones[0]<=0) {audio1.volume = 0;}
@@ -492,7 +508,7 @@ socket.on('newPos', function(data){
         
         biQLow10.frequency.value = 20*(2**(1/(limitOfUsers/10)*(data[0].zones[9])));
         if(!isPlaying(audio10)){audio10.currentTime = data[0].timer;}
-        audio10.volume = 1;
+        audio10.volume = 0.5;
         audio10.play();
     }
     else if (data[0].zones[9]<=0){audio10.volume = 0;}
